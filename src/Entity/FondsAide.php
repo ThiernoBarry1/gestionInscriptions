@@ -24,7 +24,7 @@ class FondsAide
     private $nom;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Session", mappedBy="fondAide")
+     * @ORM\OneToMany(targetEntity="App\Entity\Session", mappedBy="fondsAide")
      */
     private $sessions;
 
@@ -62,7 +62,7 @@ class FondsAide
     {
         if (!$this->sessions->contains($session)) {
             $this->sessions[] = $session;
-            $session->setFondAide($this);
+            $session->setFondsAide($this);
         }
 
         return $this;
@@ -73,8 +73,8 @@ class FondsAide
         if ($this->sessions->contains($session)) {
             $this->sessions->removeElement($session);
             // set the owning side to null (unless already changed)
-            if ($session->getFondAide() === $this) {
-                $session->setFondAide(null);
+            if ($session->getFondsAide() === $this) {
+                $session->setFondsAide(null);
             }
         }
 

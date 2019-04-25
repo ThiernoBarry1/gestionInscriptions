@@ -19,17 +19,17 @@ class Projet
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255,nullable=true)
      */
     private $titre;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer",nullable=true)
      */
     private $duree;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255,nullable=true)
      */
     private $formatTournage;
 
@@ -86,7 +86,7 @@ class Projet
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $typeDaideDoc;
+    private $typeAideDoc;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -116,7 +116,7 @@ class Projet
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $castionEnvisage;
+    private $castingEnvisage;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -124,104 +124,104 @@ class Projet
     private $listeLiensTournage;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer",nullable=true)
      */
     private $nombreJoursTournage;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer",nullable=true)
      */
     private $nombreJoursTotal;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private $droitArtistiqueHt;
+    private $droitArtistiqueTotalHt;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $droitArtistiqueDRNHt;
+    private $droitArtistiqueTotalHtNormandie;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $personnel;
+    private $personnelTolalHt;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $personnelDRNHT;
+    private $personnelTotalHtNoramndie;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private $interpretationHt;
+    private $interpretationTotalHt;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private $interpretationDNHT;
+    private $interpretationTotalHtNormandie;
 
     /**
      * @ORM\Column(type="float")
      */
-    private $totalChargeSocialesHt;
+    private $totalChargeSocialesTotalHt;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private $totalChargeSocialesDNHt;
+    private $totalChargeSocialesTotalHtNormandie;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private $decoEtCostumes;
+    private $decoEtCostumesTotalHt;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private $decoEtCostumesDNHT;
+    private $decoEtCostumesTotalHtNormandie;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private $transportHT;
+    private $transportTotalHt;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private $transportDNHT;
+    private $transportTotalHtNormandie;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private $moyenTechniqueTournage;
+    private $moyenTechniqueTournageTotalHt;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private $postProd;
+    private $postProdTotalHt;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private $moyenTechniqueTournageDNHT;
+    private $moyenTechniqueTournageTotalHtNormandie;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private $postProdDNHT;
+    private $postProdTotalHtNormandie;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private $assuranceEtFrais;
+    private $assuranceEtFraisTotalHt;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private $assuranceEtFraisDNHT;
+    private $assuranceEtFraisTotalHtNormandie;
 
     /**
      * @ORM\Column(type="float", nullable=true)
@@ -231,37 +231,37 @@ class Projet
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private $fraisFinanciersDNHT;
+    private $fraisFinanciersTotalHtNormandie;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private $fraisGenerauxHT;
+    private $fraisGenerauxTotalHT;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private $fraisGenerauxDNHT;
+    private $fraisGenerauxTotalHtNormandie;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private $inprevus;
+    private $imprevusTotalHt;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private $inprevusDNHT;
+    private $imprevusTotalHtNormandie;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private $totalGeneralHT;
+    private $totalGeneralTotalHT;
 
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private $totalGeneralDNHT;
+    private $totalGeneralTotalHtNormandie;
 
     /**
      * @ORM\Column(type="boolean")
@@ -273,10 +273,7 @@ class Projet
      */
     private $financementAcquisPrecision;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $String;
+    
 
     /**
      * @ORM\Column(type="boolean")
@@ -291,17 +288,17 @@ class Projet
     /**
      * @ORM\Column(type="boolean", nullable=true)
      */
-    private $projetDejaPresenterFA;
+    private $projetDejaPresenteFondAide;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $projetDejaPresenteFADate;
+    private $projetDejaPresenteFondAideDate;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $projetDejaPresenteFATypeAide;
+    private $projetDejaPresenteFondAideTypeAide;
 
     public function __construct()
     {
@@ -513,14 +510,14 @@ class Projet
         return $this;
     }
 
-    public function getTypeDaideDoc(): ?string
+    public function getTypeAideDoc(): ?string
     {
-        return $this->typeDaideDoc;
+        return $this->typeAideDoc;
     }
 
-    public function setTypeDaideDoc(?string $typeDaideDoc): self
+    public function setTypeAideDoc(?string $typeAideDoc): self
     {
-        $this->typeDaideDoc = $typeDaideDoc;
+        $this->typeAideDoc = $typeAideDoc;
 
         return $this;
     }
@@ -585,14 +582,14 @@ class Projet
         return $this;
     }
 
-    public function getCastionEnvisage(): ?string
+    public function getCastingEnvisage(): ?string
     {
-        return $this->castionEnvisage;
+        return $this->castingEnvisage;
     }
 
-    public function setCastionEnvisage(?string $castionEnvisage): self
+    public function setCastingEnvisage(?string $castingEnvisage): self
     {
-        $this->castionEnvisage = $castionEnvisage;
+        $this->castingEnvisage = $castingEnvisage;
 
         return $this;
     }
@@ -633,316 +630,312 @@ class Projet
         return $this;
     }
 
-    public function getDroitArtistiqueHt(): ?float
+    public function getDroitArtistiqueTotalHt(): ?float
     {
-        return $this->droitArtistiqueHt;
+        return $this->droitArtistiqueTotalHt;
     }
 
-    public function setDroitArtistiqueHt(?float $droitArtistiqueHt): self
+    public function setDroitArtistiqueTotalHt(?float $droitArtistiqueTotalHt): self
     {
-        $this->droitArtistiqueHt = $droitArtistiqueHt;
+        $this->droitArtistiqueTotalHt = $droitArtistiqueTotalHt;
 
         return $this;
     }
 
-    public function getDroitArtistiqueDRNHt(): ?int
+    public function getDroitArtistiqueTotalHtNormandie(): ?int
     {
-        return $this->droitArtistiqueDRNHt;
+        return $this->getDroitArtistiqueTotalHtNormandie;
     }
 
-    public function setDroitArtistiqueDRNHt(?int $droitArtistiqueDRNHt): self
+    public function setDroitArtistiqueTotalHtNormandie(?int $droitArtistiqueTotalHtNormandie): self
     {
-        $this->droitArtistiqueDRNHt = $droitArtistiqueDRNHt;
+        $this->droitArtistiqueTotalHtNormandie = $droitArtistiqueTotalHtNormandie;
 
         return $this;
     }
 
-    public function getPersonnel(): ?int
+    public function getPersonnelTotalHt(): ?int
     {
-        return $this->personnel;
+        return $this->personnelTotalHt;
     }
 
-    public function setPersonnel(?int $personnel): self
+    public function setPersonnelTotalHt(?int $personnelTotalHt): self
     {
-        $this->personnel = $personnel;
+        $this->personnelTotalHt = $personnelTotalHt;
 
         return $this;
     }
 
-    public function getPersonnelDRNHT(): ?int
+    public function getPersonnelTotalHtNormandie(): ?int
     {
-        return $this->personnelDRNHT;
+        return $this->personnelTotalHtNormandie;
     }
 
-    public function setPersonnelDRNHT(?int $personnelDRNHT): self
+    public function setPersonnelTotalHtNormandie(?int $personnelTotalHtNormandie): self
     {
-        $this->personnelDRNHT = $personnelDRNHT;
+        $this->personnelTotalHtNormandie = $personnelTotalHtNormandie;
 
         return $this;
     }
 
-    public function getInterpretationHt(): ?float
+    public function getInterpretationTotalHt(): ?float
     {
-        return $this->interpretationHt;
+        return $this->interpretationTotalHt;
     }
-
-    public function setInterpretationHt(?float $interpretationHt): self
+    public function setInterpretationTotalHt(?float $interpretationTotalHt): self
     {
-        $this->interpretationHt = $interpretationHt;
+        $this->interpretationTotalHt = $interpretationTotalHt;
+
+        return $this;
+    }
+    
+    public function getInterpretationTotalHtNormandie(): ?float
+    {
+        return $this->interpretationTotalNormandie;
+    }
+    public function setInterpretationTotalHtNormandie(?float $interpretationTotalHtNormandie): self
+    {
+        $this->interpretationTotalHt = $interpretationTotalHtNormandie;
 
         return $this;
     }
 
-    public function getInterpretationDNHT(): ?float
+    public function getTotalChargeSocialesTotalHt(): ?float
     {
-        return $this->interpretationDNHT;
+        return $this->totalChargeSocialesTotalHt;
     }
 
-    public function setInterpretationDNHT(?float $interpretationDNHT): self
+    public function setTotalChargeSocialesTotalHt(float $totalChargeSocialesTotalHt): self
     {
-        $this->interpretationDNHT = $interpretationDNHT;
+        $this->totalChargeSocialesTotalHt = $totalChargeSocialesTotalHt;
 
         return $this;
     }
 
-    public function getTotalChargeSocialesHt(): ?float
+    public function getTotalChargeSocialesTotalHtNormandie(): ?float
     {
-        return $this->totalChargeSocialesHt;
+        return $this->totalChargeSocialesTotalHtNormandie;
     }
 
-    public function setTotalChargeSocialesHt(float $totalChargeSocialesHt): self
+    public function setTotalChargeSocialesTotalHtNormandie(?float $totalChargeSocialesTotalHtNormandie): self
     {
-        $this->totalChargeSocialesHt = $totalChargeSocialesHt;
+        $this->totalChargeSocialesTotalHtNormandie = $totalChargeSocialesTotalHtNormandie;
 
         return $this;
     }
 
-    public function getTotalChargeSocialesDNHt(): ?float
+    public function getDecoEtCostumesTotalHt(): ?float
     {
-        return $this->totalChargeSocialesDNHt;
+        return $this->decoEtCostumesTotalHt;
     }
 
-    public function setTotalChargeSocialesDNHt(?float $totalChargeSocialesDNHt): self
+    public function setDecoEtCostumes(?float $decoEtCostumesTotalHt): self
     {
-        $this->totalChargeSocialesDNHt = $totalChargeSocialesDNHt;
+        $this->decoEtCostumesTotalHt = $decoEtCostumesTotalHt;
 
         return $this;
     }
 
-    public function getDecoEtCostumes(): ?float
+    public function getDecoEtCostumesTotalHtNormandie(): ?float
     {
-        return $this->decoEtCostumes;
+        return $this->decoEtCostumesTotalHtNormandie;
     }
 
-    public function setDecoEtCostumes(?float $decoEtCostumes): self
+    public function setDecoEtCostumesTotalHtNormandie(?float $decoEtCostumesTotalHtNormandie): self
     {
-        $this->decoEtCostumes = $decoEtCostumes;
+        $this->decoEtCostumesTotalHtNormandie = $decoEtCostumesTotalHtNormandie;
 
         return $this;
     }
 
-    public function getDecoEtCostumesDNHT(): ?float
+    public function getTransportTotalHT(): ?float
     {
-        return $this->decoEtCostumesDNHT;
+        return $this->transportTotalHT;
     }
 
-    public function setDecoEtCostumesDNHT(?float $decoEtCostumesDNHT): self
+    public function setTransportTotalHT(?float $transportTotalHT): self
     {
-        $this->decoEtCostumesDNHT = $decoEtCostumesDNHT;
+        $this->transportTotalHT = $transportTotalHT;
 
         return $this;
     }
 
-    public function getTransportHT(): ?float
+    public function getTransportTotalHTNoramandie(): ?float
     {
-        return $this->transportHT;
+        return $this->transportTotalHTNoramandie;
     }
 
-    public function setTransportHT(?float $transportHT): self
+    public function SetTransportTotalHtNormandie(?float $transportTotalHtNormandie): self
     {
-        $this->transportHT = $transportHT;
+        $this->transportTotalHtNormandie = $transportTotalHtNormandie;
 
         return $this;
     }
 
-    public function getTransportDNHT(): ?float
+    public function getMoyenTechniqueTournageTotalHt(): ?float
     {
-        return $this->transportDNHT;
+        return $this->moyenTechniqueTournageTotalHt;
     }
 
-    public function setTransportDNHT(?float $transportDNHT): self
+    public function setMoyenTechniqueTournageTotalHt(?float $moyenTechniqueTournageTotalHt): self
     {
-        $this->transportDNHT = $transportDNHT;
+        $this->moyenTechniqueTournageTotalHt = $moyenTechniqueTournageTotalHt;
 
         return $this;
     }
 
-    public function getMoyenTechniqueTournage(): ?float
+    public function getPostProdTotalHt(): ?float
     {
-        return $this->moyenTechniqueTournage;
+        return $this->postProdTotalHt;
     }
 
-    public function setMoyenTechniqueTournage(?float $moyenTechniqueTournage): self
+    public function setPostProdTotalHt(?float $postProd): self
     {
-        $this->moyenTechniqueTournage = $moyenTechniqueTournage;
+        $this->postProdTotalHt = $postProdTotalHt;
 
         return $this;
     }
 
-    public function getPostProd(): ?float
+    public function getMoyenTechniqueTournageTotalHtNormandie(): ?float
     {
-        return $this->postProd;
+        return $this->moyenTechniqueTournageTotalHtNormandie;
     }
 
-    public function setPostProd(?float $postProd): self
+    public function setMoyenTechniqueTournageTotalHtNormandie(?float $moyenTechniqueTournageTotalHtNormandie): self
     {
-        $this->postProd = $postProd;
+        $this->moyenTechniqueTournageTotalHtNormandie = $moyenTechniqueTournageTotalHtNormandie;
 
         return $this;
     }
 
-    public function getMoyenTechniqueTournageDNHT(): ?float
+    public function getPostProdTotalHtNormandie(): ?float
     {
-        return $this->moyenTechniqueTournageDNHT;
+        return $this->postProdTotalHtNormandie;
     }
 
-    public function setMoyenTechniqueTournageDNHT(?float $moyenTechniqueTournageDNHT): self
+    public function setPostProdTotalHtNormandie(?float $postProdTotalHtNormandie): self
     {
-        $this->moyenTechniqueTournageDNHT = $moyenTechniqueTournageDNHT;
+        $this->postPostProdTotalHtNormandie = $postProdTotalHtNormandie;
+
+        return $this;
+    }
+    public function getAssuranceEtFraisTotalHt(): ?float
+    {
+        return $this->assuranceEtFraisTotalHt;
+    }
+
+    public function setAssuranceEtFraisTotalHt(?float $assuranceEtFraisTotalHt): self
+    {
+        $this->assuranceEtFraisTotalHt = $assuranceEtFraisTotalHt;
 
         return $this;
     }
 
-    public function getPostProdDNHT(): ?float
+    public function getAssuranceEtFraisTotalHtNormandie(): ?float
     {
-        return $this->postProdDNHT;
+        return $this->assuranceEtFraisTotalHtNormandie;
     }
 
-    public function setPostProdDNHT(?float $postProdDNHT): self
+    public function setAssuranceEtFraisTotalHtNormandie(?float $assuranceEtFraisNormandie): self
     {
-        $this->postProdDNHT = $postProdDNHT;
+        $this->assuranceEtFraisNormandie = $assuranceEtFraisNormandie;
 
         return $this;
     }
 
-    public function getAssuranceEtFrais(): ?float
+
+    public function getFraisFinanciersTotalHT(): ?float
     {
-        return $this->assuranceEtFrais;
+        return $this->fraisFinanciersTotalHT;
     }
 
-    public function setAssuranceEtFrais(?float $assuranceEtFrais): self
+    public function setFraisFinanciersTotalHT(?float $fraisFinanciersTotalHT): self
     {
-        $this->assuranceEtFrais = $assuranceEtFrais;
+        $this->fraisFinanciersTotalHT = $fraisFinanciersTotalHT;
 
         return $this;
     }
 
-    public function getAssuranceEtFraisDNHT(): ?float
+    public function getFraisFinanciersTotalHtNormandie(): ?float
     {
-        return $this->assuranceEtFraisDNHT;
+        return $this->fraisFinanciersTotalHtNormandie;
     }
 
-    public function setAssuranceEtFraisDNHT(?float $assuranceEtFraisDNHT): self
+    public function setFraisFinanciersTotalHtNormandie(?float $fraisFinanciersTotalHtNormandie): self
     {
-        $this->assuranceEtFraisDNHT = $assuranceEtFraisDNHT;
+        $this->fraisFinanciersTotalHtNormandie = $fraisFinanciersTotalHtNormandie;
 
         return $this;
     }
 
-    public function getFraisFinanciersHT(): ?float
+    public function getFraisGenerauxTotalHt(): ?float
     {
-        return $this->fraisFinanciersHT;
+        return $this->fraisGenerauxTotalHt;
     }
 
-    public function setFraisFinanciersHT(?float $fraisFinanciersHT): self
+    public function setFraisGenerauxTotalHt(?float $fraisGenerauxTotalHt): self
     {
-        $this->fraisFinanciersHT = $fraisFinanciersHT;
+        $this->fraisGenerauxTotalHt = $fraisGenerauxTotalHt;
 
         return $this;
     }
 
-    public function getFraisFinanciersDNHT(): ?float
+    public function getFraisGenerauxTotalHtNormandie(): ?float
     {
-        return $this->fraisFinanciersDNHT;
+        return $this->fraisGenerauxTotalHtNormandie;
     }
 
-    public function setFraisFinanciersDNHT(?float $fraisFinanciersDNHT): self
+    public function setFraisGenerauxTotalHtNormandie(?float $fraisGenerauxTotalHtNormandie): self
     {
-        $this->fraisFinanciersDNHT = $fraisFinanciersDNHT;
+        $this->fraisGenerauxTotalHtNormandie = $fraisGenerauxTotalHtNormandie;
 
         return $this;
     }
 
-    public function getFraisGenerauxHT(): ?float
+    public function getImprevusTotalHt(): ?float
     {
-        return $this->fraisGenerauxHT;
+        return $this->imprevusTotalHt;
     }
 
-    public function setFraisGenerauxHT(?float $fraisGenerauxHT): self
+    public function setImprevusTotalHt(?float $imprevusTotalHt): self
     {
-        $this->fraisGenerauxHT = $fraisGenerauxHT;
+        $this->inprevusTotalHt = $imprevusTotalHt;
 
         return $this;
     }
 
-    public function getFraisGenerauxDNHT(): ?float
+    public function getImprevusTotalHtNormandie(): ?float
     {
-        return $this->fraisGenerauxDNHT;
+        return $this->imprevusTotalHtNormandie;
     }
 
-    public function setFraisGenerauxDNHT(?float $fraisGenerauxDNHT): self
+    public function setImprevusTotalHtNormandie(?float $imprevusTotalHtNormandie): self
     {
-        $this->fraisGenerauxDNHT = $fraisGenerauxDNHT;
+        $this->imprevusTotalHtNormandie = $imprevusTotalHtNormandie;
 
         return $this;
     }
 
-    public function getInprevus(): ?float
+    public function getTotalGeneralTotalHt(): ?float
     {
-        return $this->inprevus;
+        return $this->totalGeneralTotalHt;
     }
-
-    public function setInprevus(?float $inprevus): self
+    public function setTotalGeneralTotalHt(?float $totalGeneralTotalHT): self
     {
-        $this->inprevus = $inprevus;
+        $this->totalGeneralTotalHt = $totalGeneralTotalHt;
+
+        return $this;
+    }
+    public function setTotalGeneralTotalHtNormandie(?float $totalGeneralTotalHtNormandie): self
+    {
+        $this->totalGeneralTotalHtNormandie = $totalGeneralTotalHtNormandie;
 
         return $this;
     }
 
-    public function getInprevusDNHT(): ?float
+    public function getTotalGeneralTotalHtNormandie(): ?float
     {
-        return $this->inprevusDNHT;
-    }
-
-    public function setInprevusDNHT(?float $inprevusDNHT): self
-    {
-        $this->inprevusDNHT = $inprevusDNHT;
-
-        return $this;
-    }
-
-    public function getTotalGeneralHT(): ?float
-    {
-        return $this->totalGeneralHT;
-    }
-
-    public function setTotalGeneralHT(?float $totalGeneralHT): self
-    {
-        $this->totalGeneralHT = $totalGeneralHT;
-
-        return $this;
-    }
-
-    public function getTotalGeneralDNHT(): ?float
-    {
-        return $this->totalGeneralDNHT;
-    }
-
-    public function setTotalGeneralDNHT(?float $totalGeneralDNHT): self
-    {
-        $this->totalGeneralDNHT = $totalGeneralDNHT;
-
-        return $this;
+        return $this->totalGeneralTotalHtNormandie;
     }
 
     public function getFinancementAcquis(): ?bool

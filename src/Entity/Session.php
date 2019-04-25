@@ -51,7 +51,7 @@ class Session
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\FondsAide", inversedBy="sessions")
      */
-    private $fondAide;
+    private $fondsAide;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Projet", mappedBy="session")
@@ -140,14 +140,14 @@ class Session
         return $this;
     }
 
-    public function getFondAide(): ?FondsAide
+    public function getFondsAide(): ?FondsAide
     {
-        return $this->fondAide;
+        return $this->fondsAide;
     }
 
-    public function setFondAide(?FondsAide $fondAide): self
+    public function setFondsAide(?FondsAide $fondsAide): self
     {
-        $this->fondAide = $fondAide;
+        $this->fondsAide = $fondsAide;
 
         return $this;
     }
