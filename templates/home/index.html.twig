@@ -2,12 +2,13 @@
 
 {% block title %}calendier des commissions de soutien à la production et à la création du fonds d'aide région Noramndie{% endblock %}
 {% block body %}
+  <h3 mt-4>Fonds de soutien écriture, développement, recherche</h3>
     <div class="container">
-        <div class="row">
+        <div class="row mt-4">
             {% for entity in data %}
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="card border-secondary bg-light mb-3 text-center">
-                    <div class="card-header bg-red">
+                    <div class="card-header">
                         {{entity.nom}}
                     </div>        
                     <div class="card-body">
@@ -18,7 +19,7 @@
                                 <p class="card-text">Présélection  le  {{ session.preselection | date('d/m/Y')}}</p>
                                 <p class="card-text">Plénière le  {{ session.pleniere | date('d/m/Y')}} </p>
                                 <br>
-                                <a href="#" class="btn btn-secondary">je dépose mon dossier</a>
+                                <a href="{{path('all_filds_form',{'id':entity.id})}}" class="btn btn-secondary">Je m'inscris</a>
                              </fieldset>
                         {% endfor %}
                     </div>

@@ -146,12 +146,12 @@ class Projet
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $personnelTolalHt;
+    private $personnelTotalHt;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
      */
-    private $personnelTotalHtNoramndie;
+    private $personnelTotalHtNormandie;
 
     /**
      * @ORM\Column(type="float", nullable=true)
@@ -226,7 +226,8 @@ class Projet
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private $fraisFinanciersHT;
+    private $fraisFinanciersTotalHt;
+
 
     /**
      * @ORM\Column(type="float", nullable=true)
@@ -236,7 +237,7 @@ class Projet
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private $fraisGenerauxTotalHT;
+    private $fraisGenerauxTotalHt;
 
     /**
      * @ORM\Column(type="float", nullable=true)
@@ -256,7 +257,7 @@ class Projet
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private $totalGeneralTotalHT;
+    private $totalGeneralTotalHt;
 
     /**
      * @ORM\Column(type="float", nullable=true)
@@ -273,8 +274,6 @@ class Projet
      */
     private $financementAcquisPrecision;
 
-    
-
     /**
      * @ORM\Column(type="boolean")
      */
@@ -288,17 +287,17 @@ class Projet
     /**
      * @ORM\Column(type="boolean", nullable=true)
      */
-    private $projetDejaPresenteFondAide;
+    private $projetDejaPresenteFondsAide;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $projetDejaPresenteFondAideDate;
+    private $projetDejaPresenteFondsAideDate;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $projetDejaPresenteFondAideTypeAide;
+    private $projetDejaPresenteFondsAideTypeAide;
 
     public function __construct()
     {
@@ -644,12 +643,12 @@ class Projet
 
     public function getDroitArtistiqueTotalHtNormandie(): ?int
     {
-        return $this->getDroitArtistiqueTotalHtNormandie;
+        return $this->droitArtistiqueTotalHtNormandie;
     }
 
     public function setDroitArtistiqueTotalHtNormandie(?int $droitArtistiqueTotalHtNormandie): self
     {
-        $this->droitArtistiqueTotalHtNormandie = $droitArtistiqueTotalHtNormandie;
+        $this->droitArtistiqueTotalHtNormandie = $droitArtistiqueTotalHtNormandi;
 
         return $this;
     }
@@ -691,7 +690,7 @@ class Projet
     
     public function getInterpretationTotalHtNormandie(): ?float
     {
-        return $this->interpretationTotalNormandie;
+        return $this->interpretationTotalHtNormandie;
     }
     public function setInterpretationTotalHtNormandie(?float $interpretationTotalHtNormandie): self
     {
@@ -748,21 +747,21 @@ class Projet
         return $this;
     }
 
-    public function getTransportTotalHT(): ?float
+    public function getTransportTotalHt(): ?float
     {
-        return $this->transportTotalHT;
+        return $this->transportTotalHt;
     }
 
-    public function setTransportTotalHT(?float $transportTotalHT): self
+    public function setTransportTotalHt(?float $transportTotalHt): self
     {
-        $this->transportTotalHT = $transportTotalHT;
+        $this->transportTotalHt = $transportTotalHt;
 
         return $this;
     }
 
-    public function getTransportTotalHTNoramandie(): ?float
+    public function getTransportTotalHtNormandie(): ?float
     {
-        return $this->transportTotalHTNoramandie;
+        return $this->transportTotalHtNormandie;
     }
 
     public function SetTransportTotalHtNormandie(?float $transportTotalHtNormandie): self
@@ -844,14 +843,14 @@ class Projet
     }
 
 
-    public function getFraisFinanciersTotalHT(): ?float
+    public function getFraisFinanciersTotalHt(): ?float
     {
-        return $this->fraisFinanciersTotalHT;
+        return $this->fraisFinanciersTotalHt;
     }
 
-    public function setFraisFinanciersTotalHT(?float $fraisFinanciersTotalHT): self
+    public function setFraisFinanciersTotalHt(?float $fraisFinanciersTotalHT): self
     {
-        $this->fraisFinanciersTotalHT = $fraisFinanciersTotalHT;
+        $this->fraisFinanciersTotalHt = $fraisFinanciersTotalHt;
 
         return $this;
     }
@@ -920,7 +919,7 @@ class Projet
     {
         return $this->totalGeneralTotalHt;
     }
-    public function setTotalGeneralTotalHt(?float $totalGeneralTotalHT): self
+    public function setTotalGeneralTotalHt(?float $totalGeneralTotalHt): self
     {
         $this->totalGeneralTotalHt = $totalGeneralTotalHt;
 
@@ -962,17 +961,6 @@ class Projet
         return $this;
     }
 
-    public function getString(): ?string
-    {
-        return $this->String;
-    }
-
-    public function setString(?string $String): self
-    {
-        $this->String = $String;
-
-        return $this;
-    }
 
     public function getDepotProjetCollectivite(): ?bool
     {
@@ -998,38 +986,38 @@ class Projet
         return $this;
     }
 
-    public function getProjetDejaPresenterFA(): ?bool
+    public function getProjetDejaPresenteFondsAide(): ?bool
     {
-        return $this->projetDejaPresenterFA;
+        return $this->projetDejaPresenteFondsAide;
     }
 
-    public function setProjetDejaPresenterFA(?bool $projetDejaPresenterFA): self
+    public function setProjetDejaPresenteFondsAide(?bool $projetDejaPresenteFondsAide): self
     {
-        $this->projetDejaPresenterFA = $projetDejaPresenterFA;
+        $this->projetDejaPresenteFondsAide = $projetDejaPresenteFondsAide;
 
         return $this;
     }
 
-    public function getProjetDejaPresenteFADate(): ?string
+    public function getProjetDejaPresenteFondsAideDate(): ?string
     {
-        return $this->projetDejaPresenteFADate;
+        return $this->projetDejaPresenteFondsAideDate;
     }
 
-    public function setProjetDejaPresenteFADate(?string $projetDejaPresenteFADate): self
+    public function setProjetDejaPresenteFondsAideDate(?string $projetDejaPresenteFondsAideDate): self
     {
-        $this->projetDejaPresenteFADate = $projetDejaPresenteFADate;
+        $this->projetDejaPresenteFondsAideDate = $projetDejaPresenteFondsAideDate;
 
         return $this;
     }
 
-    public function getProjetDejaPresenteFATypeAide(): ?string
+    public function getProjetDejaPresenteFondsAideTypeAide(): ?string
     {
-        return $this->projetDejaPresenteFATypeAide;
+        return $this->projetDejaPresenteFondsAideTypeAide;
     }
 
-    public function setProjetDejaPresenteFATypeAide(?string $projetDejaPresenteFATypeAide): self
+    public function setProjetDejaPresenteFondsAideTypeAide(?string $projetDejaPresenteFondsAideTypeAide): self
     {
-        $this->projetDejaPresenteFATypeAide = $projetDejaPresenteFATypeAide;
+        $this->projetDejaPresenteFondsAideTypeAide = $projetDejaPresenteFondsAideTypeAide;
 
         return $this;
     }

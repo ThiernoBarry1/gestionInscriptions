@@ -57,7 +57,7 @@ class GesitionIncriptionFixtures extends Fixture
         $manager->persist($session1);
         $manager->persist($session2);
         
-        $fondsAideCreation->setNom(" Création Images differentes et nouveaux médias")
+        $fondsAideCreation->setNom("Création Images differentes et nouveaux médias")
                          ->addSession($session1)
                          ->addSession($session2);
         $manager->persist($fondsAideCreation);
@@ -78,7 +78,7 @@ class GesitionIncriptionFixtures extends Fixture
                  ->setFondsAide($fondsAideEdd);
         $manager->persist($session1);
         $manager->persist($session2);
-        $fondsAideEdd->setNom(" Ecriture et développement documentaire")
+        $fondsAideEdd->setNom("Ecriture et développement documentaire")
                      ->addSession($session1)
                      ->addSession($session2);
         $manager->persist($fondsAideEdd);
@@ -107,7 +107,7 @@ class GesitionIncriptionFixtures extends Fixture
         $manager->persist($session1);
         $manager->persist($session2);
         $manager->persist($session3);
-        $fondsAideErlc->setNom(" Ecriture et réecriture long métrage cinéma ")
+        $fondsAideErlc->setNom("Ecriture et réecriture long métrage cinéma ")
                              ->addSession($session1)
                              ->addSession($session2)
                              ->addSession($session3);

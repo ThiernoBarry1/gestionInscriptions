@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription à la commission du {{ fondsAide.nom }} {% endblock %}
+
+{% block body %}
+  {% if whichChoice == 1 %}
+     {# {{ form_start(allFildsForm) }}
+     {{ form_widget(allFildsForm.titre) }}
+     {{ form_widget(allFildsForm.duree) }}
+     {# {{ form_widget(allFildsForm.genre) }} #}
+     {{ form_end(allFildsForm) }} #}
+     {{ dump(allFildsForm) }}
+  {% else %}
+     <h1>pas encore implementer </h1>
+  {% endif %}
+{% endblock %}
