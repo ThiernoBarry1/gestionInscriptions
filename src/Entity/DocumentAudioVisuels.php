@@ -51,6 +51,11 @@ class DocumentAudioVisuels
      */
     private $projet;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $lien;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -136,6 +141,18 @@ class DocumentAudioVisuels
     public function setProjet(?Projet $projet): self
     {
         $this->projet = $projet;
+
+        return $this;
+    }
+
+    public function getLien(): ?string
+    {
+        return $this->lien;
+    }
+
+    public function setLien(?string $lien): self
+    {
+        $this->lien = $lien;
 
         return $this;
     }

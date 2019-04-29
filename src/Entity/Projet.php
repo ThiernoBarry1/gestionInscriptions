@@ -299,6 +299,31 @@ class Projet
      */
     private $projetDejaPresenteFondsAideTypeAide;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $genrePrecisionAutre;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $adaptationOeuvreToa;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $adaptationOeuvreDacp;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $adaptationOeuvreDfc;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $montantSollicite;
+
     public function __construct()
     {
         $this->auteurRealisateurs = new ArrayCollection();
@@ -1018,6 +1043,66 @@ class Projet
     public function setProjetDejaPresenteFondsAideTypeAide(?string $projetDejaPresenteFondsAideTypeAide): self
     {
         $this->projetDejaPresenteFondsAideTypeAide = $projetDejaPresenteFondsAideTypeAide;
+
+        return $this;
+    }
+
+    public function getGenrePrecisionAutre(): ?string
+    {
+        return $this->genrePrecisionAutre;
+    }
+
+    public function setGenrePrecisionAutre(?string $genrePrecisionAutre): self
+    {
+        $this->genrePrecisionAutre = $genrePrecisionAutre;
+
+        return $this;
+    }
+
+    public function getAdaptationOeuvreToa(): ?string
+    {
+        return $this->adaptationOeuvreToa;
+    }
+
+    public function setAdaptationOeuvreToa(?string $adaptationOeuvreToa): self
+    {
+        $this->adaptationOeuvreToa = $adaptationOeuvreToa;
+
+        return $this;
+    }
+
+    public function getAdaptationOeuvreDacp(): ?string
+    {
+        return $this->adaptationOeuvreDacp;
+    }
+
+    public function setAdaptationOeuvreDacp(?string $adaptationOeuvreDacp): self
+    {
+        $this->adaptationOeuvreDacp = $adaptationOeuvreDacp;
+
+        return $this;
+    }
+
+    public function getAdaptationOeuvreDfc(): ?\DateTimeInterface
+    {
+        return $this->adaptationOeuvreDfc;
+    }
+
+    public function setAdaptationOeuvreDfc(?\DateTimeInterface $adaptationOeuvreDfc): self
+    {
+        $this->adaptationOeuvreDfc = $adaptationOeuvreDfc;
+
+        return $this;
+    }
+
+    public function getMontantSollicite(): ?string
+    {
+        return $this->montantSollicite;
+    }
+
+    public function setMontantSollicite(?string $montantSollicite): self
+    {
+        $this->montantSollicite = $montantSollicite;
 
         return $this;
     }
