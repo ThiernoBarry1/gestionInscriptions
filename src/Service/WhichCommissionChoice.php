@@ -5,9 +5,7 @@ use App\Entity\Projet;
 use App\Entity\FondsAide;
 use App\Repository\FondsAideRepository;
 
-
-
-class WhichChoice 
+class WhichCommissionChoice 
 {   
     private $id;
     private $fondsAideRepo;

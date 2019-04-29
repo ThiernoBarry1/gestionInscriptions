@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Projet;
+use App\Form\AuteurRealisateurType;
+use App\Entity\DocumentAudioVisuels;
 use App\Form\ConfigurationFildsType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -12,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\RadioType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 
 class RegistrationType extends ConfigurationFildsType
 {
@@ -23,23 +26,63 @@ class RegistrationType extends ConfigurationFildsType
             ->add('formatTournage',TextType::class,$this->getConfiguration('Format de tournage'))
             ->add('formatDefinitif',TextType::class,$this->getConfiguration('Format définitif'))
             ->add('genre',ChoiceType::class,
-            ['choices'  => [
-                'Maybe' => null,
-                'Yes' => true,
-                'No' => false,
-            ]]
-             )
+                [ 'choices'  => [
+                  'Fiction' => true,
+                  'Animation' => false,
+                  'Documentaire' => false,
+                  'Autre'=>false,
+                  ],  'expanded' =>true
+                ])
              ->add('genrePrecisionAutre',TextType::class,$this->getConfiguration('si autre, précisez *'))
             ->add('synopsis',TextareaType::class,$this->getConfiguration('Synopsis (600 caractères maximum) '))
-            ->add('adaptationOeuvre')
+            ->add('adaptationOeuvre',ChoiceType::class,
+                        ['choices'  => 
+                           [
+                             'Oui' => true,
+                              'Non' => false,
+                           ],
+                          'expanded' =>true
+                        ],
+                $this->getConfiguration('Adaptation d\'une oeuvre préexistante'))
             ->add('adaptationOeuvreToa',TextType::class,$this->getConfiguration('Titre de l\'oeuvre et l\'auteur *'))
             ->add('adaptationOeuvreDacp',TextType::class,$this->getConfiguration('Droits d\'adaptation cédés par *'))
             //->add('adaptationOeuvreDfc',)
-            ->add('deposant')
-            ->add('typeAideLm')
-            ->add('typeAideDoc')
+            ->add('deposant',ChoiceType::class,
+                ['choices'  => 
+                    [
+                     'Le producteur' => true,
+                     'L\'auteur / le réalisateur ' => false,
+                    ],
+                 'expanded' =>true
+                ],
+               $this->getConfiguration('Projet déposé par'))
+            ->add('typeAideLm',ChoiceType::class,
+                    ['choices'  => 
+                       [
+                         'Ecriture' => true,
+                         'Réécriture' => false,
+                       ],
+                     'expanded' =>true
+                    ],
+                $this->getConfiguration('Type d\'aide démandée'))
+            ->add('typeAideDoc',ChoiceType::class,
+                    ['choices'  => 
+                        [
+                          'Ecriture' => true,
+                          'Développement' => false,
+                        ],
+                     'expanded' =>true
+                   ],
+                $this->getConfiguration('Type d\'aide démandée'))
             ->add('mtBudget',TextType::class,$this->getConfiguration('Pour les producteurs, montant du budget HT (écriture, réécriture ou développement'))
-            ->add('liensEligibilite',ChoiceType::class,$this->getConfiguration('Liens d\'éligibilité'))
+            ->add('liensEligibilite',ChoiceType::class,
+                    ['choices'  => 
+                        [
+                          'à definir ' => true,
+                          'à definir ' => false,
+                       ],
+                    ],
+                    $this->getConfiguration('Liens d\'éligibilité'))
             ->add('datePreparation',TextType::class,$this->getConfiguration('Date de préparation'))
             ->add('dateTournage',TextType::class,$this->getConfiguration('Date de tournage'))
             ->add('dateDiffusion',TextType::class,$this->getConfiguration('Date de  diffusion'))
@@ -80,8 +123,21 @@ class RegistrationType extends ConfigurationFildsType
             ->add('depotProjetCollectivitePrecision',TextType::class,$this->getConfiguration('Si oui, lesquelles'))
             ->add('projetDejaPresenteFondsAide')
             ->add('projetDejaPresenteFondsAideDate',TextType::class,$this->getConfiguration('Si oui, à quelle date'))
-            ->add('projetDejaPresenteFondsAideTypeAide',TextType::class,$this->getConfiguration('Pour quel type d\'aide'));
-        ;
+            ->add('projetDejaPresenteFondsAideTypeAide',TextType::class,$this->getConfiguration('Pour quel type d\'aide'))
+            ->add('auteurRealisateurs',CollectionType::class,
+                [
+                 'entry_type'=>AuteurRealisateurType::class,
+                 'allow_add'=>true,
+                 'allow_delete'=>true
+               ])
+            ->add('documentAudioVisuels',CollectionType::class,
+              [
+                'entry_type'=>DocumentsAudioVisuelsType::class,
+                'allow_add'=>true,
+                'allow_delete'=>true
+              ]
+              )
+            ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
