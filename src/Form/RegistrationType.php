@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Projet;
 use App\Form\ProducteurType;
+use App\Entity\AuteurRealisateur;
 use App\Form\AuteurRealisateurType;
 use App\Entity\DocumentAudioVisuels;
 use App\Form\ConfigurationFildsType;
@@ -62,6 +63,12 @@ class RegistrationType extends ConfigurationFildsType
                 'entry_type'=>ProducteurType::class
                 ]
               )
+              ->add('auteurRealisateurs',CollectionType::class,
+                 [
+                   'entry_type'=>AuteurRealisateurType::class,
+                   'allow_add'=>true,
+                   'allow_delete'=>true,
+                 ])
                ->add('typeAideLm',ChoiceType::class,
                     ['choices'  => 
                        [

@@ -31,43 +31,92 @@
       </fieldset>
       <hr>
       <fieldset class="border p-3">
-         <legend class="w-auto"> Auteur </legend>
+         <legend class="w-auto"> Production </legend>   
 
+          {% for producteur in allFieldsForm.producteurs %}
+         <div class="form-group">
+            <div class="row">
+                <div class="col-12">
+                    {{ form_row(producteur.nom,{'label':'Nom','attr':{'class':'form_control-sm'}}) }}
+                </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                  {{ form_row(producteur.nature,{'label':'Nature juridique','attr':{'class':'form_control-sm'}}) }}
+               </div>
+               <div class="col">
+                  {{ form_row(producteur.siret,{'label':'N° de SIRET','attr':{'class':'form_control-sm'}}) }}
+               </div>
+            </div>
+            <div class="row">
+                  <div class="col">
+                      {{ form_row(producteur.prenomGerant,{'label':'Gérant/Président','attr':{'class':'form_control-sm'}}) }}
+                   </div>
+                   <div class="col">
+                      {{ form_row(producteur.nomGerant,{'label':false,'attr':{'class':'form_control-sm'}}) }}
+                   </div>
+            </div>
+            <div class="row">
+                  <div class="col">
+                      {{ form_row(producteur.nomProducteur,{'label':'Nom producteur','attr':{'class':'form_control-sm'}}) }}
+                   </div>
+                   <div class="col">
+                      {{ form_row(producteur.prenomProducteur,{'label':'Prenom producteur','attr':{'class':'form_control-sm'}}) }}
+                   </div>
+             </div>
+             <div class="row">
+                  <div class="col-12">
+                      {{ form_row(producteur.personneChargee,{'label':'Personne Chargée (si differente)','attr':{'class':'form_control-sm'}}) }}
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-12">
+                      {{ form_row(producteur.adresse,{'label':'Adresse (siège social)','attr':{'class':'form_control-sm'}}) }}
+                  </div>
+              </div>
+              <div class="row">
+                 <div class="col">
+                     {{ form_row(producteur.codePostal,{'label':'Code postal','attr':{'class':'form_control-sm'}}) }}
+                 </div>
+                 <div class="col">
+                     {{ form_row(producteur.ville,{'label':'Ville','attr':{'class':'form_control-sm'}}) }}
+                 </div>
+              </div>
+              <div class="row">
+                  <div class="col-12">
+                      {{ form_row(producteur.adresseBureau,{'label':'Adresse bureau (si differente du siège social)','attr':{'class':'form_control-sm'}}) }}
+                  </div>
+              </div>
+              <div class="row">
+                 <div class="col">
+                     {{ form_row(producteur.codePostaleBureau,{'label':'Code postal','attr':{'class':'form_control-sm'}}) }}
+                 </div>
+                 <div class="col">
+                     {{ form_row(producteur.villeBureau,{'label':'Ville','attr':{'class':'form_control-sm'}}) }}
+                 </div>
+              </div>
+              <div class="row">
+                  <div class="col">
+                      {{ form_row(producteur.telephoneFixe,{'label':'Télephone fixe','attr':{'class':'form_control-sm'}}) }}
+                  </div>
+                  <div class="col">
+                      {{ form_row(producteur.telephoneMobile,{'label':'Télephone mobile','attr':{'class':'form_control-sm'}}) }}
+                  </div>
+               </div>
+               <div class="row">
+                  <div class="col">
+                     {{ form_row(producteur.courriel,{'label':'Courriel','attr':{'class':'form_control-sm'}}) }}
+                  </div>
+               </div>
+         </div>
+         {% endfor %}
       </fieldset>
-     
+     <hr>
+     <fieldset class="border p-3">
+        <legend class="w-auto">Ajout d'un auteur ou d'un réalisateur </legend>
+
+     </fieldset>
       {{ form_end(allFieldsForm,{'render_rest':false}) }}
    </div> 
 {% endblock %}
 
-{#  Ce block permet de gérer le formulaire de l'entité auteurRealisateurs #}
-
-{% block _registration_auteurRealisateurs_entry_row %}
-   <div class="form-group">
-      <div class="row">
-         <div class="col">
-            {{form_row(form.nom,{'label':'Nom'})}}
-         </div>
-         <div class="col">
-            {{form_row(form.prenom,{'label':'Prénom'})}}
-         </div>
-      </div>
-   </div>
-{% endblock %}
-
-{% block _registration_producteur_widget %}
-   <p>Partie formulaire  producteur </p>
-   {{ form_widget(form) }}
-{% endblock %}
-
-{% block _registration_producteur_entry_row %}
-<div class="form-group">
-   <div class="row">
-      <div class="col">
-          {{form_widget(form.nom)}}
-       </div>
-       <div class="col">
-         {{form_widget(form.nature)}}
-      </div>
-   </div>
-</div>
-{% endblock %}
