@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Projet;
+use App\Form\ProducteurType;
 use App\Form\AuteurRealisateurType;
 use App\Entity\DocumentAudioVisuels;
 use App\Form\ConfigurationFildsType;
@@ -10,7 +11,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\RadioType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -78,8 +78,8 @@ class RegistrationType extends ConfigurationFildsType
             ->add('liensEligibilite',ChoiceType::class,
                     ['choices'  => 
                         [
-                          'à definir ' => true,
-                          'à definir ' => false,
+                          'à définir ' => true,
+                          'à définir ' => false,
                        ],
                     ],
                     $this->getConfiguration('Liens d\'éligibilité'))
@@ -127,8 +127,6 @@ class RegistrationType extends ConfigurationFildsType
             ->add('auteurRealisateurs',CollectionType::class,
                 [
                  'entry_type'=>AuteurRealisateurType::class,
-                 'allow_add'=>true,
-                 'allow_delete'=>true
                ])
             ->add('documentAudioVisuels',CollectionType::class,
               [
@@ -137,6 +135,10 @@ class RegistrationType extends ConfigurationFildsType
                 'allow_delete'=>true
               ]
               )
+            ->add('producteur',CollectionType::class,
+              [
+                'entry_type'=>ProducteurType::class
+              ])
             ;
     }
 

@@ -4,8 +4,11 @@ namespace App\Controller;
 
 use App\Entity\Projet;
 use App\Entity\FondsAide;
-use App\Service\WhichCommissionChoice;
+use App\Entity\Producteur;
 use App\Form\RegistrationType;
+use App\Entity\AuteurRealisateur;
+use App\Service\WhichCommissionChoice;
+use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,13 +27,45 @@ class AllFieldsFormController extends AbstractController
      * @param ObjectManager $manager
      * @return Response
      */
-    public function registration(WhichCommissionChoice $choice,$id,ObjectManager $manager)
+    public function registration(WhichCommissionChoice $choice,$id,ObjectManager $manager, Request $request)
     {
+        
         $choice->setId($id);
         $whichChoice = $choice->getCorrectIdCommision();
         $projet  = $choice->getInstanceProjet();
         $fondsAide = $choice->getFondsAide();
+        /* $producteur = new Producteur();
+        $producteur->setNom("BA")
+                   ->setNature('entreprise')
+                   ->setSiret('0000000000000000000000000000')
+                   ->setNomGerant('BARRY')
+                   ->setPrenomGerant('Thierno')
+                   ->setNomProducteur('le nom producteur ')
+                   ->setPrenomProducteur('le prenom producteur ')
+                   ->setAdresse('10 rue lkddkdkk')
+                   ->setCodePostal('14000')
+                   ->setVille('caen')
+                   ->setCourriel('th.barry@gmail.com')
+                   ->setProjet($projet);
+        $projet->setProducteur($producteur);*/
+        
+        $auteurRealisateurs = new AuteurRealisateur();
+        $auteurRealisateurs->setNom('BARRY')
+                           ->setPrenom('Abdoulaye')
+                           ->setPseudonyme('eeeeeee')
+                           ->setAdresse('dkkkkkkkk')
+                           ->setVille('caen')
+                           ->setCodePostal('14000')
+                           ->setTelephoneMobile('0633333')
+                           ->setTypePersonne('auteur')
+                           ->setProjet($projet);
+        $projet->addAuteurRealisateur($auteurRealisateurs);
         $allFieldsForm =  $this->createForm(RegistrationType::class,$projet);
+        $allFieldsForm->handleRequest($request);
+        if($allFieldsForm->isSubmitted() && $allFieldsForm->isValid()) {
+          $manager->persist($proje);
+          $manager->flush();
+        }
         return $this->render('all_fields_form/displayAllFields.html.twig', [
             'allFieldsForm' => $allFieldsForm->createView(),
             'whichChoice' => $whichChoice,

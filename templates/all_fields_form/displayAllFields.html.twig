@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Inscription à la commission du {{ fondsAide.nom }} {% endblock %}
-
+{% form_theme allFieldsForm _self %}
 {% block body %}
    <div class="container">
      <fieldset class="border p-3">
@@ -38,4 +38,24 @@
       </fieldset>
    </div> 
    {{form_widget(allFieldsForm)}}
+{% endblock %}
+
+{#  Ce block permet de gérer le formulaire de l'entité auteurRealisateurs #}
+
+{% block _registration_auteurRealisateur_widget %}
+   <p>Partie formulaire  auteur realisateur </p>
+   {{ form_widget(form) }}
+{% endblock %}
+
+{% block _registration_auteurRealisateurs_entry_row %}
+<div class="form-group">
+   <div class="row">
+      <div class="col">
+          {{form_widget(form.nom)}}
+       </div>
+       <div class="col">
+         {{form_widget(form.prenom)}}
+      </div>
+   </div>
+</div>
 {% endblock %}
