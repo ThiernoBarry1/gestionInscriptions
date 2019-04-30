@@ -102,10 +102,16 @@ class Producteur
     private $courriel;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Projet", inversedBy="producteur", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\Projet", inversedBy="producteurs")
      * @ORM\JoinColumn(nullable=false)
      */
     private $projet;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Projet", inversedBy="producteur", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    //private $projet;
 
     public function getId(): ?int
     {
@@ -321,10 +327,23 @@ class Producteur
         return $this->projet;
     }
 
+    public function setProjet(?Projet $projet): self
+    {
+        $this->projet = $projet;
+
+        return $this;
+    }
+   /*
+    public function getProjet(): ?Projet
+    {
+        return $this->projet;
+    }
+
     public function setProjet(Projet $projet): self
     {
         $this->projet = $projet;
 
         return $this;
     }
+    */
 }

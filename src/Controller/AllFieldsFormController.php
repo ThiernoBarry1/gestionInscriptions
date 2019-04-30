@@ -2,11 +2,13 @@
 
 namespace App\Controller;
 
+use DateTime;
 use App\Entity\Projet;
 use App\Entity\FondsAide;
 use App\Entity\Producteur;
 use App\Form\RegistrationType;
 use App\Entity\AuteurRealisateur;
+use App\Entity\DocumentAudioVisuels;
 use App\Service\WhichCommissionChoice;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -34,7 +36,7 @@ class AllFieldsFormController extends AbstractController
         $whichChoice = $choice->getCorrectIdCommision();
         $projet  = $choice->getInstanceProjet();
         $fondsAide = $choice->getFondsAide();
-        /* $producteur = new Producteur();
+        $producteur = new Producteur();
         $producteur->setNom("BA")
                    ->setNature('entreprise')
                    ->setSiret('0000000000000000000000000000')
@@ -47,8 +49,8 @@ class AllFieldsFormController extends AbstractController
                    ->setVille('caen')
                    ->setCourriel('th.barry@gmail.com')
                    ->setProjet($projet);
-        $projet->setProducteur($producteur);*/
-        
+        $projet->addProducteur($producteur);
+    
         $auteurRealisateurs = new AuteurRealisateur();
         $auteurRealisateurs->setNom('BARRY')
                            ->setPrenom('Abdoulaye')
@@ -60,6 +62,15 @@ class AllFieldsFormController extends AbstractController
                            ->setTypePersonne('auteur')
                            ->setProjet($projet);
         $projet->addAuteurRealisateur($auteurRealisateurs);
+        $documentAudioVisuels = new DocumentAudioVisuels();
+        $documentAudioVisuels->setTitre('eeeeeeeeeeeee')
+                             ->setRealisateur('dkkkkkkkkkkkdk')
+                             ->setGenre('ekkkkkkkkkkkkkk')
+                             ->setAnnee(2014)
+                             ->setDuree(20)
+                             ->setLien('http://127.0.0.1:8000/fonds-d-aide/51')
+                             ->setMotDePasse("ddddddddddd");
+        $projet->addDocumentAudioVisuel($documentAudioVisuels);
         $allFieldsForm =  $this->createForm(RegistrationType::class,$projet);
         $allFieldsForm->handleRequest($request);
         if($allFieldsForm->isSubmitted() && $allFieldsForm->isValid()) {

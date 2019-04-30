@@ -32,7 +32,7 @@ class DocumentAudioVisuels
     private $genre;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $annee;
 

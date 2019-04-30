@@ -62,12 +62,13 @@ class Projet
      * @ORM\ManyToOne(targetEntity="App\Entity\Session", inversedBy="projets")
      */
     private $session;
+    
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Producteur", mappedBy="projet", cascade={"persist", "remove"})
      */
-    private $producteur;
-
+    //private $producteur;
+    
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\AuteurRealisateur", mappedBy="projet", orphanRemoval=true)
      */
@@ -324,10 +325,26 @@ class Projet
      */
     private $montantSollicite;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Producteur", mappedBy="projet", orphanRemoval=true)
+     */
+    private $producteurs;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $modifiedAt;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $createdAt;
+
     public function __construct()
     {
         $this->auteurRealisateurs = new ArrayCollection();
         $this->documentAudioVisuels = new ArrayCollection();
+        $this->producteurs = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -443,12 +460,12 @@ class Projet
         return $this;
     }
 
-    public function getProducteur(): ?Producteur
+   /* public function getProducteur(): ?Producteur
     {
         return $this->producteur;
-    }
+    }*/
 
-    public function setProducteur(Producteur $producteur): self
+    /*public function setProducteur(Producteur $producteur): self
     {
         $this->producteur = $producteur;
 
@@ -459,6 +476,7 @@ class Projet
 
         return $this;
     }
+    */
 
     /**
      * @return Collection|AuteurRealisateur[]
@@ -1103,6 +1121,61 @@ class Projet
     public function setMontantSollicite(?string $montantSollicite): self
     {
         $this->montantSollicite = $montantSollicite;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Producteur[]
+     */
+    public function getProducteurs(): Collection
+    {
+        return $this->producteurs;
+    }
+
+    public function addProducteur(Producteur $producteur): self
+    {
+        if (!$this->producteurs->contains($producteur)) {
+            $this->producteurs[] = $producteur;
+            $producteur->setProjet($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProducteur(Producteur $producteur): self
+    {
+        if ($this->producteurs->contains($producteur)) {
+            $this->producteurs->removeElement($producteur);
+            // set the owning side to null (unless already changed)
+            if ($producteur->getProjet() === $this) {
+                $producteur->setProjet(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getModifiedAt(): ?\DateTimeInterface
+    {
+        return $this->modifiedAt;
+    }
+
+    public function setModifiedAt(?\DateTimeInterface $modifiedAt): self
+    {
+        $this->modifiedAt = $modifiedAt;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(?\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
 
         return $this;
     }

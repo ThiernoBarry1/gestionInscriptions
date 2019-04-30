@@ -4,15 +4,14 @@
 {% form_theme allFieldsForm _self %}
 {% block body %}
    <div class="container">
+      {{ form_start(allFieldsForm) }}
      <fieldset class="border p-3">
         <legend class="w-auto"> Le projet </legend>
         <p>
-        
-         {{ form_row(allFieldsForm.titre,{'label':'Titre du projet','attr':{'class':'form_control-sm'}}) }}
-         
-         {{ form_row(allFieldsForm.duree,{'label':'Durée envisagée','attr':{'class':'form_control-sm'}}) }}
-         {{ form_row(allFieldsForm.formatTournage,{'label':'Format de tournage','attr':{'class':'form_control-sm'}}) }}
-         {{ form_row(allFieldsForm.formatDefinitif,{'label':'Format définitif','attr':{'class':'form_control-sm'}}) }}
+            {{ form_row(allFieldsForm.titre,{'label':'Titre du projet','attr':{'class':'form_control-sm'}}) }}
+            {{ form_row(allFieldsForm.duree,{'label':'Durée envisagée','attr':{'class':'form_control-sm'}}) }}
+            {{ form_row(allFieldsForm.formatTournage,{'label':'Format de tournage','attr':{'class':'form_control-sm'}}) }}
+            {{ form_row(allFieldsForm.formatDefinitif,{'label':'Format définitif','attr':{'class':'form_control-sm'}}) }}
         </p>
        <p>
           {{ form_row(allFieldsForm.genre,{'label':'Genre','attr':{'class':'form_control-sm'}}) }} 
@@ -26,35 +25,48 @@
          {{ form_row(allFieldsForm.adaptationOeuvreDacp,{'label':'Droits d\'adaption céder par *','attr':{'class':'form_control-sm'}}) }}
       </p>
       <p>
-          <legend> Coordonnées </legend>
-           
-            {{ form_row(allFieldsForm.deposant,{'label':'Projet déposé par ','attr':{'class':'form_control-sm'}}) }}
+         <legend> Coordonnées </legend>
+         {{ form_row(allFieldsForm.deposant,{'label':'Projet déposé par ','attr':{'class':'form_control-sm'}}) }}
       </p>
       </fieldset>
       <hr>
       <fieldset class="border p-3">
-            <legend class="w-auto"> Production </legend>
-            
+         <legend class="w-auto"> Auteur </legend>
+
       </fieldset>
+     
+      {{ form_end(allFieldsForm,{'render_rest':false}) }}
    </div> 
-   {{form_widget(allFieldsForm)}}
 {% endblock %}
 
 {#  Ce block permet de gérer le formulaire de l'entité auteurRealisateurs #}
 
-{% block _registration_auteurRealisateur_widget %}
-   <p>Partie formulaire  auteur realisateur </p>
+{% block _registration_auteurRealisateurs_entry_row %}
+   <div class="form-group">
+      <div class="row">
+         <div class="col">
+            {{form_row(form.nom,{'label':'Nom'})}}
+         </div>
+         <div class="col">
+            {{form_row(form.prenom,{'label':'Prénom'})}}
+         </div>
+      </div>
+   </div>
+{% endblock %}
+
+{% block _registration_producteur_widget %}
+   <p>Partie formulaire  producteur </p>
    {{ form_widget(form) }}
 {% endblock %}
 
-{% block _registration_auteurRealisateurs_entry_row %}
+{% block _registration_producteur_entry_row %}
 <div class="form-group">
    <div class="row">
       <div class="col">
           {{form_widget(form.nom)}}
        </div>
        <div class="col">
-         {{form_widget(form.prenom)}}
+         {{form_widget(form.nature)}}
       </div>
    </div>
 </div>

@@ -7,6 +7,7 @@ use App\Form\ProducteurType;
 use App\Form\AuteurRealisateurType;
 use App\Entity\DocumentAudioVisuels;
 use App\Form\ConfigurationFildsType;
+use App\Form\DocumentsAudioVisuelsType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -56,7 +57,12 @@ class RegistrationType extends ConfigurationFildsType
                  'expanded' =>true
                 ],
                $this->getConfiguration('Projet déposé par'))
-            ->add('typeAideLm',ChoiceType::class,
+               ->add('producteurs',CollectionType::class,
+                [
+                'entry_type'=>ProducteurType::class
+                ]
+              )
+               ->add('typeAideLm',ChoiceType::class,
                     ['choices'  => 
                        [
                          'Ecriture' => true,
@@ -123,22 +129,7 @@ class RegistrationType extends ConfigurationFildsType
             ->add('depotProjetCollectivitePrecision',TextType::class,$this->getConfiguration('Si oui, lesquelles'))
             ->add('projetDejaPresenteFondsAide')
             ->add('projetDejaPresenteFondsAideDate',TextType::class,$this->getConfiguration('Si oui, à quelle date'))
-            ->add('projetDejaPresenteFondsAideTypeAide',TextType::class,$this->getConfiguration('Pour quel type d\'aide'))
-            ->add('auteurRealisateurs',CollectionType::class,
-                [
-                 'entry_type'=>AuteurRealisateurType::class,
-               ])
-            ->add('documentAudioVisuels',CollectionType::class,
-              [
-                'entry_type'=>DocumentsAudioVisuelsType::class,
-                'allow_add'=>true,
-                'allow_delete'=>true
-              ]
-              )
-            ->add('producteur',CollectionType::class,
-              [
-                'entry_type'=>ProducteurType::class
-              ])
+            ->add('projetDejaPresenteFondsAideTypeAide',TextType::class,$this->getConfiguration('Pour quel type d\'aide'))  
             ;
     }
 
