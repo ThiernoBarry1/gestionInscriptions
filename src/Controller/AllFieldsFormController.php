@@ -61,7 +61,17 @@ class AllFieldsFormController extends AbstractController
                            ->setTelephoneMobile('0633333')
                            ->setTypePersonne('auteur')
                            ->setProjet($projet);
-        $projet->addAuteurRealisateur($auteurRealisateurs);
+        $auteurRealisateurs2 = new AuteurRealisateur();
+        $auteurRealisateurs2->setNom('BARRY')
+                           ->setPrenom('Abdoulaye')
+                           ->setPseudonyme('eeeeeee')
+                           ->setAdresse('dkkkkkkkk')
+                           ->setVille('caen')
+                           ->setCodePostal('14000')
+                           ->setTelephoneMobile('0633333')
+                           ->setTypePersonne('auteur')
+                           ->setProjet($projet);
+        $projet->addAuteurRealisateur($auteurRealisateurs2);
         $documentAudioVisuels = new DocumentAudioVisuels();
         $documentAudioVisuels->setTitre('eeeeeeeeeeeee')
                              ->setRealisateur('dkkkkkkkkkkkdk')

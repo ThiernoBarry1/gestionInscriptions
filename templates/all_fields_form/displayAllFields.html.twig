@@ -113,10 +113,52 @@
       </fieldset>
      <hr>
      <fieldset class="border p-3">
-        <legend class="w-auto">Ajout d'un auteur ou d'un réalisateur </legend>
-
-     </fieldset>
+        <legend class="w-auto">Ajout d'un auteur ou/et d'un réalisateur </legend>
+           <div class="auteurRealisateur" data-prototype="{{ form_widget(allFieldsForm.auteurRealisateurs.vars.prototype)|e('html_attr') }}">
+                {% for auteurRealisateur in allFieldsForm.auteurRealisateurs %}
+                <div class="row">
+                    <div class="col">
+                        {{ form_row(auteurRealisateur.prenom,{'label':'Prénom','attr':{'class':'form_control-sm'}}) }}
+                    </div>
+                    <div class="col">
+                        {{ form_row(auteurRealisateur.nom,{'label':'Nom','attr':{'class':'form_control-sm'}}) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        {{ form_row(auteurRealisateur.pseudonyme,{'label':'Pseudonyme','attr':{'class':'form_control-sm'}}) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        {{ form_row(auteurRealisateur.adresse,{'label':'Adresse','attr':{'class':'form_control-sm'}}) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        {{ form_row(auteurRealisateur.codePostal,{'label':'Code postal','attr':{'class':'form_control-sm'}}) }}
+                    </div>
+                    <div class="col">
+                        {{ form_row(auteurRealisateur.ville,{'label':'Ville','attr':{'class':'form_control-sm'}}) }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        {{ form_row(auteurRealisateur.telephoneMobile,{'label':'Télephone','attr':{'class':'form_control-sm'}}) }}
+                    </div>
+                    <div class="col">
+                        {{ form_row(auteurRealisateur.courriel,{'label':'Courriel','attr':{'class':'form_control-sm'}}) }}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <input type="hidden" id="widget-counter" value="0">
+       <button type="button" id="ajoutAuteur-realisateur" class="btn btn-primary my-4" > Ajouter un auteur ou/et un réalisateur</button>
+    </fieldset>
       {{ form_end(allFieldsForm,{'render_rest':false}) }}
    </div> 
 {% endblock %}
 
+{% block javascript %}
+ <script src="/js/auteurRealisateurs.js"></script>
+{%  endblock %}
