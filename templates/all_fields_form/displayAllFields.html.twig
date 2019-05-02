@@ -114,7 +114,7 @@
      <hr>
      <fieldset class="border p-3">
         <legend class="w-auto">Ajout d'un auteur ou/et d'un réalisateur </legend>
-           <div class="auteurRealisateur" data-prototype="{{ form_widget(allFieldsForm.auteurRealisateurs.vars.prototype)|e('html_attr') }}">
+           <div id="auteurRealisateurs" data-prototype="{{ form_widget(allFieldsForm.auteurRealisateurs.vars.prototype)|e('html_attr') }}">
                 {% for auteurRealisateur in allFieldsForm.auteurRealisateurs %}
                 <div class="row">
                     <div class="col">
@@ -153,12 +153,14 @@
             {% endfor %}
         </div>
         <input type="hidden" id="widget-counter" value="0">
-       <button type="button" id="ajoutAuteur-realisateur" class="btn btn-primary my-4" > Ajouter un auteur ou/et un réalisateur</button>
-    </fieldset>
+        <div class="form-group">
+          <button type="button" id="ajoutAuteur-realisateur" class="btn btn-primary my-4" > Ajouter un auteur ou/et un réalisateur</button>
+        </div>
+        </fieldset>
       {{ form_end(allFieldsForm,{'render_rest':false}) }}
    </div> 
 {% endblock %}
 
-{% block javascript %}
+{% block javascripts %}
  <script src="/js/auteurRealisateurs.js"></script>
 {%  endblock %}
