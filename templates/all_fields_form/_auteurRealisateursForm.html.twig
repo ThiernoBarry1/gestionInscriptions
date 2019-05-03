@@ -1,0 +1,52 @@
+
+{% block _registration_auteurRealisateurs_entry_widget %}
+      <div class="form-group" id="block_{{id}}">
+        <div class="row">
+            <div class="col-10">
+                <div class="row">
+                    <div class="col-6">
+                        <label> Prénom </label>
+                        {{ form_row(form.prenom,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
+                     </div>
+                    <div class="col-6">
+                        <label> Nom </label>
+                         {{ form_row(form.nom,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
+                    </div>
+                </div>
+                <div class="row my-3">
+                    <div class="col-6">
+                       <label> Pseudonyme </label>
+                       {{ form_row(form.pseudonyme,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
+                    </div>
+                    <div class="col-6">
+                        <label> Adresse</label>
+                        {{ form_row(form.adresse,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
+                    </div>
+                </div>
+                <div class="row my-3">
+                    <div class="col-6">
+                    <label>Code postal</label>
+                        {{ form_row(form.codePostal,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
+                    </div>
+                    <div class="col-6">
+                        <label>Ville</label>
+                        {{ form_row(form.ville,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
+                    </div>
+                </div>
+                <div class="row my-3">
+                    <div class="col-6">
+                        <label>Téléphone</label>
+                        {{ form_row(form.telephoneMobile,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
+                    </div>
+                    <div class="col-6">
+                        <label>Courriel</label>
+                        {{ form_row(form.courriel,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-2">
+                <button type="button" class="btn btn-danger" data-action="delete" data-target="#block_{{id}}"> X</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}
