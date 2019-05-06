@@ -62,13 +62,7 @@ class Projet
      * @ORM\ManyToOne(targetEntity="App\Entity\Session", inversedBy="projets")
      */
     private $session;
-    
-
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Producteur", mappedBy="projet", cascade={"persist", "remove"})
-     */
-    //private $producteur;
-    
+  
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\AuteurRealisateur", mappedBy="projet", orphanRemoval=true)
      */
@@ -121,6 +115,8 @@ class Projet
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * il y'a une faute d'orthographe ici il s'agit  de listeLieuxTournage et non pas
+     * listeLiensTournage
      */
     private $listeLiensTournage;
 
@@ -459,24 +455,6 @@ class Projet
 
         return $this;
     }
-
-   /* public function getProducteur(): ?Producteur
-    {
-        return $this->producteur;
-    }*/
-
-    /*public function setProducteur(Producteur $producteur): self
-    {
-        $this->producteur = $producteur;
-
-        // set the owning side of the relation if necessary
-        if ($this !== $producteur->getProjet()) {
-            $producteur->setProjet($this);
-        }
-
-        return $this;
-    }
-    */
 
     /**
      * @return Collection|AuteurRealisateur[]

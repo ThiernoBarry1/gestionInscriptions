@@ -69,6 +69,12 @@ class RegistrationType extends ConfigurationFildsType
                    'allow_add'=>true,
                    'allow_delete'=>true,
                  ])
+                 ->add('documentAudioVisuels',CollectionType::class,
+                 [
+                   'entry_type'=>DocumentsAudioVisuelsType::class,
+                   'allow_add'=>true,
+                   'allow_delete'=>true,
+                 ])
                ->add('typeAideLm',ChoiceType::class,
                     ['choices'  => 
                        [
