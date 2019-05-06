@@ -1,0 +1,7 @@
+
+ #registration_typeAideDoc >.required,#registration_typeAideLm >.required{
+    margin-right: 40px;
+}
+#registration_typeAideDoc_0,#registration_typeAideDoc_1,#registration_typeAideLm_0,#registration_typeAideLm_1{
+    margin-right:20px;
+}

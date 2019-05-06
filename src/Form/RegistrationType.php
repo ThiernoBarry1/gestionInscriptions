@@ -23,10 +23,10 @@ class RegistrationType extends ConfigurationFildsType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('titre',TextType::class,$this->getConfiguration('Titre du projet'))
-            ->add('duree',TextType::class,$this->getConfiguration('Durée envisagée'))
-            ->add('formatTournage',TextType::class,$this->getConfiguration('Format de tournage'))
-            ->add('formatDefinitif',TextType::class,$this->getConfiguration('Format définitif'))
+            ->add('titre',TextType::class)
+            ->add('duree',TextType::class)
+            ->add('formatTournage',TextType::class)
+            ->add('formatDefinitif',TextType::class)
             ->add('genre',ChoiceType::class,
                 [ 'choices'  => [
                   'Fiction' => true,
@@ -35,8 +35,8 @@ class RegistrationType extends ConfigurationFildsType
                   'Autre'=>false,
                   ],  'expanded' =>true
                 ])
-             ->add('genrePrecisionAutre',TextType::class,$this->getConfiguration('si autre, précisez *'))
-            ->add('synopsis',TextareaType::class,$this->getConfiguration('Synopsis (600 caractères maximum) '))
+             ->add('genrePrecisionAutre',TextType::class)
+            ->add('synopsis',TextareaType::class)
             ->add('adaptationOeuvre',ChoiceType::class,
                         ['choices'  => 
                            [
@@ -44,10 +44,9 @@ class RegistrationType extends ConfigurationFildsType
                               'Non' => false,
                            ],
                           'expanded' =>true
-                        ],
-                $this->getConfiguration('Adaptation d\'une oeuvre préexistante'))
-            ->add('adaptationOeuvreToa',TextType::class,$this->getConfiguration('Titre de l\'oeuvre et l\'auteur *'))
-            ->add('adaptationOeuvreDacp',TextType::class,$this->getConfiguration('Droits d\'adaptation cédés par *'))
+                        ])
+            ->add('adaptationOeuvreToa',TextType::class)
+            ->add('adaptationOeuvreDacp',TextType::class)
             //->add('adaptationOeuvreDfc',)
             ->add('deposant',ChoiceType::class,
                 ['choices'  => 
@@ -56,8 +55,7 @@ class RegistrationType extends ConfigurationFildsType
                      'L\'auteur / le réalisateur ' => false,
                     ],
                  'expanded' =>true
-                ],
-               $this->getConfiguration('Projet déposé par'))
+                ])
                ->add('producteurs',CollectionType::class,
                 [
                 'entry_type'=>ProducteurType::class
@@ -78,39 +76,37 @@ class RegistrationType extends ConfigurationFildsType
                ->add('typeAideLm',ChoiceType::class,
                     ['choices'  => 
                        [
-                         'Ecriture' => true,
+                         'Écriture' => true,
                          'Réécriture' => false,
                        ],
                      'expanded' =>true
-                    ],
-                $this->getConfiguration('Type d\'aide démandée'))
+                    ])
             ->add('typeAideDoc',ChoiceType::class,
                     ['choices'  => 
                         [
-                          'Ecriture' => true,
+                          'Écriture' => true,
                           'Développement' => false,
                         ],
                      'expanded' =>true
-                   ],
-                $this->getConfiguration('Type d\'aide démandée'))
-            ->add('mtBudget',TextType::class,$this->getConfiguration('Pour les producteurs, montant du budget HT (écriture, réécriture ou développement'))
+                   ])
+            ->add('mtBudget',TextType::class)
             ->add('liensEligibilite',ChoiceType::class,
                     ['choices'  => 
                         [
-                          'à définir ' => true,
-                          'à définir ' => false,
+                          'auteur réalisateur domicilié en région' => true,
+                          'société de production disposant d’un établissement stable en région' => false,
+                          'projet entretenant un lien culturel avec le territoire régional' =>false,
                        ],
-                    ],
-                    $this->getConfiguration('Liens d\'éligibilité'))
-            ->add('datePreparation',TextType::class,$this->getConfiguration('Date de préparation'))
-            ->add('dateTournage',TextType::class,$this->getConfiguration('Date de tournage'))
-            ->add('dateDiffusion',TextType::class,$this->getConfiguration('Date de  diffusion'))
-            ->add('castingEnvisage',TextType::class,$this->getConfiguration('Casting envisagé'))
-            ->add('listeLiensTournage',TextareaType::class,$this->getConfiguration('Liste des lieux de tournage envisagé en Normandie'))
-            ->add('nombreJoursTournage',TextType::class,$this->getConfiguration('Nombre de jours de tournage prévus en Normandie'))
-            ->add('nombreJoursTotal',TextType::class,$this->getConfiguration('Nombre de jours total de tournage'))
-            ->add('droitArtistiqueTotalHt',TextType::class,$this->getConfiguration('Total HT'))
-            ->add('droitArtistiqueTotalHtNormandie',TextType::class,$this->getConfiguration('Dont en région Normandie HT'))
+                    ])
+            ->add('datePreparation',TextType::class)
+            ->add('dateTournage',TextType::class)
+            ->add('dateDiffusion',TextType::class)
+            ->add('castingEnvisage',TextType::class)
+            ->add('listeLiensTournage',TextareaType::class)
+            ->add('nombreJoursTournage',TextType::class)
+            ->add('nombreJoursTotal',TextType::class)
+            ->add('droitArtistiqueTotalHt',TextType::class)
+            ->add('droitArtistiqueTotalHtNormandie',TextType::class)
             ->add('personnelTotalHt')
             ->add('personnelTotalHtNormandie')
             ->add('interpretationTotalHt')
@@ -136,13 +132,13 @@ class RegistrationType extends ConfigurationFildsType
             ->add('totalGeneralTotalHt')
             ->add('totalGeneralTotalHtNormandie')
             ->add('financementAcquis')
-            ->add('financementAcquisPrecision',TextType::class,$this->getConfiguration('Si oui, lesquels'))
-            ->add('montantSollicite',TextType::class,$this->getConfiguration('Montant sollicité au Fonds d\'aide Normandie'))
+            ->add('financementAcquisPrecision',TextType::class)
+            ->add('montantSollicite',TextType::class)
             ->add('depotProjetCollectivite')
-            ->add('depotProjetCollectivitePrecision',TextType::class,$this->getConfiguration('Si oui, lesquelles'))
+            ->add('depotProjetCollectivitePrecision',TextType::class)
             ->add('projetDejaPresenteFondsAide')
-            ->add('projetDejaPresenteFondsAideDate',TextType::class,$this->getConfiguration('Si oui, à quelle date'))
-            ->add('projetDejaPresenteFondsAideTypeAide',TextType::class,$this->getConfiguration('Pour quel type d\'aide'))  
+            ->add('projetDejaPresenteFondsAideDate',TextType::class)
+            ->add('projetDejaPresenteFondsAideTypeAide',TextType::class)  
             ;
     }
 

@@ -2,111 +2,145 @@
 
 {% block title %}Inscription à la commission du {{ fondsAide.nom }} {% endblock %}
 {% form_theme allFieldsForm 'all_fields_form/_auteurRealisateursForm.html.twig' %}
+{% form_theme allFieldsForm 'all_fields_form/_documentsAudioVisuelsForm.html.twig' %}
 {% block body %}
    <div class="container">
       {{ form_start(allFieldsForm) }}
      <fieldset class="border p-3">
         <legend class="w-auto"> Le projet </legend>
-        <p>
-            {{ form_row(allFieldsForm.titre,{'label':'Titre du projet','attr':{'class':'form-control-sm'}}) }}
-            {{ form_row(allFieldsForm.duree,{'label':'Durée envisagée','attr':{'class':'form-control-sm'}}) }}
-            {{ form_row(allFieldsForm.formatTournage,{'label':'Format de tournage','attr':{'class':'form-control-sm'}}) }}
-            {{ form_row(allFieldsForm.formatDefinitif,{'label':'Format définitif','attr':{'class':'form-control-sm'}}) }}
-        </p>
-       <p>
-          {{ form_row(allFieldsForm.genre,{'label':'Genre','attr':{'class':'form-control-sm'}}) }} 
-      </p>
-      <p>
-         {{ form_row(allFieldsForm.synopsis,{'label':'Synopsis ( 600 caractères maximum)','attr':{'class':'form-control-sm'}}) }}
-      </p>
-      <p>
-         {{ form_row(allFieldsForm.adaptationOeuvre,{'label':'Adaption d\'une Oeuvre préexistante','attr':{'class':'form-control-sm'}}) }}
-         {{ form_row(allFieldsForm.adaptationOeuvreToa,{'label':'Titre de l\'oeuvre et l\'auteur *','attr':{'class':'form-control-sm'}}) }}
-         {{ form_row(allFieldsForm.adaptationOeuvreDacp,{'label':'Droits d\'adaption céder par *','attr':{'class':'form-control-sm'}}) }}
-      </p>
-      <p>
-         <legend> Coordonnées </legend>
+        <div class="form-group">
+           <div class="row">
+              <div class="col">
+                 {{ form_row(allFieldsForm.titre,{'label':'Titre du projet','attr':{'class':'form-control-sm'}}) }}
+              </div>
+              <div class="col">
+                 {{ form_row(allFieldsForm.duree,{'label':'Durée envisagée','attr':{'class':'form-control-sm'}}) }}
+              </div>
+              <div class="col">
+                 {{ form_row(allFieldsForm.formatTournage,{'label':'Format de tournage','attr':{'class':'form-control-sm'}}) }}
+              </div>
+              <div class="col">
+                 {{ form_row(allFieldsForm.formatDefinitif,{'label':'Format définitif','attr':{'class':'form-control-sm'}}) }}
+              </div>
+           </div>
+         </div>
+       <div class="form-group genreProjet">
+          <label for="genre"> Genre</label>
+          {{ form_row(allFieldsForm.genre,{'label':false}) }} 
+       </div>
+      <div class="form-group">
+         {{ form_row(allFieldsForm.synopsis,{'label':'Synopsis ( 600 caractères maximum)','attr':{'class':'form-control','rows':'3'}}) }}
+      </div>
+      <div class="form-group">
+         <div class="row">
+            {{ form_row(allFieldsForm.adaptationOeuvre,{'label':'Adaption d\'une Oeuvre préexistante','attr':{'class':'form-control-sm'}}) }}
+         </div>
+         <div class="row">
+            {{ form_row(allFieldsForm.adaptationOeuvreToa,{'label':'Titre de l\'oeuvre et l\'auteur *','attr':{'class':'form-control-sm'}}) }}
+         </div>
+         <div class="row">
+            {{ form_row(allFieldsForm.adaptationOeuvreDacp,{'label':'Droits d\'adaption céder par *','attr':{'class':'form-control-sm'}}) }}
+         </div>
+         
+      </div>
+      <div>
+         <h3> Coordonnées </h3>
          {{ form_row(allFieldsForm.deposant,{'label':'Projet déposé par ','attr':{'class':'form-control-sm'}}) }}
-      </p>
+      </div>
       </fieldset>
       <hr>
       <fieldset class="border p-3">
          <legend class="w-auto"> Production </legend>   
-
           {% for producteur in allFieldsForm.producteurs %}
          <div class="form-group">
             <div class="row">
-                <div class="col-12">
-                <p>Nom</p>
-                   {{ form_row(producteur.nom,{'label':false,'attr':{'class':'form-control-sm'}}) }}
-                </div>
+               <div class="col-12">
+               <label for="nom">Nom</label>
+                  {{ form_row(producteur.nom,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
+               </div>
             </div>
-            <div class="row">
+            <div class="row my-3">
               <div class="col">
-                  {{ form_row(producteur.nature,{'label':'Nature juridique','attr':{'class':'form-control-sm'}}) }}
+                 <label for="nature">Nature juridique</label>
+                  {{ form_row(producteur.nature,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
                </div>
                <div class="col">
-                  {{ form_row(producteur.siret,{'label':'N° de SIRET','attr':{'class':'form-control-sm'}}) }}
+                  <label for="siret">N° de SIRET</label>
+                  {{ form_row(producteur.siret,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
                </div>
             </div>
-            <div class="row">
-                  <div class="col">
-                      {{ form_row(producteur.prenomGerant,{'label':'Gérant/Président','attr':{'class':'form-control-sm'}}) }}
-                   </div>
-                   <div class="col">
-                      {{ form_row(producteur.nomGerant,{'label':false,'attr':{'class':'form-control-sm'}}) }}
-                   </div>
+            <div class="row my-3">
+               <div class="col">
+                  <label for="prenomGerant">Prénom Gérant/Président</label>
+                   {{ form_row(producteur.prenomGerant,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
+                </div>
+                <div class="col">
+                  <label for="nomGerant">Nom Gérant/Président</label>
+                   {{ form_row(producteur.nomGerant,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
+                </div>
             </div>
-            <div class="row">
-                  <div class="col">
-                      {{ form_row(producteur.nomProducteur,{'label':'Nom producteur','attr':{'class':'form-control-sm'}}) }}
-                   </div>
-                   <div class="col">
-                      {{ form_row(producteur.prenomProducteur,{'label':'Prenom producteur','attr':{'class':'form-control-sm'}}) }}
-                   </div>
+            <div class="row my-3">
+               <div class="col">
+                  <label for="nomProducteur">Nom producteur</label>
+                   {{ form_row(producteur.nomProducteur,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
+                </div>
+                <div class="col">
+                     <label for="prenomProducteur">Prenom producteur</label>
+                   {{ form_row(producteur.prenomProducteur,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
+                </div>
              </div>
              <div class="row">
-                  <div class="col-12">
-                      {{ form_row(producteur.personneChargee,{'label':'Personne Chargée (si differente)','attr':{'class':'form-control-sm'}}) }}
-                  </div>
+                <div class="col-12">
+                   <label for="personneChargee">Personne Chargée (si différente) </label>
+                    {{ form_row(producteur.personneChargee,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
+                </div>
               </div>
               <div class="row">
                   <div class="col-12">
-                      {{ form_row(producteur.adresse,{'label':'Adresse (siège social)','attr':{'class':'form-control-sm'}}) }}
-                  </div>
-              </div>
-              <div class="row">
-                 <div class="col">
-                     {{ form_row(producteur.codePostal,{'label':'Code postal','attr':{'class':'form-control-sm'}}) }}
-                 </div>
-                 <div class="col">
-                     {{ form_row(producteur.ville,{'label':'Ville','attr':{'class':'form-control-sm'}}) }}
-                 </div>
-              </div>
-              <div class="row">
-                  <div class="col-12">
-                      {{ form_row(producteur.adresseBureau,{'label':'Adresse bureau (si differente du siège social)','attr':{'class':'form-control-sm'}}) }}
+                     <label for="adresse">Adresse (siège social)</label>
+                      {{ form_row(producteur.adresse,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
                   </div>
               </div>
               <div class="row">
                  <div class="col">
-                     {{ form_row(producteur.codePostaleBureau,{'label':'Code postal','attr':{'class':'form-control-sm'}}) }}
+                    <label for="codePostal"></label>
+                     {{ form_row(producteur.codePostal,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
                  </div>
                  <div class="col">
-                     {{ form_row(producteur.villeBureau,{'label':'Ville','attr':{'class':'form-control-sm'}}) }}
+                    <label for="ville">Ville</label>
+                     {{ form_row(producteur.ville,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
+                 </div>
+              </div>
+              <div class="row">
+                  <div class="col-12">
+                     <label for="adresseBureau">Adresse bureau (si differente du siège social)</label>
+                      {{ form_row(producteur.adresseBureau,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
+                  </div>
+              </div>
+              <div class="row my-4">
+                 <div class="col">
+                    <label for="codePostalBureau">Code postal</label>
+                     {{ form_row(producteur.codePostaleBureau,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
+                 </div>
+                 <div class="col">
+                    <label for="villeBureau">Ville</label>
+                     {{ form_row(producteur.villeBureau,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
                  </div>
               </div>
               <div class="row">
                   <div class="col">
-                      {{ form_row(producteur.telephoneFixe,{'label':'Télephone fixe','attr':{'class':'form-control-sm'}}) }}
+                     <label for="telephoneFixe">Téléphone fixe</label>
+                      {{ form_row(producteur.telephoneFixe,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
                   </div>
                   <div class="col">
-                      {{ form_row(producteur.telephoneMobile,{'label':'Télephone mobile','attr':{'class':'form-control-sm'}}) }}
+                     <label for="telephoneMobile">Téléphone Mobile</label>
+                      {{ form_row(producteur.telephoneMobile,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
                   </div>
                </div>
                <div class="row">
                   <div class="col">
-                     {{ form_row(producteur.courriel,{'label':'Courriel','attr':{'class':'form-control-sm'}}) }}
+                     <label for="corriel">Courriel</label>
+                     {{ form_row(producteur.courriel,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
                   </div>
                </div>
          </div>
@@ -126,30 +160,32 @@
         <hr>
       <fieldset class="border p-3">
          <legend class="w-auto">Documents audioVisuels joints</legend>
-            <div id="documentAudioVisuels" data-prototype="{{ form_widget(allFieldsForm.documentAudioVisuels.vars.prototype)|e('html_attr') }}">
-            </div>
-            <input type="hidden" id="widget-counter-documentAudioVisuels" value="0">
-            <div class="form-group">
-               <button type="button" id="ajoutDocumentAudioVisuels" class="btn btn-primary my-4">Ajouter un documents audio visuels</button>
-            </div>
+         <div id="documentAudioVisuels" data-prototype="{{ form_widget(allFieldsForm.documentAudioVisuels.vars.prototype)|e('html_attr') }}">
+         </div>
+         <input type="hidden" id="widget-counter-documentAudioVisuels" value="0">
+         <div class="form-group">
+            <button type="button" id="ajoutDocumentAudioVisuels" class="btn btn-primary my-4">Ajouter un documents audio visuels</button>
+         </div>
       </fieldset>
       <hr>
-      <div class="form-group">
-         <label for="typeAideLm" class="my-4">Type d'aide demandée</label>
+      <div class="form-group my-4">
+         <label for="typeAideLm" class="my-3">Type d'aide demandée</label>
          {{ form_row(allFieldsForm.typeAideLm,{'label':false})}}
       </div>
-      <div class="form-group">
-         <label for="typeAideDoc" class="my-4">Type d'aide demandée</label>
-         {{ form_row(allFieldsForm.typeAideDoc,{'label':false})}}
+      <div class="form-group inline-radio-block my-4">
+         <label for="typeAideDoc" class="my-3">Type d'aide demandée</label>
+         {{ form_widget(allFieldsForm.typeAideDoc,{'label':false})}}
       </div>
-      <div class="form-group">
-         <label for="montant-budeget" class="my-4">montant du budget Ht(écriture, réécriture ou développement)</label>
-         {{ form_row(allFieldsForm.mtBudget,{'label':false})}}
+      <div class="form-group my-4">
+         <label for="montant-budeget">Montant du budget Ht(écriture, réécriture ou développement)</label>
+         {{ form_row(allFieldsForm.mtBudget,{'label':false,'attr':{'class':'form-control-sm w-50'}})}}
        </div>
-       <div class="form-group">
-          <label for="liensEligibilite" class="my-4">liens éligibilités</label>
-          {{ form_row(allFieldsForm.liensEligibilite,{'label':false})}}
+       <div class="form-group my-4">
+          <label for="liensEligibilite">Liens éligibilités *</label>
+          <small class="form-text text-muted">selectionner au moins un critère</small>
+          {{ form_row(allFieldsForm.liensEligibilite,{'label':false,'attr':{'class':'form-control-sm '}})}}
        </div>
+       <hr>
        <fieldset class="border p-3">
             <legend class="w-auto">Elements prévisionnels </legend>
             <fieldset class="border p-3">
@@ -158,19 +194,19 @@
                      <div class="row">
                         <div class="col">
                            <label for="datePreparation">Date de préparation</label>
-                           {{ form_row(allFieldsForm.datePreparation,{'label':false,'attr':{'class':'form-control-sm'}})}}
+                           {{ form_row(allFieldsForm.datePreparation,{'label':false,'attr':{'class':'form-control-sm w-65'}})}}
                         </div>
                         <div class="col">
                               <label for="dateTournage">Date de tournage</label>
-                              {{ form_row(allFieldsForm.dateTournage,{'label':false,'attr':{'class':'form-control-sm'}})}}
+                              {{ form_row(allFieldsForm.dateTournage,{'label':false,'attr':{'class':'form-control-sm w-65'}})}}
                         </div>
                         <div class="col">
                               <label for="dateDiffusion">Date de diffusion</label>
-                              {{ form_row(allFieldsForm.dateDiffusion,{'label':false,'attr':{'class':'form-control-sm'}})}}
+                              {{ form_row(allFieldsForm.dateDiffusion,{'label':false,'attr':{'class':'form-control-sm w-65'}})}}
                         </div>
                         <div class="col">
                               <label for="castingEnvisage">Casting envisagé</label>
-                              {{ form_row(allFieldsForm.castingEnvisage,{'label':false,'attr':{'class':'form-control-sm'}})}}
+                              {{ form_row(allFieldsForm.castingEnvisage,{'label':false,'attr':{'class':'form-control-sm w-65'}})}}
                         </div>
                      </div>
                   </div>
@@ -179,17 +215,17 @@
                <div class="row">
                   <div class="col">
                      <label for="listeDelieuxTournage">Liste des lieux de tournage en Normandie</label>
-                     {{ form_row(allFieldsForm.listeLiensTournage,{'label':false,'attr':{'class':'form-control-sm'}})}}
+                     {{ form_row(allFieldsForm.listeLiensTournage,{'label':false,'attr':{'class':'form-control','rows':'3'}})}}
                   </div>
                </div>
                <div class="row my-4">
                   <div class="col">
                      <label for="nombreJoursTournage">Nombres de jours de tournage prévus en Normandie</label>
-                     {{ form_row(allFieldsForm.nombreJoursTournage,{'label':false,'attr':{'class':'form-control-sm'}})}}
+                     {{ form_row(allFieldsForm.nombreJoursTournage,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
                   </div>
                   <div class="col">
                      <label for="nombreJoursTotal">Nombres de jours total de tournage</label>
-                     {{ form_row(allFieldsForm.nombreJoursTotal,{'label':false,'attr':{'class':'form-control-sm'}})}}
+                     {{ form_row(allFieldsForm.nombreJoursTotal,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
                   </div>
                </div>
             </div>
@@ -203,13 +239,13 @@
                 <div class="col">
                   <div class="form-group">
                     <label for="totalHt">Total Ht</label>
-                    {{ form_row(allFieldsForm.droitArtistiqueTotalHt,{'label':false,'attr':{'class':'form-control-sm'}})}}
+                    {{ form_row(allFieldsForm.droitArtistiqueTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
                   </div>
                </div>
                <div class="col">
                   <div class="form-group">
                      <label for="totalHt">Dont en région Normandie HT</label>
-                     {{ form_row(allFieldsForm.droitArtistiqueTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm'}})}}
+                     {{ form_row(allFieldsForm.droitArtistiqueTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
                   </div>
                </div>
             </div>
@@ -219,12 +255,12 @@
                 </div>
                 <div class="col">
                   <div class="form-group">
-                    {{ form_row(allFieldsForm.personnelTotalHt,{'label':false,'attr':{'class':'form-control-sm'}})}}
+                    {{ form_row(allFieldsForm.personnelTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
                   </div>
                </div>
                <div class="col">
                   <div class="form-group">
-                     {{ form_row(allFieldsForm.personnelTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm'}})}}
+                     {{ form_row(allFieldsForm.personnelTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
                   </div>
                </div>
             </div>
@@ -234,12 +270,12 @@
                 </div>
                 <div class="col">
                   <div class="form-group">
-                    {{ form_row(allFieldsForm.interpretationTotalHt,{'label':false,'attr':{'class':'form-control-sm'}})}}
+                    {{ form_row(allFieldsForm.interpretationTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
                   </div>
                </div>
                <div class="col">
                   <div class="form-group">
-                     {{ form_row(allFieldsForm.interpretationTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm'}})}}
+                     {{ form_row(allFieldsForm.interpretationTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
                   </div>
                </div>
             </div>
@@ -249,12 +285,12 @@
                 </div>
                 <div class="col">
                   <div class="form-group">
-                    {{ form_row(allFieldsForm.totalChargeSocialesTotalHt,{'label':false,'attr':{'class':'form-control-sm'}})}}
+                    {{ form_row(allFieldsForm.totalChargeSocialesTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
                   </div>
                </div>
                <div class="col">
                   <div class="form-group">
-                     {{ form_row(allFieldsForm.totalChargeSocialesTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm'}})}}
+                     {{ form_row(allFieldsForm.totalChargeSocialesTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
                   </div>
                </div>
             </div>
@@ -266,12 +302,12 @@
                </div>
                <div class="col">
                   <div class="form-group">
-                    {{ form_row(allFieldsForm.transportTotalHt,{'label':false,'attr':{'class':'form-control-sm'}})}}
+                    {{ form_row(allFieldsForm.transportTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
                   </div>
                </div>
                <div class="col">
                   <div class="form-group">
-                     {{ form_row(allFieldsForm.transportTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm'}})}}
+                     {{ form_row(allFieldsForm.transportTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
                   </div>
                </div>
             </div>
@@ -283,12 +319,12 @@
                </div>
                <div class="col">
                   <div class="form-group">
-                    {{ form_row(allFieldsForm.moyenTechniqueTournageTotalHt,{'label':false,'attr':{'class':'form-control-sm'}})}}
+                    {{ form_row(allFieldsForm.moyenTechniqueTournageTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
                   </div>
                </div>
                <div class="col">
                   <div class="form-group">
-                     {{ form_row(allFieldsForm.moyenTechniqueTournageTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm'}})}}
+                     {{ form_row(allFieldsForm.moyenTechniqueTournageTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
                   </div>
                </div>
             </div>
@@ -300,12 +336,12 @@
                </div>
                <div class="col">
                   <div class="form-group">
-                    {{ form_row(allFieldsForm.postProdTotalHt,{'label':false,'attr':{'class':'form-control-sm'}})}}
+                    {{ form_row(allFieldsForm.postProdTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
                   </div>
                </div>
                <div class="col">
                   <div class="form-group">
-                     {{ form_row(allFieldsForm.postProdTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm'}})}}
+                     {{ form_row(allFieldsForm.postProdTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
                   </div>
                </div>
             </div>
@@ -317,12 +353,12 @@
                </div>
                <div class="col">
                   <div class="form-group">
-                    {{ form_row(allFieldsForm.assuranceEtFraisTotalHt,{'label':false,'attr':{'class':'form-control-sm'}})}}
+                    {{ form_row(allFieldsForm.assuranceEtFraisTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
                   </div>
                </div>
                <div class="col">
                   <div class="form-group">
-                     {{ form_row(allFieldsForm.assuranceEtFraisTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm'}})}}
+                     {{ form_row(allFieldsForm.assuranceEtFraisTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
                   </div>
                </div>
             </div>
@@ -334,12 +370,12 @@
                </div>
                <div class="col">
                   <div class="form-group">
-                    {{ form_row(allFieldsForm.fraisFinanciersTotalHt,{'label':false,'attr':{'class':'form-control-sm'}})}}
+                    {{ form_row(allFieldsForm.fraisFinanciersTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
                   </div>
                </div>
                <div class="col">
                   <div class="form-group">
-                     {{ form_row(allFieldsForm.fraisFinanciersTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm'}})}}
+                     {{ form_row(allFieldsForm.fraisFinanciersTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
                   </div>
                </div>
             </div>
@@ -351,12 +387,12 @@
                </div>
                <div class="col">
                   <div class="form-group">
-                    {{ form_row(allFieldsForm.fraisGenerauxTotalHt,{'label':false,'attr':{'class':'form-control-sm'}})}}
+                    {{ form_row(allFieldsForm.fraisGenerauxTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
                   </div>
                </div>
                <div class="col">
                   <div class="form-group">
-                     {{ form_row(allFieldsForm.fraisGenerauxTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm'}})}}
+                     {{ form_row(allFieldsForm.fraisGenerauxTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
                   </div>
                </div>
             </div>
@@ -368,12 +404,12 @@
                </div>
                <div class="col">
                   <div class="form-group">
-                    {{ form_row(allFieldsForm.imprevusTotalHt,{'label':false,'attr':{'class':'form-control-sm'}})}}
+                    {{ form_row(allFieldsForm.imprevusTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
                   </div>
                </div>
                <div class="col">
                   <div class="form-group">
-                     {{ form_row(allFieldsForm.imprevusTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm'}})}}
+                     {{ form_row(allFieldsForm.imprevusTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
                   </div>
                </div>
             </div>
@@ -385,12 +421,12 @@
                </div>
                <div class="col">
                   <div class="form-group">
-                    {{ form_row(allFieldsForm.totalGeneralTotalHt,{'label':false,'attr':{'class':'form-control-sm'}})}}
+                    {{ form_row(allFieldsForm.totalGeneralTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
                   </div>
                </div>
                <div class="col">
                   <div class="form-group">
-                     {{ form_row(allFieldsForm.totalGeneralTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm'}})}}
+                     {{ form_row(allFieldsForm.totalGeneralTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
                   </div>
                </div>
             </div>
