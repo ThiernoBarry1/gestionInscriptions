@@ -1,8 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Inscription à la commission du {{ fondsAide.nom }} {% endblock %}
-{% form_theme allFieldsForm 'all_fields_form/_auteurRealisateursForm.html.twig' %}
-{% form_theme allFieldsForm 'all_fields_form/_documentsAudioVisuelsForm.html.twig' %}
+{% form_theme allFieldsForm  with
+   [
+     'all_fields_form/_auteurRealisateursForm.html.twig', 
+     'all_fields_form/_documentsAudioVisuelsForm.html.twig'
+   ] 
+%}
 {% block body %}
    <div class="container">
       {{ form_start(allFieldsForm) }}
@@ -11,7 +15,8 @@
         <div class="form-group">
            <div class="row">
               <div class="col">
-                 {{ form_row(allFieldsForm.titre,{'label':'Titre du projet','attr':{'class':'form-control-sm'}}) }}
+                 <label for="titre">Titre du projet</label>
+                 {{ form_row(allFieldsForm.titre,{'label':false,'attr':{'class':'form-control-sm'}}) }}
               </div>
               <div class="col">
                  {{ form_row(allFieldsForm.duree,{'label':'Durée envisagée','attr':{'class':'form-control-sm'}}) }}
@@ -24,32 +29,42 @@
               </div>
            </div>
          </div>
-       <div class="form-group genreProjet">
-          <label for="genre"> Genre</label>
-          {{ form_row(allFieldsForm.genre,{'label':false}) }} 
-       </div>
-      <div class="form-group">
-         {{ form_row(allFieldsForm.synopsis,{'label':'Synopsis ( 600 caractères maximum)','attr':{'class':'form-control','rows':'3'}}) }}
+         <div class="row genreProjet">
+            <div class="col">
+               <label for="genre"> Genre</label>
+               {{ form_row(allFieldsForm.genre,{'label':false}) }} 
+            </div>
+            <div class="col genrePrecisionAutre">
+               <label for="genrePrecisionAutre"> Si autre précisez </label>
+               {{ form_row(allFieldsForm.genrePrecisionAutre,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }} 
+            </div>
+         </div>
+         <div class="form-group">
+         <label for="synopsis">Synopsis ( 600 caractères maximum)</label>
+         {{ form_row(allFieldsForm.synopsis,{'label':false,'attr':{'class':'form-control','rows':'3'}}) }}
       </div>
-      <div class="form-group">
-         <div class="row">
-            {{ form_row(allFieldsForm.adaptationOeuvre,{'label':'Adaption d\'une Oeuvre préexistante','attr':{'class':'form-control-sm'}}) }}
+      <div class="row my-3">
+         <div class="col-6">
+            <label for="adaptationOeuvre" class="ml-3">Adaption d'une œuvre prééxistante</label>
+            {{ form_row(allFieldsForm.adaptationOeuvre,{'label':false,'attr':{'class':'form-control-sm ml-3'}}) }}
          </div>
-         <div class="row">
-            {{ form_row(allFieldsForm.adaptationOeuvreToa,{'label':'Titre de l\'oeuvre et l\'auteur *','attr':{'class':'form-control-sm'}}) }}
+         <div class="col-6 adaptationOeuvrePrecision">
+            <label for="adptationOeuvreToa">Titre de l'œuvre et l'auteur </label>
+            {{ form_row(allFieldsForm.adaptationOeuvreToa,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
+            <label for="adapdationOuevreDacp">Droits d'adaption céder par</label>
+            {{ form_row(allFieldsForm.adaptationOeuvreDacp,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
+            <label for="adapdationOuevreDfc">Date de fin de session</label>
+            {{ form_row(allFieldsForm.adaptationOeuvreDfc,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
          </div>
-         <div class="row">
-            {{ form_row(allFieldsForm.adaptationOeuvreDacp,{'label':'Droits d\'adaption céder par *','attr':{'class':'form-control-sm'}}) }}
-         </div>
-         
       </div>
       <div>
          <h3> Coordonnées </h3>
-         {{ form_row(allFieldsForm.deposant,{'label':'Projet déposé par ','attr':{'class':'form-control-sm'}}) }}
+         <label for="deposant">Projet déposé par</label>
+         {{ form_row(allFieldsForm.deposant,{'label':false,'attr':{'class':'form-control-sm'}}) }}
       </div>
       </fieldset>
       <hr>
-      <fieldset class="border p-3">
+      <fieldset class="border p-3 production">
          <legend class="w-auto"> Production </legend>   
           {% for producteur in allFieldsForm.producteurs %}
          <div class="form-group">
@@ -96,35 +111,27 @@
                 </div>
               </div>
               <div class="row">
-                  <div class="col-12">
+                  <div class="col">
                      <label for="adresse">Adresse (siège social)</label>
                       {{ form_row(producteur.adresse,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
                   </div>
-              </div>
-              <div class="row">
-                 <div class="col">
-                    <label for="codePostal"></label>
-                     {{ form_row(producteur.codePostal,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
+                  <div class="col">
+                     {{ form_row(producteur.codePostal,{'label':false,'attr':{'class':'form-control-sm w-75 ','placeholder':'Code postal'}}) }}
                  </div>
                  <div class="col">
-                    <label for="ville">Ville</label>
-                     {{ form_row(producteur.ville,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
+                     {{ form_row(producteur.ville,{'label':false,'attr':{'class':'form-control-sm w-75','placeholder':'Ville'}}) }}
                  </div>
               </div>
               <div class="row">
-                  <div class="col-12">
+                  <div class="col">
                      <label for="adresseBureau">Adresse bureau (si differente du siège social)</label>
                       {{ form_row(producteur.adresseBureau,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
                   </div>
-              </div>
-              <div class="row my-4">
-                 <div class="col">
-                    <label for="codePostalBureau">Code postal</label>
-                     {{ form_row(producteur.codePostaleBureau,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
+                  <div class="col">
+                     {{ form_row(producteur.codePostaleBureau,{'label':false,'attr':{'class':'form-control-sm w-75','placeholder':'Code postal'}}) }}
                  </div>
                  <div class="col">
-                    <label for="villeBureau">Ville</label>
-                     {{ form_row(producteur.villeBureau,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
+                     {{ form_row(producteur.villeBureau,{'label':false,'attr':{'class':'form-control-sm w-75','placeholder':'Ville'}}) }}
                  </div>
               </div>
               <div class="row">
@@ -146,8 +153,8 @@
          </div>
          {% endfor %}
       </fieldset>
-     <hr>
-     <fieldset class="border p-3">
+     <hr class="auteurRealisateurs">
+     <fieldset class="border p-3 auteurRealisateurs">
         <legend class="w-auto">Ajout d'un auteur ou/et d'un réalisateur </legend>
         <p>Pur ajouter un auteur ou/et un réalisateur cliquer sur ce bouton </p>
         <div id="auteurRealisateurs" data-prototype="{{ form_widget(allFieldsForm.auteurRealisateurs.vars.prototype)|e('html_attr') }}">
@@ -177,8 +184,8 @@
          {{ form_widget(allFieldsForm.typeAideDoc,{'label':false})}}
       </div>
       <div class="form-group my-4">
-         <label for="montant-budeget">Montant du budget Ht(écriture, réécriture ou développement)</label>
-         {{ form_row(allFieldsForm.mtBudget,{'label':false,'attr':{'class':'form-control-sm w-50'}})}}
+         <label for="montant-budeget">Montant du budget Ht</label>
+         {{ form_row(allFieldsForm.mtBudget,{'label':false,'attr':{'class':'form-control-sm '}})}}
        </div>
        <div class="form-group my-4">
           <label for="liensEligibilite">Liens éligibilités *</label>
@@ -215,7 +222,7 @@
                <div class="row">
                   <div class="col">
                      <label for="listeDelieuxTournage">Liste des lieux de tournage en Normandie</label>
-                     {{ form_row(allFieldsForm.listeLiensTournage,{'label':false,'attr':{'class':'form-control','rows':'3'}})}}
+                     {{ form_row(allFieldsForm.listeLieuxTournage,{'label':false,'attr':{'class':'form-control','rows':'3'}})}}
                   </div>
                </div>
                <div class="row my-4">
@@ -236,15 +243,15 @@
                 <div class="col mt-4">
                    <p>1. Droit artistique et concept</p> 
                 </div>
-                <div class="col">
+                <div class="col ht">
                   <div class="form-group">
                     <label for="totalHt">Total Ht</label>
-                    {{ form_row(allFieldsForm.droitArtistiqueTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
+                    {{ form_row(allFieldsForm.droitArtistiqueTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75 '}})}}
                   </div>
                </div>
-               <div class="col">
+               <div class="col htNormandie">
                   <div class="form-group">
-                     <label for="totalHt">Dont en région Normandie HT</label>
+                     <label for="totalHtNormandie">Dont en région Normandie HT</label>
                      {{ form_row(allFieldsForm.droitArtistiqueTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
                   </div>
                </div>
@@ -253,12 +260,12 @@
                 <div class="col">
                    <p>2. Personnel</p> 
                 </div>
-                <div class="col">
+                <div class="col ht">
                   <div class="form-group">
                     {{ form_row(allFieldsForm.personnelTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
                   </div>
                </div>
-               <div class="col">
+               <div class="col htNormandie">
                   <div class="form-group">
                      {{ form_row(allFieldsForm.personnelTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
                   </div>
@@ -268,14 +275,14 @@
                 <div class="col">
                    <p>3. Interprétation </p> 
                 </div>
-                <div class="col">
+                <div class="col ht">
                   <div class="form-group">
-                    {{ form_row(allFieldsForm.interpretationTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
+                    {{ form_row(allFieldsForm.interpretationTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75 '}})}}
                   </div>
                </div>
-               <div class="col">
+               <div class="col htNormandie">
                   <div class="form-group">
-                     {{ form_row(allFieldsForm.interpretationTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
+                     {{ form_row(allFieldsForm.interpretationTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm w-75 '}})}}
                   </div>
                </div>
             </div>
@@ -283,12 +290,12 @@
                 <div class="col">
                    <p>4. Total Charges sociales </p> 
                 </div>
-                <div class="col">
+                <div class="col ht">
                   <div class="form-group">
                     {{ form_row(allFieldsForm.totalChargeSocialesTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
                   </div>
                </div>
-               <div class="col">
+               <div class="col htNormandie">
                   <div class="form-group">
                      {{ form_row(allFieldsForm.totalChargeSocialesTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
                   </div>
@@ -300,12 +307,12 @@
                      6. Transport, défraiement, régie 
                   </p> 
                </div>
-               <div class="col">
+               <div class="col ht">
                   <div class="form-group">
                     {{ form_row(allFieldsForm.transportTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
                   </div>
                </div>
-               <div class="col">
+               <div class="col htNormandie">
                   <div class="form-group">
                      {{ form_row(allFieldsForm.transportTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
                   </div>
@@ -317,12 +324,12 @@
                      7. Moyen technique-Tournage
                   </p> 
                </div>
-               <div class="col">
+               <div class="col ht">
                   <div class="form-group">
                     {{ form_row(allFieldsForm.moyenTechniqueTournageTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
                   </div>
                </div>
-               <div class="col">
+               <div class="col htNormandie">
                   <div class="form-group">
                      {{ form_row(allFieldsForm.moyenTechniqueTournageTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
                   </div>
@@ -334,12 +341,12 @@
                      8. Post-prod
                   </p> 
                </div>
-               <div class="col">
+               <div class="col ht">
                   <div class="form-group">
-                    {{ form_row(allFieldsForm.postProdTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
+                    {{ form_row(allFieldsForm.postProdTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75 '}})}}
                   </div>
                </div>
-               <div class="col">
+               <div class="col htNormandie">
                   <div class="form-group">
                      {{ form_row(allFieldsForm.postProdTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
                   </div>
@@ -351,14 +358,14 @@
                      9. Assurances et frais
                   </p> 
                </div>
-               <div class="col">
+               <div class="col ht">
                   <div class="form-group">
-                    {{ form_row(allFieldsForm.assuranceEtFraisTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
+                    {{ form_row(allFieldsForm.assuranceEtFraisTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75 '}})}}
                   </div>
                </div>
-               <div class="col">
+               <div class="col htNormandie">
                   <div class="form-group">
-                     {{ form_row(allFieldsForm.assuranceEtFraisTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
+                     {{ form_row(allFieldsForm.assuranceEtFraisTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm w-75 '}})}}
                   </div>
                </div>
             </div>
@@ -368,12 +375,12 @@
                      10. Frais financiers
                   </p> 
                </div>
-               <div class="col">
+               <div class="col ht">
                   <div class="form-group">
-                    {{ form_row(allFieldsForm.fraisFinanciersTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
+                    {{ form_row(allFieldsForm.fraisFinanciersTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75 '}})}}
                   </div>
                </div>
-               <div class="col">
+               <div class="col htNormandie">
                   <div class="form-group">
                      {{ form_row(allFieldsForm.fraisFinanciersTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
                   </div>
@@ -385,12 +392,12 @@
                      11.Frais généraux
                   </p> 
                </div>
-               <div class="col">
+               <div class="col ht">
                   <div class="form-group">
                     {{ form_row(allFieldsForm.fraisGenerauxTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
                   </div>
                </div>
-               <div class="col">
+               <div class="col htNormandie">
                   <div class="form-group">
                      {{ form_row(allFieldsForm.fraisGenerauxTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
                   </div>
@@ -402,14 +409,14 @@
                      12. Imprévus
                   </p> 
                </div>
-               <div class="col">
+               <div class="col ht">
                   <div class="form-group">
                     {{ form_row(allFieldsForm.imprevusTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
                   </div>
                </div>
-               <div class="col">
+               <div class="col htNormandie">
                   <div class="form-group">
-                     {{ form_row(allFieldsForm.imprevusTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
+                     {{ form_row(allFieldsForm.imprevusTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm w-75 '}})}}
                   </div>
                </div>
             </div>
@@ -421,21 +428,63 @@
                </div>
                <div class="col">
                   <div class="form-group">
-                    {{ form_row(allFieldsForm.totalGeneralTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
+                    {{ form_row(allFieldsForm.totalGeneralTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75 input-totalHtTotalGeneral'}})}}
                   </div>
                </div>
                <div class="col">
                   <div class="form-group">
-                     {{ form_row(allFieldsForm.totalGeneralTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
+                     {{ form_row(allFieldsForm.totalGeneralTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm w-75 input-totalHtNormandieTotalGeneral'}})}}
                   </div>
                </div>
             </div>
        </fieldset>
-      
+      <hr>
+      <div class="row my-3">
+         <div class="col">
+            <label for="financementAcquis">Financement acquis</label>
+            {{ form_row(allFieldsForm.financementAcquis,{'label':false}) }} 
+         </div>
+         <div class="col financementAcquisPrecision">
+            <label for="financementAcquisPrecision"> Si oui précisez </label>
+            {{ form_row(allFieldsForm.financementAcquisPrecision,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }} 
+         </div>
+      </div>
+      <div class="row my-3">
+         <div class="col">
+             <label for="montantSollicite"> Montant Sollicité au fonds d'aide Normandie </label>
+             {{ form_row(allFieldsForm.montantSollicite,{'label':false,'attr':{'class':'form-control-sm w-50'}}) }} 
+         </div>
+      </div>
+      <div class="row my-3">
+         <div class="col">
+            <label for="depotProjetCollectivite">Avez vous déposé le projet auprès d'autres collectivités territoriales ? </label>
+            {{ form_row(allFieldsForm.depotProjetCollectivite,{'label':false}) }} 
+         </div>
+         <div class="col depotProjetCollectivitePrecision">
+            <label for="depotProjetCollectivitePrecision"> Si oui lesquelles </label>
+            {{ form_row(allFieldsForm.depotProjetCollectivitePrecision,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }} 
+         </div>
+      </div>
+      <div class="row my-3">
+         <div class="col">
+            <label for="projetDejaPresenteFondsAide">Projet déjà présenté au Fonds d'aide Normandie </label>
+            {{ form_row(allFieldsForm.projetDejaPresenteFondsAide,{'label':false}) }} 
+         </div>
+         <div class="col projetDejaPresenteFondsAidePrecision">
+            <label for="projetDejaPresenteFondsAideDate"> Si oui,à quelle date  ?</label>
+             {{ form_row(allFieldsForm.projetDejaPresenteFondsAideDate,{'label':false,'attr':{'class':'form-control-sm w-75','placeholder':'date'}}) }} 
+            <label for="projetDejaPresenteFondsAideTypeAide">pour quel type d'aide ?</label>
+            {{ form_row(allFieldsForm.projetDejaPresenteFondsAideTypeAide,{'label':false,'attr':{'class':'form-control-sm w-75','placeholder':'type d\'aide'}}) }} 
+         </div>
+      </div>
+      <hr>
+      <div class="form-group enregistrer">
+         <button  class="btn btn-success">Enregistrer pour revenir après</button>
+      </div>
+      </div>
       {{ form_end(allFieldsForm,{'render_rest':false}) }}
    </div> 
 {% endblock %}
-
 {% block javascripts %}
- <script src="/js/auteurRealisateurs.js"></script>
+ <script defer src="/js/app.js"></script>
 {%  endblock %}

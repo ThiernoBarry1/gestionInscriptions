@@ -28,38 +28,46 @@ class RegistrationType extends ConfigurationFildsType
             ->add('formatTournage',TextType::class)
             ->add('formatDefinitif',TextType::class)
             ->add('genre',ChoiceType::class,
-                [ 'choices'  => [
-                  'Fiction' => true,
-                  'Animation' => false,
-                  'Documentaire' => false,
-                  'Autre'=>false,
-                  ],  'expanded' =>true
-                ])
+                $this->getArrayChoice(
+                                       [
+                                        'Fiction' => true,
+                                        'Animation' => false,
+                                        'Documentaire' => false,
+                                        'Autre'=>false,
+                                       ]
+                                      )
+                   )
              ->add('genrePrecisionAutre',TextType::class)
             ->add('synopsis',TextareaType::class)
             ->add('adaptationOeuvre',ChoiceType::class,
-                        ['choices'  => 
-                           [
-                             'Oui' => true,
-                              'Non' => false,
-                           ],
-                          'expanded' =>true
-                        ])
+                        $this->getArrayChoice(
+                                               ['Oui' => true, 
+                                                'Non' => false,
+                                               ]
+                                             )
+                  )
             ->add('adaptationOeuvreToa',TextType::class)
             ->add('adaptationOeuvreDacp',TextType::class)
-            //->add('adaptationOeuvreDfc',)
+            ->add('adaptationOeuvreDfc',ChoiceType::class,
+                   [
+                     'choices'=>
+                     [
+                       $this->getArrayDate()
+                     ],
+                   ]
+                  )
             ->add('deposant',ChoiceType::class,
-                ['choices'  => 
-                    [
-                     'Le producteur' => true,
-                     'L\'auteur / le réalisateur ' => false,
-                    ],
-                 'expanded' =>true
-                ])
+                $this->getArrayChoice(
+                                  [ 
+                                    'Le producteur' => true, 
+                                    'L\'auteur/le réalisateur ' => false,
+                                  ]
+                                  )
+                  )
                ->add('producteurs',CollectionType::class,
-                [
-                'entry_type'=>ProducteurType::class
-                ]
+                       [
+                          'entry_type'=>ProducteurType::class
+                       ]
               )
               ->add('auteurRealisateurs',CollectionType::class,
                  [
@@ -74,21 +82,21 @@ class RegistrationType extends ConfigurationFildsType
                    'allow_delete'=>true,
                  ])
                ->add('typeAideLm',ChoiceType::class,
-                    ['choices'  => 
-                       [
-                         'Écriture' => true,
-                         'Réécriture' => false,
-                       ],
-                     'expanded' =>true
-                    ])
+                    $this->getArrayChoice(
+                                          [
+                                            'Écriture' => true,
+                                             'Réécriture' => false,
+                                          ]
+                                        )
+                    )
             ->add('typeAideDoc',ChoiceType::class,
-                    ['choices'  => 
-                        [
-                          'Écriture' => true,
-                          'Développement' => false,
-                        ],
-                     'expanded' =>true
-                   ])
+                    $this->getArrayChoice(
+                                          [
+                                            'Écriture' => true,
+                                             'Développement' => false,
+                                          ]
+                                        )
+                  )
             ->add('mtBudget',TextType::class)
             ->add('liensEligibilite',ChoiceType::class,
                     ['choices'  => 
@@ -102,41 +110,61 @@ class RegistrationType extends ConfigurationFildsType
             ->add('dateTournage',TextType::class)
             ->add('dateDiffusion',TextType::class)
             ->add('castingEnvisage',TextType::class)
-            ->add('listeLiensTournage',TextareaType::class)
+            ->add('listeLieuxTournage',TextareaType::class)
             ->add('nombreJoursTournage',TextType::class)
             ->add('nombreJoursTotal',TextType::class)
             ->add('droitArtistiqueTotalHt',TextType::class)
             ->add('droitArtistiqueTotalHtNormandie',TextType::class)
-            ->add('personnelTotalHt')
+            ->add('personnelTotalHt',TextType::class)
             ->add('personnelTotalHtNormandie')
-            ->add('interpretationTotalHt')
-            ->add('interpretationTotalHtNormandie')
-            ->add('totalChargeSocialesTotalHt')
-            ->add('totalChargeSocialesTotalHtNormandie')
-            ->add('decoEtCostumesTotalHt')
-            ->add('decoEtCostumesTotalHtNormandie')
-            ->add('transportTotalHt')
-            ->add('transportTotalHtNormandie')
-            ->add('moyenTechniqueTournageTotalHt')
-            ->add('postProdTotalHt')
-            ->add('moyenTechniqueTournageTotalHtNormandie')
-            ->add('postProdTotalHtNormandie')
-            ->add('assuranceEtFraisTotalHt')
-            ->add('assuranceEtFraisTotalHtNormandie')
-            ->add('fraisFinanciersTotalHt')
-            ->add('fraisFinanciersTotalHtNormandie')
-            ->add('fraisGenerauxTotalHt')
-            ->add('fraisGenerauxTotalHtNormandie')
-            ->add('imprevusTotalHt')
-            ->add('imprevusTotalHtNormandie')
-            ->add('totalGeneralTotalHt')
-            ->add('totalGeneralTotalHtNormandie')
-            ->add('financementAcquis')
+            ->add('interpretationTotalHt',TextType::class)
+            ->add('interpretationTotalHtNormandie',TextType::class)
+            ->add('totalChargeSocialesTotalHt',TextType::class)
+            ->add('totalChargeSocialesTotalHtNormandie',TextType::class)
+            ->add('decoEtCostumesTotalHt',TextType::class)
+            ->add('decoEtCostumesTotalHtNormandie',TextType::class)
+            ->add('transportTotalHt',TextType::class)
+            ->add('transportTotalHtNormandie',TextType::class)
+            ->add('moyenTechniqueTournageTotalHt',TextType::class)
+            ->add('postProdTotalHt',TextType::class)
+            ->add('moyenTechniqueTournageTotalHtNormandie',TextType::class)
+            ->add('postProdTotalHtNormandie',TextType::class)
+            ->add('assuranceEtFraisTotalHt',TextType::class)
+            ->add('assuranceEtFraisTotalHtNormandie',TextType::class)
+            ->add('fraisFinanciersTotalHt',TextType::class)
+            ->add('fraisFinanciersTotalHtNormandie',TextType::class)
+            ->add('fraisGenerauxTotalHt',TextType::class)
+            ->add('fraisGenerauxTotalHtNormandie',TextType::class)
+            ->add('imprevusTotalHt',TextType::class)
+            ->add('imprevusTotalHtNormandie',TextType::class)
+            ->add('totalGeneralTotalHt',TextType::class)
+            ->add('totalGeneralTotalHtNormandie',TextType::class)
+            ->add('financementAcquis',ChoiceType::class,
+                     $this->getArrayChoice(
+                                             [
+                                              'Oui'=>true,
+                                              'Non'=>false
+                                              ]
+                                           )
+                  )
             ->add('financementAcquisPrecision',TextType::class)
             ->add('montantSollicite',TextType::class)
-            ->add('depotProjetCollectivite')
+            ->add('depotProjetCollectivite',ChoiceType::class,
+                   $this->getArrayChoice(
+                                            [
+                                              'Oui'=>true,
+                                              'Non'=>false
+                                            ]
+                                       )
+                 )
             ->add('depotProjetCollectivitePrecision',TextType::class)
-            ->add('projetDejaPresenteFondsAide')
+            ->add('projetDejaPresenteFondsAide',ChoiceType::class,$this->getArrayChoice(
+                                                          [
+                                                             'Oui'=>true,
+                                                             'Non'=>false
+                                                          ]
+                                                  )
+                 )
             ->add('projetDejaPresenteFondsAideDate',TextType::class)
             ->add('projetDejaPresenteFondsAideTypeAide',TextType::class)  
             ;

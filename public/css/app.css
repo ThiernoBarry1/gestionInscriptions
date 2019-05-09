@@ -1,7 +1,35 @@
 
- #registration_typeAideDoc >.required,#registration_typeAideLm >.required{
-    margin-right: 40px;
+ #registration_typeAideDoc >.required,#registration_typeAideLm >.required,#registration_genre >.required,
+ #registration_adaptationOeuvre >.required,#registration_deposant>.required,
+ #registration_financementAcquis>.required,#registration_depotProjetCollectivite>.required,
+ #registration_projetDejaPresenteFondsAide >.required{
+    margin-right: 30px;
 }
-#registration_typeAideDoc_0,#registration_typeAideDoc_1,#registration_typeAideLm_0,#registration_typeAideLm_1{
-    margin-right:20px;
+#registration_deposant_0,#registration_deposant_1,#registration_typeAideDoc_0,#registration_typeAideDoc_1,#registration_typeAideLm_0,#registration_typeAideLm_1,
+#registration_adaptationOeuvre_0,#registration_adaptationOeuvre_1,
+#registration_genre_0,#registration_genre_1,#registration_genre_2,#registration_genre_3,
+#registration_financementAcquis_0,#registration_financementAcquis_1,
+#registration_depotProjetCollectivite_0,#registration_depotProjetCollectivite_1,
+#registration_projetDejaPresenteFondsAide_0,#registration_projetDejaPresenteFondsAide_1
+{
+    margin-right:5px;
+}
+
+
+
+#registration_producteurs_0_codePostaleBureau,#registration_producteurs_0_villeBureau,
+    #registration_producteurs_0_codePostal,#registration_producteurs_0_ville,
+    #registration_auteurRealisateurs_0_codePostal,#registration_auteurRealisateurs_0_ville{
+    margin-top:30px;
+}
+.genrePrecisionAutre{
+    margin-top: 30px;
+}
+hr{
+    background-color:navy;
+}
+.enregistrer >button{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }

@@ -114,11 +114,10 @@ class Projet
     private $castingEnvisage;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     * il y'a une faute d'orthographe ici il s'agit  de listeLieuxTournage et non pas
-     * listeLiensTournage
+     * @ORM\Column(type="text", nullable=true)
+     *
      */
-    private $listeLiensTournage;
+    private $listeLieuxTournage;
 
     /**
      * @ORM\Column(type="integer",nullable=true)
@@ -136,17 +135,17 @@ class Projet
     private $droitArtistiqueTotalHt;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="float", nullable=true)
      */
     private $droitArtistiqueTotalHtNormandie;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="float", nullable=true)
      */
     private $personnelTotalHt;
 
     /**
-     * @ORM\Column(type="integer", nullable=true)
+     * @ORM\Column(type="float", nullable=true)
      */
     private $personnelTotalHtNormandie;
 
@@ -267,7 +266,7 @@ class Projet
     private $financementAcquis;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text",nullable=true)
      */
     private $financementAcquisPrecision;
 
@@ -287,7 +286,7 @@ class Projet
     private $projetDejaPresenteFondsAide;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=55, nullable=true)
      */
     private $projetDejaPresenteFondsAideDate;
 
@@ -312,7 +311,7 @@ class Projet
     private $adaptationOeuvreDacp;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="string", length=5, nullable=true)
      */
     private $adaptationOeuvreDfc;
 
@@ -614,14 +613,14 @@ class Projet
         return $this;
     }
 
-    public function getListeLiensTournage(): ?string
+    public function getListeLieuxTournage(): ?string
     {
-        return $this->listeLiensTournage;
+        return $this->listeLieuxTournage;
     }
 
-    public function setListeLiensTournage(?string $listeLiensTournage): self
+    public function setlisteLieuxTournage(?string $listeLieuxTournage): self
     {
-        $this->listeLiensTournage = $listeLiensTournage;
+        $this->listeLieuxTournage = $listeLieuxTournage;
 
         return $this;
     }
