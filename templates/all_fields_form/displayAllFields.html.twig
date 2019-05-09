@@ -16,29 +16,36 @@
            <div class="row">
               <div class="col">
                  <label for="titre">Titre du projet</label>
-                 {{ form_row(allFieldsForm.titre,{'label':false,'attr':{'class':'form-control-sm'}}) }}
+                 {{ form_row(allFieldsForm.titre,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
               </div>
               <div class="col">
-                 {{ form_row(allFieldsForm.duree,{'label':'Durée envisagée','attr':{'class':'form-control-sm'}}) }}
+                 <label for="duree">Durée envisagée</label>
+                 {{ form_row(allFieldsForm.duree,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
               </div>
-              <div class="col">
-                 {{ form_row(allFieldsForm.formatTournage,{'label':'Format de tournage','attr':{'class':'form-control-sm'}}) }}
-              </div>
-              <div class="col">
-                 {{ form_row(allFieldsForm.formatDefinitif,{'label':'Format définitif','attr':{'class':'form-control-sm'}}) }}
-              </div>
+              {% if whichChoice == 3 %}
+                  <div class="col">
+                     <label for="formatDeTournage">Format de tournage</label>
+                     {{ form_row(allFieldsForm.formatTournage,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
+                  </div>
+                  <div class="col">
+                     <label for="formatDefinitif">Format définitif</label>
+                     {{ form_row(allFieldsForm.formatDefinitif,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
+                  </div>
+              {% endif %}
            </div>
          </div>
-         <div class="row genreProjet">
-            <div class="col">
-               <label for="genre"> Genre</label>
-               {{ form_row(allFieldsForm.genre,{'label':false}) }} 
+         {% if whichChoice != 2  and whichChoice != 8 %}
+            <div class="row genreProjet">
+               <div class="col">
+                  <label for="genre"> Genre</label>
+                  {{ form_row(allFieldsForm.genre,{'label':false}) }} 
+               </div>
+               <div class="col genrePrecisionAutre">
+                  <label for="genrePrecisionAutre"> Si autre précisez </label>
+                  {{ form_row(allFieldsForm.genrePrecisionAutre,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }} 
+               </div>
             </div>
-            <div class="col genrePrecisionAutre">
-               <label for="genrePrecisionAutre"> Si autre précisez </label>
-               {{ form_row(allFieldsForm.genrePrecisionAutre,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }} 
-            </div>
-         </div>
+         {% endif %}
          <div class="form-group">
          <label for="synopsis">Synopsis ( 600 caractères maximum)</label>
          {{ form_row(allFieldsForm.synopsis,{'label':false,'attr':{'class':'form-control','rows':'3'}}) }}
@@ -57,101 +64,103 @@
             {{ form_row(allFieldsForm.adaptationOeuvreDfc,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
          </div>
       </div>
-      <div>
-         <h3> Coordonnées </h3>
-         <label for="deposant">Projet déposé par</label>
-         {{ form_row(allFieldsForm.deposant,{'label':false,'attr':{'class':'form-control-sm'}}) }}
-      </div>
+      {% if whichChoice == 1 or whichChoice == 2 %}
+            <div>
+               <h3> Coordonnées </h3>
+               <label for="deposant">Projet déposé par</label>
+               {{ form_row(allFieldsForm.deposant,{'label':false,'attr':{'class':'form-control-sm'}}) }}
+            </div>
+      {% endif %}
       </fieldset>
-      <hr>
+      <hr class="production">
       <fieldset class="border p-3 production">
          <legend class="w-auto"> Production </legend>   
-          {% for producteur in allFieldsForm.producteurs %}
-         <div class="form-group">
-            <div class="row">
-               <div class="col-12">
-               <label for="nom">Nom</label>
-                  {{ form_row(producteur.nom,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
-               </div>
-            </div>
-            <div class="row my-3">
-              <div class="col">
-                 <label for="nature">Nature juridique</label>
-                  {{ form_row(producteur.nature,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
-               </div>
-               <div class="col">
-                  <label for="siret">N° de SIRET</label>
-                  {{ form_row(producteur.siret,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
-               </div>
-            </div>
-            <div class="row my-3">
-               <div class="col">
-                  <label for="prenomGerant">Prénom Gérant/Président</label>
-                   {{ form_row(producteur.prenomGerant,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
-                </div>
-                <div class="col">
-                  <label for="nomGerant">Nom Gérant/Président</label>
-                   {{ form_row(producteur.nomGerant,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
-                </div>
-            </div>
-            <div class="row my-3">
-               <div class="col">
-                  <label for="nomProducteur">Nom producteur</label>
-                   {{ form_row(producteur.nomProducteur,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
-                </div>
-                <div class="col">
-                     <label for="prenomProducteur">Prenom producteur</label>
-                   {{ form_row(producteur.prenomProducteur,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
-                </div>
-             </div>
-             <div class="row">
-                <div class="col-12">
-                   <label for="personneChargee">Personne Chargée (si différente) </label>
-                    {{ form_row(producteur.personneChargee,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
-                </div>
-              </div>
-              <div class="row">
-                  <div class="col">
-                     <label for="adresse">Adresse (siège social)</label>
-                      {{ form_row(producteur.adresse,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
+            {% for producteur in allFieldsForm.producteurs %}
+               <div class="form-group">
+                  <div class="row">
+                     <div class="col-12">
+                     <label for="nom">Nom</label>
+                        {{ form_row(producteur.nom,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
+                     </div>
                   </div>
-                  <div class="col">
-                     {{ form_row(producteur.codePostal,{'label':false,'attr':{'class':'form-control-sm w-75 ','placeholder':'Code postal'}}) }}
-                 </div>
-                 <div class="col">
-                     {{ form_row(producteur.ville,{'label':false,'attr':{'class':'form-control-sm w-75','placeholder':'Ville'}}) }}
-                 </div>
-              </div>
-              <div class="row">
-                  <div class="col">
-                     <label for="adresseBureau">Adresse bureau (si differente du siège social)</label>
-                      {{ form_row(producteur.adresseBureau,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
+                  <div class="row my-3">
+                    <div class="col">
+                       <label for="nature">Nature juridique</label>
+                        {{ form_row(producteur.nature,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
+                     </div>
+                     <div class="col">
+                        <label for="siret">N° de SIRET</label>
+                        {{ form_row(producteur.siret,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
+                     </div>
                   </div>
-                  <div class="col">
-                     {{ form_row(producteur.codePostaleBureau,{'label':false,'attr':{'class':'form-control-sm w-75','placeholder':'Code postal'}}) }}
-                 </div>
-                 <div class="col">
-                     {{ form_row(producteur.villeBureau,{'label':false,'attr':{'class':'form-control-sm w-75','placeholder':'Ville'}}) }}
-                 </div>
-              </div>
-              <div class="row">
-                  <div class="col">
-                     <label for="telephoneFixe">Téléphone fixe</label>
-                      {{ form_row(producteur.telephoneFixe,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
+                  <div class="row my-3">
+                     <div class="col">
+                        <label for="prenomGerant">Prénom Gérant/Président</label>
+                         {{ form_row(producteur.prenomGerant,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
+                      </div>
+                      <div class="col">
+                        <label for="nomGerant">Nom Gérant/Président</label>
+                         {{ form_row(producteur.nomGerant,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
+                      </div>
                   </div>
-                  <div class="col">
-                     <label for="telephoneMobile">Téléphone Mobile</label>
-                      {{ form_row(producteur.telephoneMobile,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
+                  <div class="row my-3">
+                     <div class="col">
+                        <label for="nomProducteur">Nom producteur</label>
+                         {{ form_row(producteur.nomProducteur,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
+                      </div>
+                      <div class="col">
+                           <label for="prenomProducteur">Prenom producteur</label>
+                         {{ form_row(producteur.prenomProducteur,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
+                      </div>
+                   </div>
+                   <div class="row">
+                      <div class="col-12">
+                         <label for="personneChargee">Personne Chargée (si différente) </label>
+                          {{ form_row(producteur.personneChargee,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
+                      </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                           <label for="adresse">Adresse (siège social)</label>
+                            {{ form_row(producteur.adresse,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
+                        </div>
+                        <div class="col">
+                           {{ form_row(producteur.codePostal,{'label':false,'attr':{'class':'form-control-sm w-75 ','placeholder':'Code postal'}}) }}
+                       </div>
+                       <div class="col">
+                           {{ form_row(producteur.ville,{'label':false,'attr':{'class':'form-control-sm w-75','placeholder':'Ville'}}) }}
+                       </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                           <label for="adresseBureau">Adresse bureau (si differente du siège social)</label>
+                            {{ form_row(producteur.adresseBureau,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
+                        </div>
+                        <div class="col">
+                           {{ form_row(producteur.codePostaleBureau,{'label':false,'attr':{'class':'form-control-sm w-75','placeholder':'Code postal'}}) }}
+                       </div>
+                       <div class="col">
+                           {{ form_row(producteur.villeBureau,{'label':false,'attr':{'class':'form-control-sm w-75','placeholder':'Ville'}}) }}
+                       </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                           <label for="telephoneFixe">Téléphone fixe</label>
+                            {{ form_row(producteur.telephoneFixe,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
+                        </div>
+                        <div class="col">
+                           <label for="telephoneMobile">Téléphone Mobile</label>
+                            {{ form_row(producteur.telephoneMobile,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
+                        </div>
+                     </div>
+                     <div class="row">
+                        <div class="col">
+                           <label for="corriel">Courriel</label>
+                           {{ form_row(producteur.courriel,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
+                        </div>
+                     </div>
                   </div>
-               </div>
-               <div class="row">
-                  <div class="col">
-                     <label for="corriel">Courriel</label>
-                     {{ form_row(producteur.courriel,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
-                  </div>
-               </div>
-         </div>
-         {% endfor %}
+               {% endfor %}
       </fieldset>
      <hr class="auteurRealisateurs">
      <fieldset class="border p-3 auteurRealisateurs">
@@ -175,49 +184,60 @@
          </div>
       </fieldset>
       <hr>
-      <div class="form-group my-4">
-         <label for="typeAideLm" class="my-3">Type d'aide demandée</label>
-         {{ form_row(allFieldsForm.typeAideLm,{'label':false})}}
-      </div>
-      <div class="form-group inline-radio-block my-4">
-         <label for="typeAideDoc" class="my-3">Type d'aide demandée</label>
-         {{ form_widget(allFieldsForm.typeAideDoc,{'label':false})}}
-      </div>
-      <div class="form-group my-4">
-         <label for="montant-budeget">Montant du budget Ht</label>
-         {{ form_row(allFieldsForm.mtBudget,{'label':false,'attr':{'class':'form-control-sm '}})}}
-       </div>
-       <div class="form-group my-4">
-          <label for="liensEligibilite">Liens éligibilités *</label>
-          <small class="form-text text-muted">selectionner au moins un critère</small>
-          {{ form_row(allFieldsForm.liensEligibilite,{'label':false,'attr':{'class':'form-control-sm '}})}}
-       </div>
-       <hr>
-       <fieldset class="border p-3">
-            <legend class="w-auto">Elements prévisionnels </legend>
+      {% if whichChoice == 1 %}
+         <div class="form-group my-4">
+            <label for="typeAideLm" class="my-3">Type d'aide demandée</label>
+            {{ form_row(allFieldsForm.typeAideLm,{'label':false})}}
+         </div>
+      {% endif %}
+      {% if whichChoice == 2 %}
+         <div class="form-group  my-4">
+            <label for="typeAideDoc" class="my-3">Type d'aide demandée</label>
+            {{ form_widget(allFieldsForm.typeAideDoc,{'label':false})}}
+         </div>
+      {% endif %}
+      {% if whichChoice == 1 or whichChoice == 2 %}
+         <div class="form-group my-4">
+            <label for="montant-budget">Montant du budget Ht</label>
+            {{ form_row(allFieldsForm.mtBudget,{'label':false,'attr':{'class':'form-control-sm '}})}}
+         </div>
+      {% endif %}
+      {% if whichChoice == 1 or whichChoice == 2 or whichChoice == 3 or whichChoice == 5  %}
+         <div class="form-group my-4">
+            <label for="liensEligibilite">Liens éligibilités *</label>
+            <small class="form-text text-muted">selectionner au moins un critère</small>
+            {{ form_row(allFieldsForm.liensEligibilite,{'label':false,'attr':{'class':'form-control-sm '}})}}
+         </div>
+      {% endif %}
+      {% if whichChoice != 1 and whichChoice != 2 %}
+            <hr>
             <fieldset class="border p-3">
-              <legend class="w-auto"> Calendrier envisagé</legend>
-                  <div class="form-group">
-                     <div class="row">
-                        <div class="col">
-                           <label for="datePreparation">Date de préparation</label>
-                           {{ form_row(allFieldsForm.datePreparation,{'label':false,'attr':{'class':'form-control-sm w-65'}})}}
-                        </div>
-                        <div class="col">
+                 <legend class="w-auto">Elements prévisionnels </legend>
+                 <fieldset class="border p-3">
+                     <legend class="w-auto"> Calendrier envisagé</legend>
+                     <div class="form-group">
+                        <div class="row">
+                           <div class="col">
+                              <label for="datePreparation">Date de préparation</label>
+                              {{ form_row(allFieldsForm.datePreparation,{'label':false,'attr':{'class':'form-control-sm w-65'}})}}
+                           </div>
+                           <div class="col">
                               <label for="dateTournage">Date de tournage</label>
                               {{ form_row(allFieldsForm.dateTournage,{'label':false,'attr':{'class':'form-control-sm w-65'}})}}
-                        </div>
-                        <div class="col">
+                           </div>
+                           <div class="col">
                               <label for="dateDiffusion">Date de diffusion</label>
                               {{ form_row(allFieldsForm.dateDiffusion,{'label':false,'attr':{'class':'form-control-sm w-65'}})}}
-                        </div>
-                        <div class="col">
-                              <label for="castingEnvisage">Casting envisagé</label>
-                              {{ form_row(allFieldsForm.castingEnvisage,{'label':false,'attr':{'class':'form-control-sm w-65'}})}}
+                           </div>
+                           {% if whichChoice != 7 and whichChoice != 9 %}
+                              <div class="col">
+                                 <label for="castingEnvisage">Casting envisagé</label>
+                                 {{ form_row(allFieldsForm.castingEnvisage,{'label':false,'attr':{'class':'form-control-sm w-65'}})}}
+                              </div>
+                           {% endif %}
                         </div>
                      </div>
-                  </div>
-            </fieldset>
+                 </fieldset>
             <div class="form-group my-4">
                <div class="row">
                   <div class="col">
@@ -236,208 +256,212 @@
                   </div>
                </div>
             </div>
-       </fieldset>
-       <fieldset class="border p-3"> 
-          <legend class="w-auto">Devis prévisionnel résumé faisant apparaitre la part des dépenses en région</legend>
-             <div class="row">
-                <div class="col mt-4">
-                   <p>1. Droit artistique et concept</p> 
-                </div>
-                <div class="col ht">
-                  <div class="form-group">
-                    <label for="totalHt">Total Ht</label>
-                    {{ form_row(allFieldsForm.droitArtistiqueTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75 '}})}}
+         </fieldset>
+          {% endif %}
+          {% if whichChoice != 1 and whichChoice != 2 %}
+            <hr>
+            <fieldset class="border p-3"> 
+                <legend class="w-auto">Devis prévisionnel résumé faisant apparaitre la part des dépenses en région</legend>
+                <div class="row">
+                   <div class="col mt-4">
+                      <p>1. Droit artistique et concept</p> 
+                   </div>
+                   <div class="col ht">
+                     <div class="form-group">
+                       <label for="totalHt">Total Ht</label>
+                       {{ form_row(allFieldsForm.droitArtistiqueTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75 '}})}}
+                     </div>
+                  </div>
+                  <div class="col htNormandie">
+                     <div class="form-group">
+                        <label for="totalHtNormandie">Dont en région Normandie HT</label>
+                        {{ form_row(allFieldsForm.droitArtistiqueTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
+                     </div>
                   </div>
                </div>
-               <div class="col htNormandie">
-                  <div class="form-group">
-                     <label for="totalHtNormandie">Dont en région Normandie HT</label>
-                     {{ form_row(allFieldsForm.droitArtistiqueTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
+               <div class="row">
+                   <div class="col">
+                      <p>2. Personnel</p> 
+                   </div>
+                   <div class="col ht">
+                     <div class="form-group">
+                       {{ form_row(allFieldsForm.personnelTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
+                     </div>
+                  </div>
+                  <div class="col htNormandie">
+                     <div class="form-group">
+                        {{ form_row(allFieldsForm.personnelTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
+                     </div>
                   </div>
                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                   <p>2. Personnel</p> 
-                </div>
-                <div class="col ht">
-                  <div class="form-group">
-                    {{ form_row(allFieldsForm.personnelTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
+               <div class="row">
+                   <div class="col">
+                      <p>3. Interprétation </p> 
+                   </div>
+                   <div class="col ht">
+                     <div class="form-group">
+                       {{ form_row(allFieldsForm.interpretationTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75 '}})}}
+                     </div>
+                  </div>
+                  <div class="col htNormandie">
+                     <div class="form-group">
+                        {{ form_row(allFieldsForm.interpretationTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm w-75 '}})}}
+                     </div>
                   </div>
                </div>
-               <div class="col htNormandie">
-                  <div class="form-group">
-                     {{ form_row(allFieldsForm.personnelTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
+               <div class="row">
+                   <div class="col">
+                      <p>4. Total Charges sociales </p> 
+                   </div>
+                   <div class="col ht">
+                     <div class="form-group">
+                       {{ form_row(allFieldsForm.totalChargeSocialesTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
+                     </div>
+                  </div>
+                  <div class="col htNormandie">
+                     <div class="form-group">
+                        {{ form_row(allFieldsForm.totalChargeSocialesTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
+                     </div>
                   </div>
                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                   <p>3. Interprétation </p> 
-                </div>
-                <div class="col ht">
-                  <div class="form-group">
-                    {{ form_row(allFieldsForm.interpretationTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75 '}})}}
+               <div class="row">
+                  <div class="col">
+                     <p>
+                        6. Transport, défraiement, régie 
+                     </p> 
+                  </div>
+                  <div class="col ht">
+                     <div class="form-group">
+                       {{ form_row(allFieldsForm.transportTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
+                     </div>
+                  </div>
+                  <div class="col htNormandie">
+                     <div class="form-group">
+                        {{ form_row(allFieldsForm.transportTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
+                     </div>
                   </div>
                </div>
-               <div class="col htNormandie">
-                  <div class="form-group">
-                     {{ form_row(allFieldsForm.interpretationTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm w-75 '}})}}
+               <div class="row">
+                  <div class="col">
+                     <p>
+                        7. Moyen technique-Tournage
+                     </p> 
+                  </div>
+                  <div class="col ht">
+                     <div class="form-group">
+                       {{ form_row(allFieldsForm.moyenTechniqueTournageTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
+                     </div>
+                  </div>
+                  <div class="col htNormandie">
+                     <div class="form-group">
+                        {{ form_row(allFieldsForm.moyenTechniqueTournageTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
+                     </div>
                   </div>
                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                   <p>4. Total Charges sociales </p> 
-                </div>
-                <div class="col ht">
-                  <div class="form-group">
-                    {{ form_row(allFieldsForm.totalChargeSocialesTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
+               <div class="row">
+                  <div class="col">
+                     <p>
+                        8. Post-prod
+                     </p> 
+                  </div>
+                  <div class="col ht">
+                     <div class="form-group">
+                       {{ form_row(allFieldsForm.postProdTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75 '}})}}
+                     </div>
+                  </div>
+                  <div class="col htNormandie">
+                     <div class="form-group">
+                        {{ form_row(allFieldsForm.postProdTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
+                     </div>
                   </div>
                </div>
-               <div class="col htNormandie">
-                  <div class="form-group">
-                     {{ form_row(allFieldsForm.totalChargeSocialesTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
+               <div class="row">
+                  <div class="col">
+                     <p>
+                        9. Assurances et frais
+                     </p> 
+                  </div>
+                  <div class="col ht">
+                     <div class="form-group">
+                       {{ form_row(allFieldsForm.assuranceEtFraisTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75 '}})}}
+                     </div>
+                  </div>
+                  <div class="col htNormandie">
+                     <div class="form-group">
+                        {{ form_row(allFieldsForm.assuranceEtFraisTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm w-75 '}})}}
+                     </div>
                   </div>
                </div>
-            </div>
-            <div class="row">
-               <div class="col">
-                  <p>
-                     6. Transport, défraiement, régie 
-                  </p> 
-               </div>
-               <div class="col ht">
-                  <div class="form-group">
-                    {{ form_row(allFieldsForm.transportTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
+               <div class="row">
+                  <div class="col">
+                     <p>
+                        10. Frais financiers
+                     </p> 
+                  </div>
+                  <div class="col ht">
+                     <div class="form-group">
+                       {{ form_row(allFieldsForm.fraisFinanciersTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75 '}})}}
+                     </div>
+                  </div>
+                  <div class="col htNormandie">
+                     <div class="form-group">
+                        {{ form_row(allFieldsForm.fraisFinanciersTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
+                     </div>
                   </div>
                </div>
-               <div class="col htNormandie">
-                  <div class="form-group">
-                     {{ form_row(allFieldsForm.transportTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
+               <div class="row">
+                  <div class="col">
+                     <p>
+                        11.Frais généraux
+                     </p> 
+                  </div>
+                  <div class="col ht">
+                     <div class="form-group">
+                       {{ form_row(allFieldsForm.fraisGenerauxTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
+                     </div>
+                  </div>
+                  <div class="col htNormandie">
+                     <div class="form-group">
+                        {{ form_row(allFieldsForm.fraisGenerauxTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
+                     </div>
                   </div>
                </div>
-            </div>
-            <div class="row">
-               <div class="col">
-                  <p>
-                     7. Moyen technique-Tournage
-                  </p> 
-               </div>
-               <div class="col ht">
-                  <div class="form-group">
-                    {{ form_row(allFieldsForm.moyenTechniqueTournageTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
+               <div class="row">
+                  <div class="col">
+                     <p>
+                        12. Imprévus
+                     </p> 
+                  </div>
+                  <div class="col ht">
+                     <div class="form-group">
+                       {{ form_row(allFieldsForm.imprevusTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
+                     </div>
+                  </div>
+                  <div class="col htNormandie">
+                     <div class="form-group">
+                        {{ form_row(allFieldsForm.imprevusTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm w-75 '}})}}
+                     </div>
                   </div>
                </div>
-               <div class="col htNormandie">
-                  <div class="form-group">
-                     {{ form_row(allFieldsForm.moyenTechniqueTournageTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
+               <div class="row">
+                  <div class="col">
+                     <p>
+                        Total général HT
+                     </p> 
+                  </div>
+                  <div class="col">
+                     <div class="form-group">
+                       {{ form_row(allFieldsForm.totalGeneralTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75 input-totalHtTotalGeneral'}})}}
+                     </div>
+                  </div>
+                  <div class="col">
+                     <div class="form-group">
+                        {{ form_row(allFieldsForm.totalGeneralTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm w-75 input-totalHtNormandieTotalGeneral'}})}}
+                     </div>
                   </div>
                </div>
-            </div>
-            <div class="row">
-               <div class="col">
-                  <p>
-                     8. Post-prod
-                  </p> 
-               </div>
-               <div class="col ht">
-                  <div class="form-group">
-                    {{ form_row(allFieldsForm.postProdTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75 '}})}}
-                  </div>
-               </div>
-               <div class="col htNormandie">
-                  <div class="form-group">
-                     {{ form_row(allFieldsForm.postProdTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
-                  </div>
-               </div>
-            </div>
-            <div class="row">
-               <div class="col">
-                  <p>
-                     9. Assurances et frais
-                  </p> 
-               </div>
-               <div class="col ht">
-                  <div class="form-group">
-                    {{ form_row(allFieldsForm.assuranceEtFraisTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75 '}})}}
-                  </div>
-               </div>
-               <div class="col htNormandie">
-                  <div class="form-group">
-                     {{ form_row(allFieldsForm.assuranceEtFraisTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm w-75 '}})}}
-                  </div>
-               </div>
-            </div>
-            <div class="row">
-               <div class="col">
-                  <p>
-                     10. Frais financiers
-                  </p> 
-               </div>
-               <div class="col ht">
-                  <div class="form-group">
-                    {{ form_row(allFieldsForm.fraisFinanciersTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75 '}})}}
-                  </div>
-               </div>
-               <div class="col htNormandie">
-                  <div class="form-group">
-                     {{ form_row(allFieldsForm.fraisFinanciersTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
-                  </div>
-               </div>
-            </div>
-            <div class="row">
-               <div class="col">
-                  <p>
-                     11.Frais généraux
-                  </p> 
-               </div>
-               <div class="col ht">
-                  <div class="form-group">
-                    {{ form_row(allFieldsForm.fraisGenerauxTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
-                  </div>
-               </div>
-               <div class="col htNormandie">
-                  <div class="form-group">
-                     {{ form_row(allFieldsForm.fraisGenerauxTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
-                  </div>
-               </div>
-            </div>
-            <div class="row">
-               <div class="col">
-                  <p>
-                     12. Imprévus
-                  </p> 
-               </div>
-               <div class="col ht">
-                  <div class="form-group">
-                    {{ form_row(allFieldsForm.imprevusTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
-                  </div>
-               </div>
-               <div class="col htNormandie">
-                  <div class="form-group">
-                     {{ form_row(allFieldsForm.imprevusTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm w-75 '}})}}
-                  </div>
-               </div>
-            </div>
-            <div class="row">
-               <div class="col">
-                  <p>
-                     Total général HT
-                  </p> 
-               </div>
-               <div class="col">
-                  <div class="form-group">
-                    {{ form_row(allFieldsForm.totalGeneralTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75 input-totalHtTotalGeneral'}})}}
-                  </div>
-               </div>
-               <div class="col">
-                  <div class="form-group">
-                     {{ form_row(allFieldsForm.totalGeneralTotalHtNormandie,{'label':false,'attr':{'class':'form-control-sm w-75 input-totalHtNormandieTotalGeneral'}})}}
-                  </div>
-               </div>
-            </div>
-       </fieldset>
+          </fieldset>
+      {% endif %}
       <hr>
       <div class="row my-3">
          <div class="col">

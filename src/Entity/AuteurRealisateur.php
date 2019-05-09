@@ -57,7 +57,7 @@ class AuteurRealisateur
     private $courriel;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=25)
      */
     private $typePersonne;
 
