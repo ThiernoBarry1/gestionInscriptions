@@ -7,6 +7,7 @@
      'all_fields_form/_documentsAudioVisuelsForm.html.twig'
    ] 
 %}
+
 {% block body %}
    <div class="container">
       {{ form_start(allFieldsForm) }}
@@ -16,11 +17,7 @@
            <div class="row">
               <div class="col">
                  <label for="titre">Titre du projet</label>
-                 {{ form_row(allFieldsForm.titre,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
-              </div>
-              <div class="col">
-                 <label for="duree">Durée envisagée</label>
-                 {{ form_row(allFieldsForm.duree,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
+                 {{ form_row(allFieldsForm.titre,{'label':false,'attr':{'class':'form-control-sm w-50'}}) }}
               </div>
               {% if whichChoice == 3 %}
                   <div class="col">
@@ -36,40 +33,51 @@
          </div>
          {% if whichChoice != 2  and whichChoice != 8 %}
             <div class="row genreProjet">
-               <div class="col">
+               <div class="col-6">
                   <label for="genre"> Genre</label>
                   {{ form_row(allFieldsForm.genre,{'label':false}) }} 
                </div>
-               <div class="col genrePrecisionAutre">
-                  <label for="genrePrecisionAutre"> Si autre précisez </label>
+               <div class="col-6 genrePrecisionAutre">
+                     <label for="precision">Précisez</label>
                   {{ form_row(allFieldsForm.genrePrecisionAutre,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }} 
                </div>
             </div>
          {% endif %}
+         <div class="row my-2">
+            <div class="col-6">
+               <label for="typeFilm">Le type de film </label>
+               {{ form_row(allFieldsForm.typeFilm,{'label':false})}}
+            </div>
+            <div class="col-6">
+                  <label for="duree" class="dureeEnvisagee"></label>
+               <div class="row ml-3">
+                  {{ form_row(allFieldsForm.duree,{'label':false,'attr':{'class':'form-control-sm '}}) }}<span>minutes</span>
+               </div>
+            </div>
+        </div>
          <div class="form-group">
          <label for="synopsis">Synopsis ( 600 caractères maximum)</label>
          {{ form_row(allFieldsForm.synopsis,{'label':false,'attr':{'class':'form-control','rows':'3'}}) }}
       </div>
       <div class="row my-3">
          <div class="col-6">
-            <label for="adaptationOeuvre" class="ml-3">Adaption d'une œuvre prééxistante</label>
-            {{ form_row(allFieldsForm.adaptationOeuvre,{'label':false,'attr':{'class':'form-control-sm ml-3'}}) }}
+            <label for="adaptationOeuvre">Adaption d'une œuvre prééxistante</label>
+            {{ form_row(allFieldsForm.adaptationOeuvre,{'label':false,'attr':{'class':'form-control-sm'}}) }}
          </div>
          <div class="col-6 adaptationOeuvrePrecision">
             <label for="adptationOeuvreToa">Titre de l'œuvre et l'auteur </label>
             {{ form_row(allFieldsForm.adaptationOeuvreToa,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
-            <label for="adapdationOuevreDacp">Droits d'adaption céder par</label>
+            <label for="adapdationOuevreDacp">Droits d'adaption cedés par</label>
             {{ form_row(allFieldsForm.adaptationOeuvreDacp,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
             <label for="adapdationOuevreDfc">Date de fin de session</label>
-            {{ form_row(allFieldsForm.adaptationOeuvreDfc,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
+            {{ form_row(allFieldsForm.adaptationOeuvreDfc,{'label':false}) }}
          </div>
       </div>
       {% if whichChoice == 1 or whichChoice == 2 %}
-            <div>
-               <h3> Coordonnées </h3>
-               <label for="deposant">Projet déposé par</label>
-               {{ form_row(allFieldsForm.deposant,{'label':false,'attr':{'class':'form-control-sm'}}) }}
-            </div>
+          <div class="my-3">
+             <label for="deposant">Projet déposé par</label>
+             {{ form_row(allFieldsForm.deposant,{'label':false,'attr':{'class':'form-control-sm'}}) }}
+          </div>
       {% endif %}
       </fieldset>
       <hr class="production">
@@ -78,83 +86,79 @@
             {% for producteur in allFieldsForm.producteurs %}
                <div class="form-group">
                   <div class="row">
-                     <div class="col-12">
-                     <label for="nom">Nom</label>
-                        {{ form_row(producteur.nom,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
+                     <div class="col-6">
+                        <label for="nom">Nom</label>
+                           {{ form_row(producteur.nom,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
                      </div>
                   </div>
-                  <div class="row my-3">
-                    <div class="col">
+                  <div class="row my-2">
+                    <div class="col-6">
                        <label for="nature">Nature juridique</label>
-                        {{ form_row(producteur.nature,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
+                        {{ form_row(producteur.nature,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
                      </div>
-                     <div class="col">
-                        <label for="siret">N° de SIRET</label>
-                        {{ form_row(producteur.siret,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
+                     <div class="col-6">
+                        <label for="siret">SIRET</label>
+                        {{ form_row(producteur.siret,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
                      </div>
                   </div>
-                  <div class="row my-3">
-                     <div class="col">
-                        <label for="prenomGerant">Prénom Gérant/Président</label>
-                         {{ form_row(producteur.prenomGerant,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
+                  <div class="row my-2">
+                     <div class="col-6">
+                        <label for="prenomGerant">Gérant/Président</label>
+                         {{ form_row(producteur.nomGerant,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'Nom'}}) }}
                       </div>
-                      <div class="col">
-                        <label for="nomGerant">Nom Gérant/Président</label>
-                         {{ form_row(producteur.nomGerant,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
+                      <div class="col-6">
+                         {{ form_row(producteur.prenomGerant,{'label':false,'attr':{'class':'form-control-sm w-100 decalageLabel','placeholder':'Prénom'}}) }}
                       </div>
                   </div>
-                  <div class="row my-3">
-                     <div class="col">
-                        <label for="nomProducteur">Nom producteur</label>
-                         {{ form_row(producteur.nomProducteur,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
+                  <div class="row my-2">
+                     <div class="col-6">
+                        <label for="nomProducteur">Producteur</label>
+                         {{ form_row(producteur.nomProducteur,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'Nom'}}) }}
                       </div>
-                      <div class="col">
-                           <label for="prenomProducteur">Prenom producteur</label>
-                         {{ form_row(producteur.prenomProducteur,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
+                      <div class="col-6 decalageLabel">
+                         {{ form_row(producteur.prenomProducteur,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'Prénom'}}) }}
                       </div>
                    </div>
                    <div class="row">
-                      <div class="col-12">
+                      <div class="col-6">
                          <label for="personneChargee">Personne Chargée (si différente) </label>
                           {{ form_row(producteur.personneChargee,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
                       </div>
                     </div>
                     <div class="row">
-                        <div class="col">
-                           <label for="adresse">Adresse (siège social)</label>
+                        <div class="col-6">
+                           <label for="adresse">Adresse siège social</label>
                             {{ form_row(producteur.adresse,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
                         </div>
-                        <div class="col">
-                           {{ form_row(producteur.codePostal,{'label':false,'attr':{'class':'form-control-sm w-75 ','placeholder':'Code postal'}}) }}
-                       </div>
-                       <div class="col">
-                           {{ form_row(producteur.ville,{'label':false,'attr':{'class':'form-control-sm w-75','placeholder':'Ville'}}) }}
-                       </div>
+                        <div class="col-3">
+                           {{ form_row(producteur.codePostal,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'Code postal'}}) }}
+                        </div>
+                        <div class="col-3">
+                           {{ form_row(producteur.ville,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'Ville'}}) }}
+                        </div>
                     </div>
                     <div class="row">
-                        <div class="col">
+                        <div class="col-6">
                            <label for="adresseBureau">Adresse bureau (si differente du siège social)</label>
                             {{ form_row(producteur.adresseBureau,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
                         </div>
-                        <div class="col">
-                           {{ form_row(producteur.codePostaleBureau,{'label':false,'attr':{'class':'form-control-sm w-75','placeholder':'Code postal'}}) }}
+                        <div class="col-3">
+                           {{ form_row(producteur.codePostaleBureau,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'Code postal'}}) }}
                        </div>
-                       <div class="col">
-                           {{ form_row(producteur.villeBureau,{'label':false,'attr':{'class':'form-control-sm w-75','placeholder':'Ville'}}) }}
+                       <div class="col-3">
+                           {{ form_row(producteur.villeBureau,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'Ville'}}) }}
                        </div>
                     </div>
                     <div class="row">
-                        <div class="col">
+                        <div class="col-4">
                            <label for="telephoneFixe">Téléphone fixe</label>
-                            {{ form_row(producteur.telephoneFixe,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
+                            {{ form_row(producteur.telephoneFixe,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
                         </div>
-                        <div class="col">
+                        <div class="col-4">
                            <label for="telephoneMobile">Téléphone Mobile</label>
-                            {{ form_row(producteur.telephoneMobile,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }}
+                            {{ form_row(producteur.telephoneMobile,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
                         </div>
-                     </div>
-                     <div class="row">
-                        <div class="col">
+                        <div class="col-4">
                            <label for="corriel">Courriel</label>
                            {{ form_row(producteur.courriel,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
                         </div>
@@ -164,49 +168,93 @@
       </fieldset>
      <hr class="auteurRealisateurs">
      <fieldset class="border p-3 auteurRealisateurs">
-        <legend class="w-auto">Ajout d'un auteur ou/et d'un réalisateur </legend>
-        <p>Pur ajouter un auteur ou/et un réalisateur cliquer sur ce bouton </p>
-        <div id="auteurRealisateurs" data-prototype="{{ form_widget(allFieldsForm.auteurRealisateurs.vars.prototype)|e('html_attr') }}">
+        <legend class="w-auto">Auteurs/réalisateurs </legend>
+        <div id="auteurRealisateurs"  data-prototype="{{ form_widget(allFieldsForm.auteurRealisateurs.vars.prototype)|e('html_attr') }}">
+         {% for auteurRealisateurs in allFieldsForm.auteurRealisateurs %}
+               <div class="row my-3">
+                   <div class="col-4">
+                       <label> Prénom </label>
+                       {{ form_row(auteurRealisateurs.prenom,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'Prénom'}}) }}
+                    </div>
+                   <div class="col-4">
+                       <label> Nom </label>
+                        {{ form_row(auteurRealisateurs.nom,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'Nom'}}) }}
+                   </div>
+                   <div class="col-4">
+                      <label> Pseudonyme </label>
+                      {{ form_row(auteurRealisateurs.pseudonyme,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'Pseudonyme'}}) }}
+                   </div>
+               </div>
+               <div class="row my-3">
+                   <div class="col-6">
+                       <label> Adresse</label>
+                       {{ form_row(auteurRealisateurs.adresse,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'adresse'}}) }}
+                   </div>
+                   <div class="col-3">
+                       {{ form_row(auteurRealisateurs.codePostal,{'label':false,'attr':{'class':'form-control-sm w-100 decalageCodeVille','placeholder':'Code postal'}}) }}
+                   </div>
+                   <div class="col-3">
+                       {{ form_row(auteurRealisateurs.ville,{'label':false,'attr':{'class':'form-control-sm w-100 decalageCodeVille','placeholder':'Ville'}}) }}
+                   </div>
+               </div>
+               <div class="row my-3">
+                   <div class="col-6">
+                       <label>Téléphone</label>
+                       {{ form_row(auteurRealisateurs.telephoneMobile,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
+                   </div>
+                   <div class="col-6">
+                       <label>Courriel</label>
+                       {{ form_row(auteurRealisateurs.courriel,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
+                   </div>
+               </div>
+               <div class="form-group my-4">
+                   <label for="typePersonne" class="my-3">Pour ce projet vous êtes ?</label>
+                   {{ form_row(auteurRealisateurs.typePersonne,{'label':false})}}
+               </div>
+         </div>   
+         <input type="hidden" id="widget-counter" value="0">
+         <div class="form-group">
+           <button type="button" id="ajoutAuteur-realisateur" class="btn btn-primary my-4" > Ajouter un auteur réalisateur</button>
          </div>
-        <input type="hidden" id="widget-counter" value="0">
-        <div class="form-group">
-          <button type="button" id="ajoutAuteur-realisateur" class="btn btn-primary my-4" > Ajouter un auteur ou/et un réalisateur</button>
-        </div>
-        </fieldset>
-        <hr>
+      {% endfor %}
+      </fieldset>
+      <hr>
       <fieldset class="border p-3">
-         <legend class="w-auto">Documents audioVisuels joints</legend>
+         <legend class="w-auto">Documents audiovisuels joints</legend>
          <div id="documentAudioVisuels" data-prototype="{{ form_widget(allFieldsForm.documentAudioVisuels.vars.prototype)|e('html_attr') }}">
          </div>
          <input type="hidden" id="widget-counter-documentAudioVisuels" value="0">
          <div class="form-group">
-            <button type="button" id="ajoutDocumentAudioVisuels" class="btn btn-primary my-4">Ajouter un documents audio visuels</button>
+            <button type="button" id="ajoutDocumentAudioVisuels" class="btn btn-primary my-4">Ajouter un documents audiovisuels</button>
          </div>
       </fieldset>
-      <hr>
       {% if whichChoice == 1 %}
-         <div class="form-group my-4">
-            <label for="typeAideLm" class="my-3">Type d'aide demandée</label>
+      <hr>
+         <div class="form-group my-2">
+            <label for="typeAideLm">Type d'aide demandée</label>
             {{ form_row(allFieldsForm.typeAideLm,{'label':false})}}
          </div>
       {% endif %}
       {% if whichChoice == 2 %}
-         <div class="form-group  my-4">
-            <label for="typeAideDoc" class="my-3">Type d'aide demandée</label>
+      <hr>
+         <div class="form-group  my-2">
+            <label for="typeAideDoc">Type d'aide demandée</label>
             {{ form_widget(allFieldsForm.typeAideDoc,{'label':false})}}
          </div>
       {% endif %}
       {% if whichChoice == 1 or whichChoice == 2 %}
-         <div class="form-group my-4">
+      <hr>
+         <div class="form-group my-2 montant-budget">
             <label for="montant-budget">Montant du budget Ht</label>
             {{ form_row(allFieldsForm.mtBudget,{'label':false,'attr':{'class':'form-control-sm '}})}}
          </div>
       {% endif %}
       {% if whichChoice == 1 or whichChoice == 2 or whichChoice == 3 or whichChoice == 5  %}
-         <div class="form-group my-4">
-            <label for="liensEligibilite">Liens éligibilités *</label>
-            <small class="form-text text-muted">selectionner au moins un critère</small>
-            {{ form_row(allFieldsForm.liensEligibilite,{'label':false,'attr':{'class':'form-control-sm '}})}}
+      <hr>
+         <div class="form-group my-2">
+            <label for="liensEligibilite">Liens avec la Région Normandie</label>
+            <small class="form-text text-muted">cocher au moins un critère</small>
+            {{ form_row(allFieldsForm.liensEligibilite,{'label':false})}}
          </div>
       {% endif %}
       {% if whichChoice != 1 and whichChoice != 2 %}
@@ -238,25 +286,25 @@
                         </div>
                      </div>
                  </fieldset>
-            <div class="form-group my-4">
-               <div class="row">
-                  <div class="col">
-                     <label for="listeDelieuxTournage">Liste des lieux de tournage en Normandie</label>
-                     {{ form_row(allFieldsForm.listeLieuxTournage,{'label':false,'attr':{'class':'form-control','rows':'3'}})}}
+               <div class="form-group my-2">
+                  <div class="row">
+                     <div class="col">
+                        <label for="listeDelieuxTournage">Liste des lieux de tournage en Normandie</label>
+                        {{ form_row(allFieldsForm.listeLieuxTournage,{'label':false,'attr':{'class':'form-control','rows':'3'}})}}
+                     </div>
                   </div>
-               </div>
-               <div class="row my-4">
-                  <div class="col">
-                     <label for="nombreJoursTournage">Nombres de jours de tournage prévus en Normandie</label>
-                     {{ form_row(allFieldsForm.nombreJoursTournage,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
+                  <div class="row my-4">
+                     <div class="col">
+                        <label for="nombreJoursTournage">Nombres de jours de tournage prévus en Normandie</label>
+                        {{ form_row(allFieldsForm.nombreJoursTournage,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
+                     </div>
+                     <div class="col">
+                        <label for="nombreJoursTotal">Nombres de jours total de tournage</label>
+                        {{ form_row(allFieldsForm.nombreJoursTotal,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
+                     </div>
                   </div>
-                  <div class="col">
-                     <label for="nombreJoursTotal">Nombres de jours total de tournage</label>
-                     {{ form_row(allFieldsForm.nombreJoursTotal,{'label':false,'attr':{'class':'form-control-sm w-75'}})}}
-                  </div>
-               </div>
-            </div>
-         </fieldset>
+                 </div>
+            </fieldset>
           {% endif %}
           {% if whichChoice != 1 and whichChoice != 2 %}
             <hr>
@@ -451,7 +499,7 @@
                   </div>
                   <div class="col">
                      <div class="form-group">
-                       {{ form_row(allFieldsForm.totalGeneralTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75 input-totalHtTotalGeneral'}})}}
+                       {{ form_row(allFieldsForm.totalGeneralTotalHt,{'label':false,'attr':{'class':'form-control-sm w-75 input-totalHtTotalGeneral','type':'hidden'}})}}
                      </div>
                   </div>
                   <div class="col">
@@ -464,51 +512,61 @@
       {% endif %}
       <hr>
       <div class="row my-3">
-         <div class="col">
+         <div class="col-6">
             <label for="financementAcquis">Financement acquis</label>
             {{ form_row(allFieldsForm.financementAcquis,{'label':false}) }} 
          </div>
-         <div class="col financementAcquisPrecision">
+         <div class="col-6 financementAcquisPrecision">
             <label for="financementAcquisPrecision"> Si oui précisez </label>
-            {{ form_row(allFieldsForm.financementAcquisPrecision,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }} 
+            {{ form_row(allFieldsForm.financementAcquisPrecision,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }} 
          </div>
       </div>
       <div class="row my-3">
-         <div class="col">
-             <label for="montantSollicite"> Montant Sollicité au fonds d'aide Normandie </label>
-             {{ form_row(allFieldsForm.montantSollicite,{'label':false,'attr':{'class':'form-control-sm w-50'}}) }} 
+         <div class="col-6">
+             <label for="montantSollicite"> Montant Sollicité au près du fonds d'aide Normandie </label>
+             {{ form_row(allFieldsForm.montantSollicite,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }} 
          </div>
       </div>
+      <div class="auteur-realisateur" data-prototype="{{ form_widget(allFieldsForm.auteurRealisateurs.vars.prototype)|e('html_attr') }}">
+         {% for auteurRealisateurs in allFieldsForm.auteurRealisateurs %}
+            <div class="form-group">
+               <div class="col-6 pourcentage">
+                  <label for="pourcentageAuteurRealisateur">Pourcentage Auteur/Realisateurs</label>
+                  {{ form_row(auteurRealisateurs.pourcentageAuteurRealisateur,{'label':false,'attr':{'class':'form-control-sm w-100'}})}}
+               </div>
+            </div>
+         {% endfor %}
+      </div>
       <div class="row my-3">
-         <div class="col">
+         <div class="col-6">
             <label for="depotProjetCollectivite">Avez vous déposé le projet auprès d'autres collectivités territoriales ? </label>
             {{ form_row(allFieldsForm.depotProjetCollectivite,{'label':false}) }} 
          </div>
-         <div class="col depotProjetCollectivitePrecision">
+         <div class="col-6 depotProjetCollectivitePrecision">
             <label for="depotProjetCollectivitePrecision"> Si oui lesquelles </label>
-            {{ form_row(allFieldsForm.depotProjetCollectivitePrecision,{'label':false,'attr':{'class':'form-control-sm w-75'}}) }} 
+            {{ form_row(allFieldsForm.depotProjetCollectivitePrecision,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }} 
          </div>
       </div>
       <div class="row my-3">
-         <div class="col">
+         <div class="col-6">
             <label for="projetDejaPresenteFondsAide">Projet déjà présenté au Fonds d'aide Normandie </label>
             {{ form_row(allFieldsForm.projetDejaPresenteFondsAide,{'label':false}) }} 
          </div>
-         <div class="col projetDejaPresenteFondsAidePrecision">
+         <div class="col-6 projetDejaPresenteFondsAidePrecision">
             <label for="projetDejaPresenteFondsAideDate"> Si oui,à quelle date  ?</label>
-             {{ form_row(allFieldsForm.projetDejaPresenteFondsAideDate,{'label':false,'attr':{'class':'form-control-sm w-75','placeholder':'date'}}) }} 
+             {{ form_row(allFieldsForm.projetDejaPresenteFondsAideDate,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'date'}}) }} 
             <label for="projetDejaPresenteFondsAideTypeAide">pour quel type d'aide ?</label>
-            {{ form_row(allFieldsForm.projetDejaPresenteFondsAideTypeAide,{'label':false,'attr':{'class':'form-control-sm w-75','placeholder':'type d\'aide'}}) }} 
+            {{ form_row(allFieldsForm.projetDejaPresenteFondsAideTypeAide,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'type d\'aide'}}) }} 
          </div>
       </div>
       <hr>
       <div class="form-group enregistrer">
-         <button  class="btn btn-success">Enregistrer pour revenir après</button>
+         <button  class="btn btn-success">Enregistrer</button>
       </div>
       </div>
       {{ form_end(allFieldsForm,{'render_rest':false}) }}
    </div> 
 {% endblock %}
 {% block javascripts %}
- <script defer src="/js/app.js"></script>
+<script defer src="/js/app.js"></script>
 {%  endblock %}

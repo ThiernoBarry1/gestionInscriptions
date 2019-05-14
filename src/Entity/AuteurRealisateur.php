@@ -17,32 +17,32 @@ class AuteurRealisateur
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=50,nullable=true)
      */
     private $nom;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=100,nullable=true)
      */
     private $prenom;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=150, nullable=true)
      */
     private $pseudonyme;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=60,nullable=true)
      */
     private $adresse;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=6,nullable=true)
      */
     private $codePostal;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=50,nullable=true)
      */
     private $ville;
 
@@ -66,6 +66,11 @@ class AuteurRealisateur
      * @ORM\JoinColumn(nullable=false)
      */
     private $projet;
+
+    /**
+     * @ORM\Column(type="string", length=50, nullable=true)
+     */
+    private $pourcentageAuteurRealisateur;
 
     public function getId(): ?int
     {
@@ -188,6 +193,18 @@ class AuteurRealisateur
     public function setProjet(?Projet $projet): self
     {
         $this->projet = $projet;
+
+        return $this;
+    }
+
+    public function getPourcentageAuteurRealisateur(): ?string
+    {
+        return $this->pourcentageAuteurRealisateur;
+    }
+
+    public function setPourcentageAuteurRealisateur(?string $pourcentageAuteurRealisateur): self
+    {
+        $this->pourcentageAuteurRealisateur = $pourcentageAuteurRealisateur;
 
         return $this;
     }

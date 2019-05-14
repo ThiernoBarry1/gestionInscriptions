@@ -20,7 +20,7 @@ class DocumentsAudioVisuelsType extends ConfigurationFildsType
             ->add('genre',TextType::class)
             ->add('annee',ChoiceType::class,
                 ['choices'  => 
-                   $this->getArrayDate(),
+                   $this->getArrayDuration(1950,2100),
                 ])
             ->add('duree',TextType::class)
             ->add('lien',TextType::class)

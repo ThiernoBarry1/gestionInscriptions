@@ -12,6 +12,7 @@ use App\Form\DocumentsAudioVisuelsType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -24,7 +25,18 @@ class RegistrationType extends ConfigurationFildsType
     {
         $builder
             ->add('titre',TextType::class)
-            ->add('duree',TextType::class)
+            ->add('duree',ChoiceType::class,[
+                                            'choices'=>
+                                            [
+                                              $this->getArrayDuration(1,300)
+                                            ],
+                                         ]
+                  )
+            ->add('typeFilm',ChoiceType::class,$this->getArrayChoice(
+                                         ['Unitaire'=>true,
+                                           'Serie'=>false
+                                         ])
+                )
             ->add('formatTournage',TextType::class)
             ->add('formatDefinitif',TextType::class)
             ->add('genre',ChoiceType::class,
@@ -48,13 +60,11 @@ class RegistrationType extends ConfigurationFildsType
                   )
             ->add('adaptationOeuvreToa',TextType::class)
             ->add('adaptationOeuvreDacp',TextType::class)
-            ->add('adaptationOeuvreDfc',ChoiceType::class,
-                   [
-                     'choices'=>
-                     [
-                       $this->getArrayDate()
-                     ],
-                   ]
+            ->add('adaptationOeuvreDfc',DateType::class,
+                                                        [
+                                                          'widget' => 'single_text',
+                                                          'attr' => ['class' => 'w-75']
+                                                        ]
                   )
             ->add('deposant',ChoiceType::class,
                 $this->getArrayChoice(
@@ -82,10 +92,10 @@ class RegistrationType extends ConfigurationFildsType
                    'allow_delete'=>true,
                  ])
                ->add('typeAideLm',ChoiceType::class,
-                    $this->getArrayChoice(
+                      $this->getArrayChoice(
                                           [
                                             'Écriture' => true,
-                                             'Réécriture' => false,
+                                            'Réécriture' => false,
                                           ]
                                         )
                     )
@@ -93,19 +103,17 @@ class RegistrationType extends ConfigurationFildsType
                     $this->getArrayChoice(
                                           [
                                             'Écriture' => true,
-                                             'Développement' => false,
+                                            'Développement' => false,
                                           ]
                                         )
                   )
             ->add('mtBudget',TextType::class)
-            ->add('liensEligibilite',ChoiceType::class,
-                    ['choices'  => 
-                        [
-                          'auteur réalisateur domicilié en région' => true,
-                          'société de production disposant d’un établissement stable en région' => false,
-                          'projet entretenant un lien culturel avec le territoire régional' =>false,
-                       ],
-                    ])
+            ->add('liensEligibilite',ChoiceType::class,$this->getArrayChoice(
+                                                                              ['Fiction'=>true,
+                                                                               'Documentaire'=>false,
+                                                                               'Animamation'=>false,
+                                                                               'Autre'=>false
+                                                                              ],true))
             ->add('datePreparation',TextType::class)
             ->add('dateTournage',TextType::class)
             ->add('dateDiffusion',TextType::class)
@@ -137,8 +145,8 @@ class RegistrationType extends ConfigurationFildsType
             ->add('fraisGenerauxTotalHtNormandie',TextType::class)
             ->add('imprevusTotalHt',TextType::class)
             ->add('imprevusTotalHtNormandie',TextType::class)
-            ->add('totalGeneralTotalHt',TextType::class)
-            ->add('totalGeneralTotalHtNormandie',TextType::class)
+            ->add('totalGeneralTotalHt',TextType::class,['disabled'=>true])
+            ->add('totalGeneralTotalHtNormandie',TextType::class,['disabled'=>true])
             ->add('financementAcquis',ChoiceType::class,
                      $this->getArrayChoice(
                                              [

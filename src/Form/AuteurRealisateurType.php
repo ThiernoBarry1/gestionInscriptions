@@ -21,7 +21,15 @@ class AuteurRealisateurType extends ConfigurationFildsType
             ->add('ville',TextType::class)
             ->add('telephoneMobile',TextType::class)
             ->add('courriel',TextType::class)
-            ->add('typePersonne',ChoiceType::class,$this->getArrayChoice(['Auteur et réalisateur'=>true,'auteur ou Réalisateur'=>false]))
+            ->add('typePersonne',ChoiceType::class,$this->getArrayChoice(
+                                                                            [
+                                                                                'Auteurréalisateur'=>true,
+                                                                                'Réalisateur'=>false,
+                                                                                'Scénariste'=>false,
+                                                                            ]
+                                                                        )
+                )
+            ->add('pourcentageAuteurRealisateur',TextType::class)
         ;
     }
 

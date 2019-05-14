@@ -12,21 +12,20 @@ class ConfigurationFildsType extends AbstractType {
      * @param array $option
      * @return Array
      */
-    protected function getConfiguration($label,$placeholder='',$option=[])
+    protected function getConfiguration($label='',$placeholder='',$option=[])
     {
       return array_merge(['label'=>$label,'attr'=>['placeholder'=>$placeholder]
                  ],$option);
     }
 
     /**
-    * Permet de remplir un tableau de nombres corespondants à des dates
+    * Permet de remplir un tableau de nombres
     *@return Array
     */
-    protected function getArrayDate()
+    protected function getArrayDuration($debut,$fin)
     {
-      
-        $arrayDate = ['1950'=>false];
-        for($i=1951;$i<=2100;$i++) {
+        $arrayDate = [$debut=>true];
+        for($i= $debut+1 ;$i <= $fin;  $i++) {
           $arrayDate[] = false;
         }
         return $arrayDate;
@@ -35,14 +34,15 @@ class ConfigurationFildsType extends AbstractType {
      * return le tableau de choix
      *
      * @param [Array] $array
+     * @param boolean $isMultiple
      * @return Array
      */
-    protected function getArrayChoice($array)
+    protected function getArrayChoice($array,$isMultiple=false)
     {
-       return  ['choices'  => 
-                     $array,
-                  'expanded' =>true
-                ];
-          
+     return [ 'choices'  => $array,
+              'expanded' => true,
+              'multiple'=>  $isMultiple,
+           ]; 
     }
+    
 }

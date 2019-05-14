@@ -1,27 +1,40 @@
-$(document).ready(function(){
+$(document).ready(function()
+{     
+   "use strict";
    // gerer l'ajout d'un auteur ou/et d'un réalisateur lors qu'on clique sur le button
-   $('#ajoutAuteur-realisateur').click(function(){  
-      traitementEvenClicks('#auteurRealisateurs','#widget-counter');
+
+  
+   $('#ajoutAuteur-realisateur').click(function()
+   { 
+      traitementEvenClicks('#auteurRealisateurs','#widget-counter','#ajoutAuteur-realisateur');
       // j'effectue la suppressesion du formulaire auteur réalisateur 
       supFormAuteurRealisateur('button[data-action="delete"]');
       counterForm('#auteurRealisateurs div.form-group','#widget-counter');
+      // car je n'est pas compris pourquoi il récupère 3 sur le 1er clique sur le boutton
+      let estimeDiv = +$('#auteurRealisateurs div.form-group').length
+      // je récupère la partie entière de la division.
+      let count = Math.floor(estimeDiv/2);
+      
+      
    });
    $('#ajoutDocumentAudioVisuels').click(function(){
-      traitementEvenClicks('#documentAudioVisuels','#widget-counter-documentAudioVisuels');
+      traitementEvenClicks('#documentAudioVisuels','#widget-counter-documentAudioVisuels','#ajoutDocumentAudioVisuels');
       // j'effectue la suppressesion du formulaire auteur réalisateur 
       supFormAuteurRealisateur('button[data-action="delete-documentAudioVisuels"]');
-      counterForm('#documentAudioVisuels div.form-group','#widget-counter-documentsAudioVisuels');
+      counterForm('#documentAudioVisuels div.form-group','#widget-counter-documentAudioVisuels');
    });
 
    /**
     * supprime le formulaire auteur réalisateur
     * 
-    * @param {String} button 
+    * @param {String} boutton 
     */
-   function supFormAuteurRealisateur(button) {
-      $(button).click(function(){
+   function supFormAuteurRealisateur(boutton) {
+      $(boutton).click(function(){
       const target = this.dataset.target;
       $(target).remove();
+      // je rend le button ajout visible à chaque suppression
+       $('#ajoutDocumentAudioVisuels').show(); 
       });
    }
 
@@ -31,27 +44,49 @@ $(document).ready(function(){
     * @param {String} div 
     * @param {String} widget_counter 
     */
-   function counterForm(div,widget_counter){
-      const count = +$(div).length;
+   function counterForm(div,widget_counter)
+   {  const count = +$(div).length;
       $(widget_counter).val(count);
    }
 
    /**
-    * @param {String} auteur 
+    * 
+    * @param {String} selecteurClass 
+    * @param {boolean} isAuteurRealisateur 
     * @param {String} widget_counter 
+    * @param {String} selecteurButton 
     */
-   function traitementEvenClicks(auteur,widget_counter){
-   // je recupère le numero des forms !
-   const index  = +$(widget_counter).val();
+   function traitementEvenClicks(selecteurDiv,widget_counter,selecteurButton){
+      // je recupère le numero des forms !
+      let index  = +$(widget_counter).val();
+      // je remplace tous les __name__ par ce numero
+      const templates = $(selecteurDiv).data('prototype').replace(/__name__/g,index);
+   
+      // j'injecte ce code au sein de la div 
+      $(selecteurDiv).append(templates);
+   
+      // compter le nombre de form  
+      $(widget_counter).val(index+1);
+      
+      const count = +$('#documentAudioVisuels div.form-group').length;
+      if(count >= 2)
+      {
+         $(selecteurButton).hide();
+      }
+     
+  /*
+      // ici je traite le cas des pourcentages
 
-   // je remplace tous les __name__ par ce numero
-   const templates = $(auteur).data('prototype').replace(/__name__/g,index);
+      const tmps = $(selecteurClass).data('prototype').replace(/__name__/g,index);
+      console.log(tmps);
+      // j'injecte ce code au sein de la div 
+      $(selecteurDiv).append(templates);
+   
+      // compter le nombre de form  
+      $(widget_counter).val(index+1);
+   
+   */
 
-   // j'injecte ce code au sein de la div 
-   $(auteur).append(templates);
-
-   // compter le nombre de form  auteur réalisateur
-   $(widget_counter).val(index+1);
    }
 
 
@@ -145,17 +180,20 @@ verifieNonSelectionne('#registration_genre_2','.genrePrecisionAutre');
  $('#registration_adaptationOeuvre_0').click(function(){
    voir('.adaptationOeuvrePrecision');
  });
- // traitement projet deposer par 
+ // traitement projet déposé par 
  
  verifieSelectionneProjetDepose('#registration_deposant_0','.production');
 
  $('#registration_deposant_0').click(function(){
    voir('.production');
-   cacher('.auteurRealisateurs');
  });
  $('#registration_deposant_1').click(function(){
    cacher('.production');
    voir('.auteurRealisateurs');
+
+   // il faut cacher le champ montant budget pour le cas de auteur/realisateur
+   $('.montant-budget').hide();
+
  });
  // traitement financement acquis
  verifieSelectionne('#registration_financementAcquis_0','.financementAcquisPrecision');
@@ -167,7 +205,7 @@ verifieNonSelectionne('#registration_genre_2','.genrePrecisionAutre');
    cacher('.financementAcquisPrecision');
  });
 
- // traiement depot collectivité 
+ // traiement dépôt collectivité 
  verifieSelectionne('#registration_depotProjetCollectivite_0','.depotProjetCollectivitePrecision');
 
  $('#registration_depotProjetCollectivite_0').click(function(){
@@ -204,11 +242,12 @@ $('#registration_typeAideDoc_1').click(function(){
  function verifieSelectionneProjetDepose(selecteurVoir,selecteurCache)
  {
    if($(selecteurVoir).is(':checked')){
-      voir(selecteurCache); 
-      cacher('.auteurRealisateurs'); 
+      voir(selecteurCache);
+      $('.montant-budget').show();  
    }else{
       cacher(selecteurCache);  
       voir('.auteurRealisateurs');
+      $('.montant-budget').hide();
    }
  }
  /**
@@ -258,5 +297,30 @@ function voir(selecteur)
       $(selecteur).show();  
    }
 }
+// partie traitment de durée envisage pour le projet
+if ($('#registration_typeFilm_0').is(':checked'))
+{
+   $('.dureeEnvisagee').html('Durée envisagée');
+}else{
+   $('.dureeEnvisagee').html('Nombre d\'épisode(s) ');
+}
+
+gestionClick('#registration_typeFilm_0','Durée envisagée');
+gestionClick('#registration_typeFilm_1','Nombre d\'épisode(s)');
+
+/**
+ * 
+ * @param {String} selecteur 
+ * @param {String} texte 
+ */
+function gestionClick(selecteur,texte)
+{
+   $(selecteur).click(function(){
+      $('.dureeEnvisagee').html(texte);
+   })
+}
+
+
+
 });
 

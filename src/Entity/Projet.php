@@ -39,7 +39,7 @@ class Projet
     private $formatDefinitif;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=20,nullable=true)
      */
     private $genre;
 
@@ -49,12 +49,12 @@ class Projet
     private $synopsis;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean",nullable=true)
      */
     private $adaptationOeuvre;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean",nullable=true)
      */
     private $deposant;
 
@@ -74,12 +74,12 @@ class Projet
     private $documentAudioVisuels;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=15, nullable=true)
      */
     private $typeAideLm;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="string", length=20, nullable=true)
      */
     private $typeAideDoc;
 
@@ -160,7 +160,7 @@ class Projet
     private $interpretationTotalHtNormandie;
 
     /**
-     * @ORM\Column(type="float")
+     * @ORM\Column(type="float",nullable=true)
      */
     private $totalChargeSocialesTotalHt;
 
@@ -261,7 +261,7 @@ class Projet
     private $totalGeneralTotalHtNormandie;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean",nullable=true)
      */
     private $financementAcquis;
 
@@ -271,7 +271,7 @@ class Projet
     private $financementAcquisPrecision;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean",nullable=true)
      */
     private $depotProjetCollectivite;
 
@@ -311,7 +311,7 @@ class Projet
     private $adaptationOeuvreDacp;
 
     /**
-     * @ORM\Column(type="string", length=5, nullable=true)
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $adaptationOeuvreDfc;
 
@@ -334,6 +334,11 @@ class Projet
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $createdAt;
+
+    /**
+     * @ORM\Column(type="string", length=25,nullable=true)
+     */
+    private $typeFilm;
 
     public function __construct()
     {
@@ -1153,6 +1158,18 @@ class Projet
     public function setCreatedAt(?\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getTypeFilm(): ?string
+    {
+        return $this->typeFilm;
+    }
+
+    public function setTypeFilm(string $typeFilm): self
+    {
+        $this->typeFilm = $typeFilm;
 
         return $this;
     }
