@@ -28,8 +28,8 @@ input[id^="registration_typeFilm"]
 
 #registration_producteurs_0_codePostaleBureau,#registration_producteurs_0_villeBureau,
 #registration_producteurs_0_codePostal,#registration_producteurs_0_ville,
-.decalageCodeVille,.genrePrecisionAutre,
-.decalageLabel,.decalageCodeVille
+.decalageCodeVille,.genrePrecisionAutre,.decalageLabel,.decalageCodeVille,
+.droitArtistique
 {
     margin-top:30px;
 }

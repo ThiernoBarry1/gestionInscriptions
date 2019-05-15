@@ -51,11 +51,7 @@ class Producteur
      */
     private $prenomProducteur;
 
-    /**
-     * @ORM\Column(type="string", length=150, nullable=true)
-     */
-    private $personneChargee;
-
+    
     /**
      * @ORM\Column(type="string", length=60, nullable=true)
      */
@@ -86,26 +82,53 @@ class Producteur
      */
     private $villeBureau;
 
-    /**
-     * @ORM\Column(type="string", length=25, nullable=true)
-     */
-    private $telephoneFixe;
-
-    /**
-     * @ORM\Column(type="string", length=17, nullable=true)
-     */
-    private $telephoneMobile;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $courriel;
+   
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Projet", inversedBy="producteurs")
      * @ORM\JoinColumn(nullable=false)
      */
     private $projet;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $prenomPersonneChargee;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $nomPersonneChargee;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $telephoneMobilePersonneChargee;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $telephoneFixePersonneChargee;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $courrielPersonneChargee;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $telephoneMobileProducteur;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $telephoneFixeProducteur;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $courrielProducteur;
 
     
 
@@ -198,17 +221,6 @@ class Producteur
         return $this;
     }
 
-    public function getPersonneChargee(): ?string
-    {
-        return $this->personneChargee;
-    }
-
-    public function setPersonneChargee(?string $personneChargee): self
-    {
-        $this->personneChargee = $personneChargee;
-
-        return $this;
-    }
 
     public function getAdresse(): ?string
     {
@@ -282,42 +294,7 @@ class Producteur
         return $this;
     }
 
-    public function getTelephoneFixe(): ?string
-    {
-        return $this->telephoneFixe;
-    }
-
-    public function setTelephoneFixe(?string $telephoneFixe): self
-    {
-        $this->telephoneFixe = $telephoneFixe;
-
-        return $this;
-    }
-
-    public function getTelephoneMobile(): ?string
-    {
-        return $this->telephoneMobile;
-    }
-
-    public function setTelephoneMobile(?string $telephoneMobile): self
-    {
-        $this->telephoneMobile = $telephoneMobile;
-
-        return $this;
-    }
-
-    public function getCourriel(): ?string
-    {
-        return $this->courriel;
-    }
-
-    public function setCourriel(string $courriel): self
-    {
-        $this->courriel = $courriel;
-
-        return $this;
-    }
-
+   
     public function getProjet(): ?Projet
     {
         return $this->projet;
@@ -329,17 +306,101 @@ class Producteur
 
         return $this;
     }
-   /*
-    public function getProjet(): ?Projet
+
+    public function getPrenomPersonneChargee(): ?string
     {
-        return $this->projet;
+        return $this->prenomPersonneChargee;
     }
 
-    public function setProjet(Projet $projet): self
+    public function setPrenomPersonneChargee(?string $prenomPersonneChargee): self
     {
-        $this->projet = $projet;
+        $this->prenomPersonneChargee = $prenomPersonneChargee;
 
         return $this;
     }
-    */
+
+    public function getNomPersonneChargee(): ?string
+    {
+        return $this->nomPersonneChargee;
+    }
+
+    public function setNomPersonneChargee(?string $nomPersonneChargee): self
+    {
+        $this->nomPersonneChargee = $nomPersonneChargee;
+
+        return $this;
+    }
+
+    public function getTelephoneMobilePersonneChargee(): ?string
+    {
+        return $this->telephoneMobilePersonneChargee;
+    }
+
+    public function setTelephoneMobilePersonneChargee(?string $telephoneMobilePersonneChargee): self
+    {
+        $this->telephoneMobilePersonneChargee = $telephoneMobilePersonneChargee;
+
+        return $this;
+    }
+
+    public function getTelephoneFixePersonneChargee(): ?string
+    {
+        return $this->telephoneFixePersonneChargee;
+    }
+
+    public function setTelephoneFixePersonneChargee(?string $telephoneFixePersonneChargee): self
+    {
+        $this->telephoneFixePersonneChargee = $telephoneFixePersonneChargee;
+
+        return $this;
+    }
+
+    public function getCourrielPersonneChargee(): ?string
+    {
+        return $this->courrielPersonneChargee;
+    }
+
+    public function setCourrielPersonneChargee(?string $courrielPersonneChargee): self
+    {
+        $this->courrielPersonneChargee = $courrielPersonneChargee;
+
+        return $this;
+    }
+
+    public function getTelephoneMobileProducteur(): ?string
+    {
+        return $this->telephoneMobileProducteur;
+    }
+
+    public function setTelephoneMobileProducteur(?string $telephoneMobileProducteur): self
+    {
+        $this->telephoneMobileProducteur = $telephoneMobileProducteur;
+
+        return $this;
+    }
+
+    public function getTelephoneFixeProducteur(): ?string
+    {
+        return $this->telephoneFixeProducteur;
+    }
+
+    public function setTelephoneFixeProducteur(?string $telephoneFixeProducteur): self
+    {
+        $this->telephoneFixeProducteur = $telephoneFixeProducteur;
+
+        return $this;
+    }
+
+    public function getCourrielProducteur(): ?string
+    {
+        return $this->courrielProducteur;
+    }
+
+    public function setCourrielProducteur(?string $courrielProducteur): self
+    {
+        $this->courrielProducteur = $courrielProducteur;
+
+        return $this;
+    }
+  
 }

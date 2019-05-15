@@ -340,6 +340,11 @@ class Projet
      */
     private $typeFilm;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $typeOeuvre;
+
     public function __construct()
     {
         $this->auteurRealisateurs = new ArrayCollection();
@@ -1170,6 +1175,18 @@ class Projet
     public function setTypeFilm(string $typeFilm): self
     {
         $this->typeFilm = $typeFilm;
+
+        return $this;
+    }
+
+    public function getTypeOeuvre(): ?string
+    {
+        return $this->typeOeuvre;
+    }
+
+    public function setTypeOeuvre(?string $typeOeuvre): self
+    {
+        $this->typeOeuvre = $typeOeuvre;
 
         return $this;
     }

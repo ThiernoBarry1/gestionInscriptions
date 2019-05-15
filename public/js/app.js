@@ -74,18 +74,7 @@ $(document).ready(function()
          $(selecteurButton).hide();
       }
      
-  /*
-      // ici je traite le cas des pourcentages
-
-      const tmps = $(selecteurClass).data('prototype').replace(/__name__/g,index);
-      console.log(tmps);
-      // j'injecte ce code au sein de la div 
-      $(selecteurDiv).append(templates);
-   
-      // compter le nombre de form  
-      $(widget_counter).val(index+1);
-   
-   */
+  
 
    }
 
@@ -245,9 +234,13 @@ $('#registration_typeAideDoc_1').click(function(){
       voir(selecteurCache);
       $('.montant-budget').show();  
    }else{
-      cacher(selecteurCache);  
-      voir('.auteurRealisateurs');
-      $('.montant-budget').hide();
+      if(!$(selecteurVoir).is(':visible')) {
+         voir(selecteurCache);
+      }else {
+         cacher(selecteurCache);  
+         voir('.auteurRealisateurs');
+         $('.montant-budget').hide();
+      }
    }
  }
  /**
@@ -283,9 +276,7 @@ $('#registration_typeAideDoc_1').click(function(){
   */
  function  cacher(selecteur)
  {
-   //if($(selecteur).is(':visible')){
-      $(selecteur).hide();  
-   //}
+     $(selecteur).hide();  
  }
  /**
   * permet de demasque
@@ -298,15 +289,22 @@ function voir(selecteur)
    }
 }
 // partie traitment de durée envisage pour le projet
-if ($('#registration_typeFilm_0').is(':checked'))
+if ($('#registration_typeFilm_0').is(':checked') )
 {
    $('.dureeEnvisagee').html('Durée envisagée');
 }else{
-   $('.dureeEnvisagee').html('Nombre d\'épisode(s) ');
+   $('.dureeEnvisagee').html('Nombre d\'épisode(s),durée par épisode');
+
+   if(!$('typeFilm').is(':visible'))
+   {
+      $('.dureeEnvisagee').html('Durée envisagée');
+   }
+      
+   
 }
 
 gestionClick('#registration_typeFilm_0','Durée envisagée');
-gestionClick('#registration_typeFilm_1','Nombre d\'épisode(s)');
+gestionClick('#registration_typeFilm_1','Nombre d\'épisode(s),durée par épisode');
 
 /**
  * 
@@ -319,7 +317,6 @@ function gestionClick(selecteur,texte)
       $('.dureeEnvisagee').html(texte);
    })
 }
-
 
 
 });

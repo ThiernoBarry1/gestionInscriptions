@@ -47,7 +47,6 @@ class AllFieldsFormController extends AbstractController
                    ->setAdresse('10 rue lkddkdkk')
                    ->setCodePostal('14000')
                    ->setVille('caen')
-                   ->setCourriel('th.barry@gmail.com')
                    ->setProjet($projet);
         $projet->addProducteur($producteur);
     

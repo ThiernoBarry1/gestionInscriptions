@@ -49,6 +49,7 @@ class RegistrationType extends ConfigurationFildsType
                                        ]
                                       )
                    )
+              ->add('typeOeuvre',TextType::class)
              ->add('genrePrecisionAutre',TextType::class)
             ->add('synopsis',TextareaType::class)
             ->add('adaptationOeuvre',ChoiceType::class,

@@ -1,19 +1,18 @@
 
 {% block _registration_auteurRealisateurs_entry_widget %}
     <div class="form-group" id="block_{{id}}">
-        <div class="form-group my-2 typePersonne">
-            <label for="typePersonne" class="my-3">Pour ce projet vous êtes ?</label>
+        <div class="form-group typePersonne mt-5">
             {{ form_row(form.typePersonne,{'label':false,'attr':{'class':'typePersonne'}})}}
          </div>
         <div class="row">
             <div class="col-10">
-                <div class="row my-3">
+                <div class="row">
                     <div class="col-4">
                         <label> Prénom </label>
                         {{ form_row(form.prenom,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'Prénom'}}) }}
                      </div>
                     <div class="col-4">
-                        <label> Nom </label>
+                        <label> Nom  de l'état civil</label>
                          {{ form_row(form.nom,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'Nom'}}) }}
                     </div>
                     <div class="col-4">
@@ -43,7 +42,12 @@
                         {{ form_row(form.courriel,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
                     </div>
                 </div>
-                
+                <div class="row my-3">
+                    <div class="col-6">
+                        <label for="pourcentageAuteurRealisateur"> Pourcentage auteur/realisateur </label>
+                        {{ form_row(form.pourcentageAuteurRealisateur,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }} 
+                    </div>
+                </div>
             </div>
             <div class="col-2">
                 <button type="button" class="btn btn-danger" data-action="delete" data-target="#block_{{id}}"> Supprimer</button>

@@ -23,9 +23,9 @@ class AuteurRealisateurType extends ConfigurationFildsType
             ->add('courriel',TextType::class)
             ->add('typePersonne',ChoiceType::class,$this->getArrayChoice(
                                                                             [
-                                                                                'Auteurréalisateur'=>true,
-                                                                                'Réalisateur'=>false,
+                                                                                'Auteur réalisateur'=>true,
                                                                                 'Scénariste'=>false,
+                                                                                'Réalisateur'=>false,
                                                                             ]
                                                                         )
                 )
