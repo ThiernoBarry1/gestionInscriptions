@@ -60,11 +60,10 @@ $(document).ready(function()
       // je recupère le numero des forms !
       let index  = +$(widget_counter).val();
       // je remplace tous les __name__ par ce numero
-      const templates = $(selecteurDiv).data('prototype').replace(/__name__/g,index);
-   
+      const templates = $(selecteurDiv).data('prototype').replace(/__name__/g,index).replace('<div class="row my-3" id="pourcentageAuteurRealisateur"><div class="col-6"><label for="pourcentageAuteurRealisateur"> Pourcentage auteur/realisateur </label><div><input type="text" id="registration_auteurRealisateurs_1_pourcentageAuteurRealisateur" name="registration[auteurRealisateurs][1][pourcentageAuteurRealisateur]" required="required" class="form-control-sm w-100" /></div></div></div>','');
+       console.log(templates);
       // j'injecte ce code au sein de la div 
       $(selecteurDiv).append(templates);
-   
       // compter le nombre de form  
       $(widget_counter).val(index+1);
       
