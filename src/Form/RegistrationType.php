@@ -25,7 +25,8 @@ class RegistrationType extends ConfigurationFildsType
     {
         $builder
             ->add('titre',TextType::class)
-            ->add('duree',ChoiceType::class,[
+            ->add('duree',ChoiceType::class,
+                                         [
                                             'choices'=>
                                             [
                                               $this->getArrayDuration(1,300)
@@ -37,6 +38,14 @@ class RegistrationType extends ConfigurationFildsType
                                            'Serie'=>false
                                          ])
                 )
+            ->add('dureeEpisode',ChoiceType::class,
+                                                   [
+                                                     'choices'=>
+                                                     [
+                                                       $this->getArrayDuration(1,300)
+                                                     ],
+                                                   ]
+                  )
             ->add('formatTournage',TextType::class)
             ->add('formatDefinitif',TextType::class)
             ->add('genre',ChoiceType::class,
@@ -76,29 +85,31 @@ class RegistrationType extends ConfigurationFildsType
                                   )
                   )
                ->add('producteurs',CollectionType::class,
-                       [
-                          'entry_type'=>ProducteurType::class
-                       ]
-              )
+                                                           [
+                                                            'entry_type'=>ProducteurType::class
+                                                           ]
+            )
               ->add('auteurRealisateurs',CollectionType::class,
-                 [
-                   'entry_type'=>AuteurRealisateurType::class,
-                   'allow_add'=>true,
-                   'allow_delete'=>true,
-                 ])
+                                                                [
+                                                                  'entry_type'=>AuteurRealisateurType::class,
+                                                                  'allow_add'=>true,
+                                                                  'allow_delete'=>true,
+                                                                ]
+                    )
                  ->add('documentAudioVisuels',CollectionType::class,
-                 [
-                   'entry_type'=>DocumentsAudioVisuelsType::class,
-                   'allow_add'=>true,
-                   'allow_delete'=>true,
-                 ])
+                                                                    [
+                                                                      'entry_type'=>DocumentsAudioVisuelsType::class,
+                                                                      'allow_add'=>true,
+                                                                      'allow_delete'=>true,
+                                                                    ]
+                      )
                ->add('typeAideLm',ChoiceType::class,
                       $this->getArrayChoice(
-                                          [
-                                            'Écriture' => true,
-                                            'Réécriture' => false,
-                                          ]
-                                        )
+                                             [
+                                               'Écriture' => true,
+                                               'Réécriture' => false,
+                                             ]
+                                           )
                     )
             ->add('typeAideDoc',ChoiceType::class,
                     $this->getArrayChoice(
@@ -110,11 +121,14 @@ class RegistrationType extends ConfigurationFildsType
                   )
             ->add('mtBudget',TextType::class)
             ->add('liensEligibilite',ChoiceType::class,$this->getArrayChoice(
-                                                                              ['Fiction'=>true,
-                                                                               'Documentaire'=>false,
-                                                                               'Animamation'=>false,
-                                                                               'Autre'=>false
-                                                                              ],true))
+                                                                              ['Un auteur réalisateur domicilié en région Normandie'=>true,
+                                                                               'Une société de production disposant d’un établissement stable en région Normandie'=>false,
+                                                                               'Un projet entretenant un lien culturel avec la région Normandie'=>false,
+                                                                               'Un auteur réalisateur ayant obtenu une aide à la production d’œuvre cinématographique de courte durée, de longue durée ou de documentaire de la Région Normandie au cours des 5 dernières années '=>false,
+                                                                              'Un projet d’œuvre cinématographique de longue durée ayant bénéficié d’une résidence d’écriture au CECI-Moulin d’Andé ou dans tout autre lieu de résidence d\'écriture reconnu en Normandie au cours des 5 dernières années'=>false,
+                                                                             ],true
+                                                                            )
+                  )
             ->add('datePreparation',TextType::class)
             ->add('dateTournage',TextType::class)
             ->add('dateDiffusion',TextType::class)
@@ -160,19 +174,19 @@ class RegistrationType extends ConfigurationFildsType
             ->add('montantSollicite',TextType::class)
             ->add('depotProjetCollectivite',ChoiceType::class,
                    $this->getArrayChoice(
-                                            [
-                                              'Oui'=>true,
-                                              'Non'=>false
-                                            ]
+                                          [
+                                            'Oui'=>true,
+                                            'Non'=>false
+                                          ]
                                        )
                  )
             ->add('depotProjetCollectivitePrecision',TextType::class)
             ->add('projetDejaPresenteFondsAide',ChoiceType::class,$this->getArrayChoice(
-                                                          [
-                                                             'Oui'=>true,
-                                                             'Non'=>false
-                                                          ]
-                                                  )
+                                                                                          [
+                                                                                            'Oui'=>true,
+                                                                                            'Non'=>false
+                                                                                          ]
+                                                                                       )
                  )
             ->add('projetDejaPresenteFondsAideDate',TextType::class)
             ->add('projetDejaPresenteFondsAideTypeAide',TextType::class)  

@@ -35,12 +35,13 @@ class ConfigurationFildsType extends AbstractType {
      *
      * @param [Array] $array
      * @param boolean $isMultiple
+     * @param boolean $isExpanded
      * @return Array
      */
-    protected function getArrayChoice($array,$isMultiple=false)
+    protected function getArrayChoice($array,$isMultiple=false,$isExpanded=true)
     {
      return [ 'choices'  => $array,
-              'expanded' => true,
+              'expanded' => $isExpanded,
               'multiple'=>  $isMultiple,
            ]; 
     }

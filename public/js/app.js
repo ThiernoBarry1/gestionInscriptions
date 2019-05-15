@@ -171,17 +171,18 @@ verifieNonSelectionne('#registration_genre_2','.genrePrecisionAutre');
  });
  // traitement projet déposé par 
  
- verifieSelectionneProjetDepose('#registration_deposant_0','.production');
+verifieSelectionneProjetDepose('#registration_deposant_0','.production');
+verifierSelectionnePorjetDeposeMbudget('#registration_deposant_0','.montant-budget');
 
  $('#registration_deposant_0').click(function(){
    voir('.production');
+   voir('.montant-budget');
  });
  $('#registration_deposant_1').click(function(){
    cacher('.production');
    voir('.auteurRealisateurs');
-
    // il faut cacher le champ montant budget pour le cas de auteur/realisateur
-   $('.montant-budget').hide();
+   cacher('.montant-budget');
 
  });
  // traitement financement acquis
@@ -232,14 +233,12 @@ $('#registration_typeAideDoc_1').click(function(){
  {
    if($(selecteurVoir).is(':checked')){
       voir(selecteurCache);
-      $('.montant-budget').show();  
    }else{
       if(!$(selecteurVoir).is(':visible')) {
          voir(selecteurCache);
       }else {
          cacher(selecteurCache);  
          voir('.auteurRealisateurs');
-         $('.montant-budget').hide();
       }
    }
  }
@@ -292,31 +291,76 @@ function voir(selecteur)
 if ($('#registration_typeFilm_0').is(':checked') )
 {
    $('.dureeEnvisagee').html('Durée envisagée');
-}else{
-   $('.dureeEnvisagee').html('Nombre d\'épisode(s),durée par épisode');
+   cacher('.col-dureeEpisode');
+}else if($('#registration_typeFilm_1').is(':checked')){
+   $('.dureeEnvisagee').html('Nombre d\'épisodes');
+   $('.dureeEpisode').html('Durée par épisode');
+}
 
-   if(!$('typeFilm').is(':visible'))
-   {
-      $('.dureeEnvisagee').html('Durée envisagée');
-   }
-      
+
+if(!$('.typeFilm').is(':visible')){
+$('.dureeEnvisagee').html('Durée envisagée');
+  cacher('.col-dureeEpisode');
+}
+// pour les cliks
+$('#registration_typeFilm_0').click(function(){
+   $('.dureeEnvisagee').html('Durée envisagée');
+   cacher('.col-dureeEpisode');
+})
+$('#registration_typeFilm_1').click(function(){
+   voir('.col-dureeEpisode');
+   $('.dureeEnvisagee').html('Nombre d\épisodes');
+   $('.dureeEpisode').html('Durée par épisode');
    
+})
+
+// gestion checkbox listeLiensEligibilite  pour n'afficher que les 3 prémiers
+
+if($('.liensEligibiliteReste').is(':visible')){
+   $('#registration_liensEligibilite_3').hide();
+   $('label[for="registration_liensEligibilite_3"]').hide();
+   $('#registration_liensEligibilite_4').hide();
+   $('label[for="registration_liensEligibilite_4"]').hide();
 }
-
-gestionClick('#registration_typeFilm_0','Durée envisagée');
-gestionClick('#registration_typeFilm_1','Nombre d\'épisode(s),durée par épisode');
-
 /**
- * 
- * @param {String} selecteur 
- * @param {String} texte 
+ * gestion des affichages champs montant du budget avec le boutton projet déposé 
  */
-function gestionClick(selecteur,texte)
+function verifierSelectionnePorjetDeposeMbudget()
 {
-   $(selecteur).click(function(){
-      $('.dureeEnvisagee').html(texte);
-   })
+   if($('#registration_deposant_0').is(':checked')){
+      voir('.montant-budget');
+   }else if($('#registration_deposant_1').is(':checked')){
+      cacher('.montant-budget')
+   }
 }
+// gestion des affichage du label montant du budget
+if($('#registration_typeAideLm_0').is(':checked') || $('#registration_typeAideDoc_0').is(':checked'))
+{
+   $('label[for="montant-budget"]').html('montant du budget écriture HT');
+}else
+if($('#registration_typeAideLm_1').is(':checked')){
+   $('label[for="montant-budget"]').html('montant du budget réécriture HT');
+}else
+if($('#registration_typeAideDoc_1').is(':checked')){
+   $('label[for="montant-budget"]').html('montant du budget développement HT');
+}else
+{
+   $('label[for="montant-budget"]').html('montant du budget HT');
+}
+// pour les clicks
+ $('#registration_typeAideLm_0').click(function(){
+   $('label[for="montant-budget"]').html('montant du budget écriture HT');
+})
+$('#registration_typeAideLm_1',).click(function(){
+   $('label[for="montant-budget"]').html('montant du budget réécriture HT');
+})
+
+$('#registration_typeAideDoc_0').click(function(){
+   $('label[for="montant-budget"]').html('montant du budget écriture HT');
+})
+$('#registration_typeAideDoc_1').click(function(){
+   $('label[for="montant-budget"]').html('montant du budget développement HT');
+})
 
 
 });

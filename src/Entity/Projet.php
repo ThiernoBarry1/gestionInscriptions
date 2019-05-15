@@ -345,6 +345,11 @@ class Projet
      */
     private $typeOeuvre;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $dureeEpisode;
+
     public function __construct()
     {
         $this->auteurRealisateurs = new ArrayCollection();
@@ -1187,6 +1192,18 @@ class Projet
     public function setTypeOeuvre(?string $typeOeuvre): self
     {
         $this->typeOeuvre = $typeOeuvre;
+
+        return $this;
+    }
+
+    public function getDureeEpisode(): ?string
+    {
+        return $this->dureeEpisode;
+    }
+
+    public function setDureeEpisode(?string $dureeEpisode): self
+    {
+        $this->dureeEpisode = $dureeEpisode;
 
         return $this;
     }

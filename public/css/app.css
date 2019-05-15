@@ -1,12 +1,16 @@
 #registration_typeAideDoc >.required,#registration_typeAideLm >.required,#registration_genre >.required,
 #registration_auteurRealisateurs_0_typePersonne>.required,#registration_typeFilm>.required,
 #registration_financementAcquis>.required,#registration_depotProjetCollectivite>.required,
-div[id^="registration_liensEligibilite"]>label[for^="registration_liensEligibilite"],
 #registration_adaptationOeuvre >.required,#registration_deposant>.required,
 #registration_projetDejaPresenteFondsAide >.required,
 div[id^="registration_auteurRealisateurs"] >.required
 {
     margin-right: 20px;
+}
+
+
+div[id^="registration_liensEligibilite"]>label[for^="registration_liensEligibilite"]{ 
+  display: flex;
 }
 
 input[id^="registration_projetDejaPresenteFondsAide"],
@@ -43,4 +47,7 @@ hr
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+.decalageLabelProduction{
+    margin-top: 15px;
 }

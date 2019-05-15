@@ -17,7 +17,15 @@ class DocumentsAudioVisuelsType extends ConfigurationFildsType
         $builder
             ->add('titre',TextType::class)
             ->add('realisateur',TextType::class)
-            ->add('genre',TextType::class)
+            ->add('genre',ChoiceType::class,$this->getArrayChoice(
+                                                                    [
+                                                                        'Fiction'=>true,
+                                                                        'Documentaire'=>false,
+                                                                        'Animation'=>false,
+                                                                        'Autre'=>false
+                                                                    ],false,false
+                                                                )
+                )
             ->add('annee',ChoiceType::class,
                 ['choices'  => 
                    $this->getArrayDuration(1950,2100),
