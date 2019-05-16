@@ -591,10 +591,8 @@
              {{ form_row(allFieldsForm.montantSollicite,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }} 
          </div>
       </div>
-      <div class="auteur-realisateur" data-prototype="{{ form_widget(allFieldsForm.auteurRealisateurs.vars.prototype)|e('html_attr') }}">
-         {% for auteurRealisateurs in allFieldsForm.auteurRealisateurs %}
-            
-         {% endfor %}
+      <div class="pourcentageAuteurRealisateur">
+      
       </div>
       <div class="row my-3">
          <div class="col-6">
@@ -622,9 +620,8 @@
       <div class="form-group enregistrer">
          <button  class="btn btn-success">Enregistrer</button>
       </div>
-      </div>
       {{ form_end(allFieldsForm,{'render_rest':false}) }}
-   </div> 
+   </div>
 {% endblock %}
 {% block javascripts %}
 <script defer src="/js/app.js"></script>

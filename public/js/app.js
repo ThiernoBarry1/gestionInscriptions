@@ -34,7 +34,7 @@ $(document).ready(function()
       const target = this.dataset.target;
       $(target).remove();
       // je rend le button ajout visible à chaque suppression
-       $('#ajoutDocumentAudioVisuels').show(); 
+      $('#ajoutDocumentAudioVisuels').show(); 
       });
    }
 
@@ -60,10 +60,15 @@ $(document).ready(function()
       // je recupère le numero des forms !
       let index  = +$(widget_counter).val();
       // je remplace tous les __name__ par ce numero
-      const templates = $(selecteurDiv).data('prototype').replace(/__name__/g,index).replace('<div class="row my-3" id="pourcentageAuteurRealisateur"><div class="col-6"><label for="pourcentageAuteurRealisateur"> Pourcentage auteur/realisateur </label><div><input type="text" id="registration_auteurRealisateurs_1_pourcentageAuteurRealisateur" name="registration[auteurRealisateurs][1][pourcentageAuteurRealisateur]" required="required" class="form-control-sm w-100" /></div></div></div>','');
-       console.log(templates);
+      //.replace(/__name__/g,index)
+      const str = '<div class="row my-3" id="blockPourcentage_registration_auteurRealisateurs___name__"><div class="col"><p></p></div><div class="col"><div class="row"><div><input type="text" id="registration_auteurRealisateurs___name___pourcentageAuteurRealisateur" name="registration[auteurRealisateurs][__name__][pourcentageAuteurRealisateur]" required="required" class="form-control-sm w-100" /></div><span>%</span></div></div></div>';
+      const templates = $(selecteurDiv).data('prototype').replace(str,'').replace(/__name__/g,index);
+      const newStr = str.replace(/__name__/g,index);
       // j'injecte ce code au sein de la div 
+      console.log(templates);
       $(selecteurDiv).append(templates);
+
+      $('.pourcentageAuteurRealisateur').append(newStr);
       // compter le nombre de form  
       $(widget_counter).val(index+1);
       
@@ -352,15 +357,22 @@ if($('#registration_typeAideDoc_1').is(':checked')){
 })
 $('#registration_typeAideLm_1',).click(function(){
    $('label[for="montant-budget"]').html('montant du budget réécriture HT');
-})
+});
 
 $('#registration_typeAideDoc_0').click(function(){
    $('label[for="montant-budget"]').html('montant du budget écriture HT');
-})
+});
 $('#registration_typeAideDoc_1').click(function(){
    $('label[for="montant-budget"]').html('montant du budget développement HT');
-})
+});
 
+// gestion d'ajout des noms et prénoms des auteurs/réalisateurs
+ $('.prenom input').on('change',function(){
+    alert('oki');
+   //const attr = $(this).getAttribute("id");
+  // alert(attr);
+});
 
 });
+
 

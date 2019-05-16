@@ -7,13 +7,13 @@
         <div class="row">
             <div class="col-10">
                 <div class="row">
-                    <div class="col-4">
+                    <div class="col-4 prenom">
                         <label> Prénom </label>
                         {{ form_row(form.prenom,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'Prénom'}}) }}
                      </div>
                     <div class="col-4">
                         <label> Nom  de l'état civil</label>
-                         {{ form_row(form.nom,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'Nom'}}) }}
+                         {{ form_row(form.nom,{'label':false,'attr':{'class':'form-control-sm w-100 nom','placeholder':'Nom'}}) }}
                     </div>
                     <div class="col-4">
                        <label> Pseudonyme </label>
@@ -41,12 +41,22 @@
                         <label>Courriel</label>
                         {{ form_row(form.courriel,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}
                     </div>
+            {% spaceless %}
                 </div>
-{# INTERDIT D'INDENTER CE CODE #}
-<div class="row my-3" id="pourcentageAuteurRealisateur"><div class="col-6"><label for="pourcentageAuteurRealisateur"> Pourcentage auteur/realisateur </label>{{ form_row(form.pourcentageAuteurRealisateur,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }}</div></div>
-            </div>
+                <div class="row my-3" id="blockPourcentage_{{id}}">
+                    <div class="col">
+                       <p> </p>
+                    </div>
+                    <div class="col">
+                       <div class="row">
+                           {{ form_row(form.pourcentageAuteurRealisateur,{'label':false,'attr':{'class':'form-control-sm w-100'}}) }} <span>%</span>
+                       </div>
+                    </div>
+                 </div>
+            {% endspaceless %}
+           </div>
             <div class="col-2">
-                <button type="button" class="btn btn-danger" data-action="delete" data-target="#block_{{id}}"> Supprimer</button>
+                <button type="button" class="btn btn-danger" data-action="delete" data-target="#block_{{id}},#blockPourcentage_{{id}}"> Supprimer</button>
             </div>
         </div>
     </div>
