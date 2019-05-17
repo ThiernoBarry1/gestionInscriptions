@@ -7,9 +7,9 @@
         <div class="row">
             <div class="col-10">
                 <div class="row">
-                    <div class="col-4 prenom">
+                    <div class="col-4">
                         <label> Prénom </label>
-                        {{ form_row(form.prenom,{'label':false,'attr':{'class':'form-control-sm w-100','placeholder':'Prénom'}}) }}
+                        {{ form_row(form.prenom,{'label':false,'attr':{'class':'form-control-sm w-100' ,'id':'input-prenom','placeholder':'Prénom'}}) }}
                      </div>
                     <div class="col-4">
                         <label> Nom  de l'état civil</label>
@@ -55,6 +55,7 @@
                  </div>
             {% endspaceless %}
            </div>
+           <input type="hidden" id="prenomP" data-target="#registration_auteurRealisateurs_1_prenom" >
             <div class="col-2">
                 <button type="button" class="btn btn-danger" data-action="delete" data-target="#block_{{id}},#blockPourcentage_{{id}}"> Supprimer</button>
             </div>

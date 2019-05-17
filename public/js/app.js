@@ -367,8 +367,16 @@ $('#registration_typeAideDoc_1').click(function(){
 });
 
 // gestion d'ajout des noms et prénoms des auteurs/réalisateurs
- $('.prenom input').on('change',function(){
+$('.prenom input[id$="prenom"]').css('background-color','#f11');
+///$('label').css('background-color','#f11');
+const t = $('#input-prenom').click(function(){
+  const t = this.dataset.target;
+  $(t).css('background-color','#f11');
+});
+
+ $('#registration_auteurRealisateurs_1_prenom').click(function(){
     alert('oki');
+    console.log('oki');
    //const attr = $(this).getAttribute("id");
   // alert(attr);
 });

@@ -297,7 +297,7 @@
          </div>
       {% elseif whichChoice == 2 or whichChoice == 3 or whichChoice == 5 %}
         <fieldset class="border p-2">
-            <legend class="w-auto h6">Liens avec la Région Normandie</legend>
+            <legend class="w-auto h6 my-2">Liens avec la Région Normandie</legend>
             <small class="form-text text-muted">Veuillez cocher au moins un critère repondant à votre projet</small>
             {{ form_row(allFieldsForm.liensEligibilite,{'label':false,'attr':{'class':'liensEligibiliteReste'}})}}
         </fieldset>
@@ -624,5 +624,5 @@
    </div>
 {% endblock %}
 {% block javascripts %}
-<script defer src="/js/app.js"></script>
+{{ parent() }}
 {%  endblock %}
