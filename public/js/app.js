@@ -6,22 +6,30 @@ $(document).ready(function()
   
    $('#ajoutAuteur-realisateur').click(function()
    { 
-      traitementEvenClicks('#auteurRealisateurs','#widget-counter','#ajoutAuteur-realisateur');
-      // j'effectue la suppressesion du formulaire auteur réalisateur 
-      supFormAuteurRealisateur('button[data-action="delete"]');
-      counterForm('#auteurRealisateurs div.form-group','#widget-counter');
-      // car je n'est pas compris pourquoi il récupère 3 sur le 1er clique sur le boutton
       let estimeDiv = +$('#auteurRealisateurs div.form-group').length
       // je récupère la partie entière de la division.
       let count = Math.floor(estimeDiv/2);
+
+      //traitementEvenClicks('#auteurRealisateurs','#widget-counter','#ajoutAuteur-realisateur');
+      traitementEvenClicksAuteurRealisateur('#auteurRealisateurs',count,'#ajoutAuteur-realisateur');
+      // j'effectue la suppressesion du formulaire auteur réalisateur 
+      supFormAuteurRealisateur('button[data-action="delete"]');
+      //counterForm('#auteurRealisateurs div.form-group','#widget-counter');
+      // car je n'est pas compris pourquoi il récupère 3 sur le 1er clique sur le boutton
+     
       
       
    });
    $('#ajoutDocumentAudioVisuels').click(function(){
-      traitementEvenClicks('#documentAudioVisuels','#widget-counter-documentAudioVisuels','#ajoutDocumentAudioVisuels');
+      let estimeDiv = +$('#documentAudioVisuels div.form-group').length
+      // je récupère la partie entière de la division.
+      let countAudio = Math.floor(estimeDiv/2);
+      //traitementEvenClicks('#documentAudioVisuels','#widget-counter-documentAudioVisuels','#ajoutDocumentAudioVisuels');
+      traitementEvenClicksDocumetAudio('#documentAudioVisuels',countAudio,'#ajoutDocumentAudioVisuels');
+      
       // j'effectue la suppressesion du formulaire auteur réalisateur 
       supFormAuteurRealisateur('button[data-action="delete-documentAudioVisuels"]');
-      counterForm('#documentAudioVisuels div.form-group','#widget-counter-documentAudioVisuels');
+     // counterForm('#documentAudioVisuels div.form-group','#widget-counter-documentAudioVisuels');
    });
 
    /**
@@ -32,6 +40,7 @@ $(document).ready(function()
    function supFormAuteurRealisateur(boutton) {
       $(boutton).click(function(){
       const target = this.dataset.target;
+      alert(target);
       $(target).remove();
       // je rend le button ajout visible à chaque suppression
       $('#ajoutDocumentAudioVisuels').show(); 
@@ -49,47 +58,107 @@ $(document).ready(function()
       $(widget_counter).val(count);
    }
 
-   /**
+
+
+/**
     * 
     * @param {String} selecteurClass 
     * @param {boolean} isAuteurRealisateur 
     * @param {String} widget_counter 
     * @param {String} selecteurButton 
     */
-   function traitementEvenClicks(selecteurDiv,widget_counter,selecteurButton){
-      // je recupère le numero des forms !
-      let index  = +$(widget_counter).val();
+   function traitementEvenClicksAuteurRealisateur(selecteurDiv,counter,selecteurButton){
+      // je recupère le numero des forms !, je le met en comment pour tester avec counter
+     // let index  = +$(widget_counter).val();
       // je remplace tous les __name__ par ce numero
-      //.replace(/__name__/g,index)
-      const str = '<div class="row my-3" id="blockPourcentage_registration_auteurRealisateurs___name__"><div class="col"><p></p></div><div class="col"><div class="row"><div><input type="text" id="registration_auteurRealisateurs___name___pourcentageAuteurRealisateur" name="registration[auteurRealisateurs][__name__][pourcentageAuteurRealisateur]" required="required" class="form-control-sm w-100" /></div><span>%</span></div></div></div>';
-      const templates = $(selecteurDiv).data('prototype').replace(str,'').replace(/__name__/g,index);
-      const newStr = str.replace(/__name__/g,index);
+      const str = '<div class="row my-3" id="blockPourcentage_registration_auteurRealisateurs___name__"><div class="col"><p id="para_registration_auteurRealisateurs___name__"></p></div><div class="col"><div class="row"><div><input type="text" id="registration_auteurRealisateurs___name___pourcentageAuteurRealisateur" name="registration[auteurRealisateurs][__name__][pourcentageAuteurRealisateur]" required="required" class="form-control-sm w-100" /></div><span>%</span></div></div></div>';
+      //const templates = $(selecteurDiv).data('prototype').replace(str,'').replace(/__name__/g,index);
+      const templates = $(selecteurDiv).data('prototype').replace(str,'').replace(/__name__/g,counter);
+      //const newStr = str.replace(/__name__/g,index);
+      const newStr = str.replace(/__name__/g,counter);
       // j'injecte ce code au sein de la div 
-      console.log(templates);
       $(selecteurDiv).append(templates);
 
       $('.pourcentageAuteurRealisateur').append(newStr);
       // compter le nombre de form  
-      $(widget_counter).val(index+1);
+      //$(widget_counter).val(index+1);
       
       const count = +$('#documentAudioVisuels div.form-group').length;
       if(count >= 2)
       {
          $(selecteurButton).hide();
       }
-     
+
+      // gestion des labels pourcentage auteurs réalisateur
+
+      $('.prenom').on('change',function(){
+         
+         // je récupère le nombre correspondant à l'id dans ce input
+        var valAttId = $(this).attr('id').match(/\d+/g).join('');
+        var scan = $(this).val();
+         $('.pourcentageAuteurRealisateur p').each(function(){
+            var valAttIdPourc = $(this).attr('id').match(/\d+/g).join('');
+            if( valAttId == valAttIdPourc )
+            {
+               $(this).html(scan);
+               // quant on arrive ici pas besoin de continuer à chercher 
+               return false;
+            }
+         });
+     });
   
+     $('.nom').on('change',function(){
+         
+      // je récupère le nombre correspondant à l'id dans ce input
+     var valAttId = $(this).attr('id').match(/\d+/g).join('');
+     var scan = "   "+$(this).val().toUpperCase()+"  a ";
+      $('.pourcentageAuteurRealisateur p').each(function(){
+         var valAttIdPourc = $(this).attr('id').match(/\d+/g).join('');
+         if( valAttId == valAttIdPourc )
+         {
+            $(this).append(scan);
+            return false;
+         }
+      });
+  });
+   }
+
+   /**
+    * 
+    * @param {boolean} isAuteurRealisateur 
+    * @param {Integer} counter 
+    * @param {String} selecteurButton 
+    */
+   function traitementEvenClicksDocumetAudio(selecteurDiv,counter,selecteurButton){
+      // je recupère le numero des forms !, je le met en comment pour tester avec counter
+     // let index  = +$(widget_counter).val();
+      // je remplace tous les __name__ par ce numero
+      //const templates = $(selecteurDiv).data('prototype').replace(str,'').replace(/__name__/g,index);
+      const templates = $(selecteurDiv).data('prototype').replace(/__name__/g,counter);
+      //const newStr = str.replace(/__name__/g,index);
+     
+      // j'injecte ce code au sein de la div 
+      $(selecteurDiv).append(templates);
+
+      // compter le nombre de form  
+      //$(widget_counter).val(index+1);
+      
+      const count = +$('#documentAudioVisuels div.form-group').length;
+      if(count >= 2)
+      {
+         $(selecteurButton).hide();
+      }
 
    }
 
 
 
   
-   counterForm('#auteurRealisateurs div.form-group','#widget-counter');
+   //counterForm('#auteurRealisateurs div.form-group','#widget-counter');
    supFormAuteurRealisateur('button[data-action="delete"]');
 
    supFormAuteurRealisateur('button[data-action="delete-documentAudioVisuels"]');
-   counterForm('#documentAudioVisuels div.form-group','#widget-counter-documentsAudioVisuels');
+   //counterForm('#documentAudioVisuels div.form-group','#widget-counter-documentsAudioVisuels');
    
   
   calculDevisPrevisionnel('.ht input','.input-totalHtTotalGeneral');
@@ -367,13 +436,19 @@ $('#registration_typeAideDoc_1').click(function(){
 });
 
 // gestion d'ajout des noms et prénoms des auteurs/réalisateurs
-$('.prenom input[id$="prenom"]').css('background-color','#f11');
-///$('label').css('background-color','#f11');
+$('#registration_auteurRealisateurs_1_prenom').css('background-color','#f11');
+/*
+$('#input-prenom').on('change',function(){
+    $(this).css('background-color','#f11');
+});
+/*
+$('label').css('background-color','#f11');
 const t = $('#input-prenom').click(function(){
   const t = this.dataset.target;
   $(t).css('background-color','#f11');
 });
-
+$('#input-pre')
+*/
  $('#registration_auteurRealisateurs_1_prenom').click(function(){
     alert('oki');
     console.log('oki');

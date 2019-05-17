@@ -14,7 +14,10 @@ class AuteurRealisateurType extends ConfigurationFildsType
     {
         $builder
             ->add('nom',TextType::class)
-            ->add('prenom',TextType::class)
+            ->add('prenom',TextType::class,[ 
+                                             'attr'=>['id'=>'prenom-input']
+                                            ]
+                 )
             ->add('pseudonyme',TextType::class)
             ->add('adresse',TextType::class)
             ->add('codePostal',TextType::class)
